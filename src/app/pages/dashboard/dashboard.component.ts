@@ -94,7 +94,10 @@ export class DashboardComponent implements OnInit {
 
   loadBudgets(companyId: number) {
     this.budgetService.getBudgetByCompanyId(companyId).subscribe((budgets: any[]) => {
-      this.datasource = budgets;
+      this.datasource = budgets.map(b => ({
+        name: b.clientId,  // Initially set clientId; will replace with client name later
+        amount: b.totalWithIva
+      }));
       this.barChartData.labels = budgets.map(b => b.clientId);  // Assume `clientId` is a property of each budget
       this.barChartData.datasets[0].data = budgets.map(b => b.totalWithIva);  // Assume `totalWithIva` is a property of each budget
     });
@@ -105,12 +108,20 @@ export class DashboardComponent implements OnInit {
       this.clientList = clients;
       this.pieChartData.labels = clients.map(c => c.name);  // Assume `name` is a property of each client
       this.pieChartData.datasets[0].data = clients.map(c => this.getTotalWithIvaSumFromBudgets(c.clientId));  // Assume `clientId` is a property of each client
+      
+      // Replace client IDs with names in the datasource
+      this.datasource.forEach((d: any) => {
+        const client = clients.find(c => c.clientId === d.name);
+        if (client) {
+          d.name = client.name;
+        }
+      });
     });
   }
 
   getTotalWithIvaSumFromBudgets(clientId: number) {
     return this.datasource
-      .filter((b: { clientId: number; }) => b.clientId === clientId)
-      .reduce((acc: number, b: { totalWithIva: number; }) => acc + b.totalWithIva, 0);
+      .filter((b: { name: number; }) => b.name === clientId)
+      .reduce((acc: number, b: { amount: number; }) => acc + b.amount, 0);
   }
 }

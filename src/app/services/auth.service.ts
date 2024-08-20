@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AuthService implements OnInit {
   private readonly tokenKey = 'authToken';
-  private apiUrl = 'https://plataforma-orcamentos-api.somee.com/api';
+  private apiUrl = 'https://plataforma-orcamentos.somee.com/api';
   //private apiUrl = 'https://localhost:7231/api';
 
   constructor(

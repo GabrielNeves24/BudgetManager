@@ -40,10 +40,23 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col-9">
             <mat-form-field class="full-width">
               <textarea matInput placeholder="Observações" formControlName="obs"></textarea>
             </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Estado" formControlName="state">
+              <mat-option value="Pendente">Pendente</mat-option>
+              <mat-option value="Aprovado">Aprovado</mat-option>
+              <mat-option value="Rejeitado">Rejeitado</mat-option>
+            </mat-select>
+            <mat-error *ngIf="budgetForm.controls['state'].hasError('required')">
+              Estado é <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+         
         </div>
       </div>
 

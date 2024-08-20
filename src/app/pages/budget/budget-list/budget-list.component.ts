@@ -19,6 +19,7 @@ export class BudgetListComponent {
     { columnDef: 'Total S/Iva', header: 'Total S/Iva', cell: (element: any) => `${element.totalWithoutIva} €` },
     { columnDef: 'Iva', header: 'Iva', cell: (element: any) => `${element.totalIva} €` },
     { columnDef: 'Total c/Iva', header: 'Total c/Iva', cell: (element: any) => `${element.totalWithIva} €` },
+    { columnDef: 'StatusOrcamento', header: 'Estado', cell: (element: any) => `${element.state}` },
     { columnDef: 'actions', header: 'Ações', cell: (element: any) => `${element.actions}` },
     { columnDef: 'print', header: 'Print', cell: (element: any) => `${element.print}` }
   ]

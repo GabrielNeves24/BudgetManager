@@ -82,7 +82,7 @@ export class BudgetCreateComponent implements OnInit {
     totalIva: [0],
     totalWithIva: [0],
     obs:'',
-    state: '',
+    state: 'Pendente',
     active: true,
     lastUpdate: null,
   });

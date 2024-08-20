@@ -134,10 +134,17 @@ click: any;
     });
   }
   seExist(){
-    if(this.CompanyInfo.declaration != null || this.CompanyInfo.declaration != ''){
-      return false;
+    if(this.CompanyInfo.declaration != ''){
+      return true;
     }
-    return true;
+    return false;
+  }
+
+  seExist2(){
+    if(this.Budget.obs != ''){
+      return true;
+    }
+    return false;
   }
 
 

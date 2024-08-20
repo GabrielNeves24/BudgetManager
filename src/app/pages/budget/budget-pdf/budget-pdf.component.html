@@ -27,7 +27,7 @@
               {{ CompanyInfo.phone }}<br>
               {{ CompanyInfo.email }}<br>
               {{ CompanyInfo.zipCode }}<br>
-              IBAN: {{ CompanyInfo.IBAN }}
+              IBAN: {{ CompanyInfo.iban }}
             </td>
             <td style="text-align:right;">
               <img src="{{ CompanyInfo.logo }}" style="width:100px; max-width:300px;">
@@ -111,7 +111,7 @@
       <table class="tabbed-totals" cellspacing="0px" cellpadding="2px">
         <tr>
           <td width="50%">
-            <b>Observações:</b><br>
+            <b *ngIf="seExist2()">Observações:</b><br>
             {{ Budget.obs }}<br>
             <b *ngIf="seExist()">Declaração:</b><br>
             {{ CompanyInfo.declaration }}<br>

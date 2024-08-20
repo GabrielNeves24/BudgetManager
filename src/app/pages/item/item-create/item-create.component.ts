@@ -116,7 +116,6 @@ export class ItemCreateComponent implements OnInit {
       this.toastr.error('Por favor preencha todos os campos obrigatórios!');
       return;
      }
-     debugger;
      if (this.isEditMode) {
       //convert the form value to Item model
       this.itemService.updateItem(this.ItemForm.value,this.itemId).subscribe(() => {

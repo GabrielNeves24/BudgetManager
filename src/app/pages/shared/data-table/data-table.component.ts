@@ -160,13 +160,13 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     if (this.addNewRoute === 'budget/create-budget') {
       this.budgetService.deleteBudget(element.budgetId).subscribe(
         (data: any) => {
-          this.toastr.success('Budget deleted successfully');
+          this.toastr.success('Orçamento eliminado com sucesso');
           //remove the element from the data source
           this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetId !== element.budgetId);
           
         },
         (error: any) => {
-          this.toastr.error('Budget could not be deleted');
+          this.toastr.error('Impossivel eliminar');
         }
       );
     }

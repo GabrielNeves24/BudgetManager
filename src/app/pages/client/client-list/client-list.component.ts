@@ -32,7 +32,6 @@ export class ClientListComponent implements OnInit {
     localStorage.getItem('empresa') ? this.companyId = Number(localStorage.getItem('empresa')) : this.companyId = 0;
      this.clientService.getAllClientsByCompany(this.companyId).subscribe((data: any) => {
       this.datasource = data;
-      console.log(data);
     });
   }
 

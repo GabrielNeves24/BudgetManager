@@ -43,7 +43,6 @@ export class BudgetManagerGestaoComponent implements OnInit {
     });
     this.companyService.getAllCompanies().subscribe((data: any) => {
       this.companyList = data;
-      console.log(this.companyList);
       this.datasource.forEach((element: any) => {
         element.companyname = this.companyList.find((company: any) => company.companyId == element.companyId)?.name;
       });

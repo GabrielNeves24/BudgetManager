@@ -136,9 +136,6 @@ export class BudgetCreateComponent implements OnInit {
     const itemIndext = this.budgetArray.findIndex(item =>
       item.budgetDetailId === element.budgetDetailId
     );
-    console.log(itemIndext); // Debugging line
-    console.log('Current budgetArray1:', this.budgetArray); // Debugging line
-    console.log('Current budgetArray2:', this.budgetArray[itemIndext]); // Debugging line
     const dialogRef = this.dialog.open(BudgetDetailModalComponent, {
       width: '600px',
       data: {
@@ -168,8 +165,6 @@ export class BudgetCreateComponent implements OnInit {
             }
           );
         } else {
-          console.log('Result from modal:', result); // Debugging line
-          console.log('Current budgetArray:', this.budgetArray); // Debugging line
         }
       }else{
 
@@ -291,11 +286,9 @@ export class BudgetCreateComponent implements OnInit {
         budgetData.companyId = this.companyId;
         this.budgetService.createBudget(budgetData).subscribe(
           (response: any) => {
-            console.log('Response:', response);
   
             if (response && response.budget && response.budget.budgetId > 0) {
-              console.log(`Budget created with ID: ${response.budget.budgetId}`);
-              this.toastr.success('Budget created successfully');
+              this.toastr.success('Orçamento criado com sucesso');
   
               // Update budgetId in the details array
               this.budgetArray.forEach((item) => {
@@ -316,95 +309,47 @@ export class BudgetCreateComponent implements OnInit {
                   detailResponses.forEach((detailResponse) => {
                     if (!detailResponse || detailResponse.budgetDetail.budgetDetailId === 0) {
                       allDetailsCreatedSuccessfully = false;
-                      console.log('Error creating budget detail');
-                      this.toastr.error('Error creating budget detail');
+                      this.toastr.error('Erro ao criar detalhe do orçamento');
                     } else {
-                      console.log(`Budget detail created with ID: ${detailResponse.budgetDetail.budgetDetailId}`);
+                      this.toastr.success('Orçamento criado com sucesso');
                     }
                   });
   
                   if (allDetailsCreatedSuccessfully) {
-                    this.toastr.success('All budget details created successfully');
+                    this.toastr.success('Todos os detalhes do orçamento foram criados com sucesso');
                     this.router.navigate(['/budget']);
                   } else {
-                    this.toastr.error('Some budget details could not be created');
+                    this.toastr.error('Houve erros ao criar os detalhes do orçamento');
                   }
                 })
                 .catch((error) => {
-                  console.error('An error occurred while creating budget details:', error);
-                  this.toastr.error('An unexpected error occurred while creating budget details');
+                  this.toastr.error('Occoreu um erro ao tentar criar os detalhes do orçamento');
                 });
             } else {
-              console.log('Error creating budget');
-              this.toastr.error('Error creating budget');
+              this.toastr.error('Erro ao criar o orçamento');
             }
           },
           (error) => {
-            console.error('An error occurred while creating the budget:', error);
-            this.toastr.error('An unexpected error occurred while creating the budget');
+            this.toastr.error('Erro ao criar o orçamento');
           }
         );
       } else {
         const budgetId = budgetData.budgetId || 0;
         this.budgetService.updateBudget(budgetData, budgetId).subscribe(
-          (response: any) => {
-            console.log('Response:', response);
-  
+          (response: any) => {  
             if (response && response.budget && response.budget.budgetId > 0) {
-              console.log(`Budget updated with ID: ${response.budget.budgetId}`);
-              this.toastr.success('Budget updated successfully');
-  
-              // Update budgetId in the details array
+              this.toastr.success('Orçamento atualizado com sucesso');
               this.budgetArray.forEach((item) => {
                 item.budgetId = response.budget.budgetId;
               });
-              
-              // Handle creation or update of each budget detail
-              // let detailPromises = this.budgetArray.map((item) => {
-              //   if (item.budgetDetailId && item.budgetDetailId > 0) {
-              //     // Update existing budget detail
-              //     return this.budgetDetailService.updateBudgetDetail(item,item.budgetDetailId ).toPromise();
-              //   } else {
-              //     // Create new budget detail
-              //     return this.budgetDetailService.createBudgetDetail(item).toPromise();
-              //   }
-              // });
-  
-              // // Wait for all details to be processed
-              // Promise.all(detailPromises)
-              //   .then((detailResponses: any[]) => {
-              //     let allDetailsProcessedSuccessfully = true;
-  
-              //     detailResponses.forEach((detailResponse) => {
-              //       if (!detailResponse || !detailResponse.budgetDetail.budgetDetailId) {
-              //         allDetailsProcessedSuccessfully = false;
-              //         console.log('Error processing budget detail');
-              //         this.toastr.error('Error processing budget detail');
-              //       } else {
-              //         console.log(`Budget detail processed with ID: ${detailResponse.budgetDetail.budgetDetailId}`);
-              //       }
-              //     });
-  
-              //     if (allDetailsProcessedSuccessfully) {
-              //       this.toastr.success('All budget details processed successfully');
-              //       this.router.navigate(['/budget']);
-              //     } else {
-              //       this.toastr.error('Some budget details could not be processed');
-              //     }
-              //   })
-              //   .catch((error) => {
-              //     console.error('An error occurred while processing budget details:', error);
-              //     this.toastr.error('An unexpected error occurred while processing budget details');
-              //   });
+             
               this.router.navigate(['/budget']);
             } else {
-              console.log('Error updating budget');
-              this.toastr.error('Error updating budget');
+              this.toastr.error('Erro ao atualizar o orçamento');
             }
           },
           (error) => {
-            console.error('An error occurred while updating the budget:', error);
-            this.toastr.error('An unexpected error occurred while updating the budget');
+            this.toastr.error('Occoreu um erro ao tentar atualizar o orçamento');
           }
         );
       }
@@ -412,8 +357,6 @@ export class BudgetCreateComponent implements OnInit {
       this.toastr.error('Preencha todos os campos');
     }
   }
-  
-  
 
   onCancelFull(): void {
     this.router.navigate(['/budget']);

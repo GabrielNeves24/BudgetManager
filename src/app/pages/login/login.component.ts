@@ -52,8 +52,7 @@ export class LoginComponent {
       (error) => {
         // Handle HTTP errors
         this.isLoading = false;
-        this.toastr.error('An error occurred while logging in. Please try again.' );
-        console.error('Login error', error);
+        this.toastr.error('Occoreu um erro no Login' );
       }
     );
   }

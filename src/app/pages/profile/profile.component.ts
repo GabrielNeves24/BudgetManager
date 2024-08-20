@@ -54,7 +54,7 @@ export class ProfileComponent {
   }
   onSubmit(){
     this.userService.updateUserPassword(this.perfilForm.value).subscribe((data: any) => {
-      this.toastr.success('User updated successfully');
+      this.toastr.success('User editado com sucesso');
       this.router.navigate(['/profile']);
     });
   }

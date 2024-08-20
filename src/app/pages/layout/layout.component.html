@@ -1,0 +1,61 @@
+<mat-toolbar color="primary" class="toolbar">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <label class="d-none d-md-block"><strong>Orçamentos Manager</strong></label>
+  <span class="spacer"></span>
+
+  <!-- User Dropdown -->
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="onProfile()">Profile</button>
+    <button mat-menu-item (click)="onLogout()">Logout</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <!-- Side Navigation -->
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="sidenav">
+    <mat-nav-list>
+      <!-- Dashboard Link -->
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link" (click)="sidenav.close()">Dashboard</a>
+
+      <!-- Articles Section -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Artigos</mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-list-item routerLink="/item" routerLinkActive="active-link" (click)="sidenav.close()">Artigos</a>
+        <a mat-list-item routerLink="/unit" routerLinkActive="active-link" (click)="sidenav.close()">Unidades de Medida</a>
+      </mat-expansion-panel>
+
+
+      <!-- Clients Section -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Orçamentos</mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-list-item routerLink="/client" routerLinkActive="active-link" (click)="sidenav.close()">Clientes</a>
+        <a mat-list-item routerLink="/budget" routerLinkActive="active-link" (click)="sidenav.close()">Orçamentos</a>
+      </mat-expansion-panel>
+      <!-- Admin Section -->
+      <mat-expansion-panel *ngIf="isAdmin">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Administração</mat-panel-title>
+        </mat-expansion-panel-header>
+        <a mat-list-item routerLink="/budgetManager" routerLinkActive="active-link" (click)="sidenav.close()">Gestor Orçamentos</a>
+        <a mat-list-item routerLink="/company" routerLinkActive="active-link" (click)="sidenav.close()">Empresa</a>
+        <a mat-list-item routerLink="/user" routerLinkActive="active-link" (click)="sidenav.close()">Users</a>
+      </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="mainContent">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

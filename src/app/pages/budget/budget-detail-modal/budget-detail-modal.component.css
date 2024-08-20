@@ -1,0 +1,41 @@
+/* budget-detail-modal.component.css */
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  mat-form-field .mat-form-field-label {
+    font-weight: bold;
+  }
+  
+  mat-form-field mat-select {
+    font-size: 14px;
+  }
+  
+  mat-form-field input {
+    font-size: 14px;
+  }
+  
+  mat-dialog-content {
+    padding: 16px;
+    background-color: #f9f9f9;
+  }
+  
+  mat-dialog-actions {
+    padding: 8px;
+    text-align: right;
+  }
+  
+  button.mat-button {
+    margin-right: 8px;
+  }
+  
+  button.mat-button.primary {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  button.mat-button.primary:hover {
+    background-color: #303f9f;
+  }

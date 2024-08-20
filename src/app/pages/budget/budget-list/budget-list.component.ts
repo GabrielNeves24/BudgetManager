@@ -1,0 +1,61 @@
+import { Component, OnInit } from '@angular/core';
+import { DataTableComponent } from '../../shared/data-table/data-table.component';
+import { BudgetService } from '../../../services/budget.service';
+import { ClientService } from '../../../services/client.service';
+@Component({
+  selector: 'app-budget-list',
+  standalone: true,
+  imports: [DataTableComponent],
+  templateUrl: './budget-list.component.html',
+  styleUrl: './budget-list.component.css'
+})
+export class BudgetListComponent {
+
+  columns = [
+    { columnDef: 'BudgetId', header: '#', cell: (element: any) => `${element.budgetId}` },
+    //{ columnDef: 'ClientId', header: 'Client ID', cell: (element: any) => `${element.clientId}` },
+    { columnDef: 'ClientName', header: 'Cliente', cell: (element: any) => `${element.clientName}` },
+    { columnDef: 'Date', header: 'Data', cell: (element: any) => `${element.date}` },
+    { columnDef: 'Total S/Iva', header: 'Total S/Iva', cell: (element: any) => `${element.totalWithoutIva} €` },
+    { columnDef: 'Iva', header: 'Iva', cell: (element: any) => `${element.totalIva} €` },
+    { columnDef: 'Total c/Iva', header: 'Total c/Iva', cell: (element: any) => `${element.totalWithIva} €` },
+    { columnDef: 'actions', header: 'Ações', cell: (element: any) => `${element.actions}` },
+    { columnDef: 'print', header: 'Print', cell: (element: any) => `${element.print}` }
+  ]
+  
+  constructor(
+    private budgetService: BudgetService,
+    private clientService: ClientService,
+  ) { }
+  datasource: any  = [];
+  clientsList: any = [];
+  companyId: number = 0;
+  ngOnInit(): void {
+    localStorage.getItem('empresa') ? this.companyId = Number(localStorage.getItem('empresa')) : this.companyId = 0;
+    this.loadBudgets();
+  }
+
+  loadBudgets() {
+    // Fetch budgets
+    this.budgetService.getBudgetByCompanyId(this.companyId).subscribe((budgets: any[]) => {
+      this.datasource = budgets;
+
+      // Fetch clients after getting budgets to ensure data merging
+      this.clientService.getAllClientsByCompany(this.companyId).subscribe((clients: any[]) => {
+        this.clientsList = clients;
+
+        // Merge clients into the budgets data source
+        this.datasource = this.mergeById(this.datasource, this.clientsList);
+      });
+    });
+  }
+
+  mergeById(datasource: any, clientsList: any) {
+    datasource.forEach((element: any) => {
+      const client = clientsList.find((client: any) => client.clientId === element.clientId);
+      element.clientName = client.name;
+    });
+  }
+
+
+}

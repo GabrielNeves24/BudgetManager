@@ -1,0 +1,117 @@
+<form [formGroup]="ItemForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h1>{{ isEditMode ? 'Editar Artigo' : 'Criar Artigo' }}</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label >Código</mat-label>
+              <input matInput type="text" placeholder="Código" formControlName="code">
+              @if (ItemForm.controls['code'].hasError('required')) {
+                <mat-error>Código <strong>é obrigatório</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+         
+            <div class="col-6">
+              <mat-form-field class="full-width">
+                <mat-label >Nome</mat-label>
+                <input matInput type="text" placeholder="Nome" formControlName="name">
+                @if (ItemForm.controls['name'].hasError('required')) {
+                  <mat-error>Nome <strong>é obrigatório</strong></mat-error>
+                }
+              </mat-form-field>
+            </div>
+          
+          
+        </div>
+        
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Preço Custo</mat-label>
+                <input matInput type="number" placeholder="Preço Custo" formControlName="costPrice">
+                @if (ItemForm.controls['costPrice'].hasError('required')) {
+                  <mat-error>Preço Custo <strong>é obrigatório</strong></mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </div>
+        
+       
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <mat-label>Unidade Medida</mat-label>
+                  <mat-select placeholder="Unidade Medida" formControlName="unitId">
+                    <mat-option *ngFor="let unit of units" [value]="unit.unitId" >
+                      {{ unit.symbol }} - {{ unit.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="ItemForm.controls['unitId'].hasError('required')">unitId é <strong>obrigatório</strong></mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          
+
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Preço de Venda</mat-label>
+                  <input matInput type="number" placeholder="Preço de Venda" formControlName="sellingPrice" (change)="calculaMargem()">
+                  @if (ItemForm.controls['sellingPrice'].hasError('required')) {
+                    <mat-error>Preço de Venda <strong>é obrigatório</strong></mat-error>
+                  }
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Margem %</mat-label>
+                  <input matInput type="number" placeholder="Margem %" formControlName="margin" (change)="calculaPrecoVenda()">
+                  @if (ItemForm.controls['margin'].hasError('required')) {
+                    <mat-error>Margem <strong>é obrigatório</strong></mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <mat-label>IVA</mat-label>
+                  <mat-select placeholder="Iva" formControlName="iva">
+                    <mat-option *ngFor="let Iv of Iva" [value]="Iv.value" >
+                      {{ Iv.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="ItemForm.controls['iva'].hasError('required')">Iva é <strong>obrigatório</strong></mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="col">
+
+                <!-- <mat-form-field  class="full-width"> -->
+                  <mat-label>Ativo</mat-label>
+                  <mat-slide-toggle formControlName="active" placeholder="Ativo?" >
+                    
+                  </mat-slide-toggle>
+                  <!-- <mat-error *ngIf="ItemForm.controls['active'].hasError('required')">active é <strong>obrigatório</strong></mat-error> -->
+                <!-- </mat-form-field> -->
+              </div>
+            </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">{{ isEditMode ? 'Atualizar' : 'Gravar' }}</button>
+          <button mat-raised-button color="accent" type="button" (click)="onCancel()">Cancelar</button>
+        </mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

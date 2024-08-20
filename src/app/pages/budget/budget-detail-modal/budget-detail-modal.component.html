@@ -1,0 +1,74 @@
+<h1 mat-dialog-title>Adicionar Detalhe do Orçamento</h1>
+<div mat-dialog-content>
+  <form [formGroup]="budgetDetailForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Artigo</mat-label>
+      <mat-select formControlName="itemId" >
+        <mat-option *ngFor="let item of data.itemList" [value]="item.itemId" (onSelectionChange)="onChangeProduct(item)">
+          {{ item.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="budgetDetailForm.controls['itemId'].hasError('required')">
+        Item ID é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <input matInput formControlName="itemDescription" placeholder="Descrição" (input)="getTotal()">
+      <mat-error *ngIf="budgetDetailForm.controls['itemDescription'].hasError('required')">
+        Descrição é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantidade</mat-label>
+      <input matInput formControlName="quantity" placeholder="Quantidade" (input)="getTotal()">
+      <mat-error *ngIf="budgetDetailForm.controls['quantity'].hasError('required')">
+        Quantidade é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Preço</mat-label>
+      <input matInput formControlName="price" placeholder="Preço" (input)="getTotal()">
+      <mat-error *ngIf="budgetDetailForm.controls['price'].hasError('required')">
+        Preço é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Unidade</mat-label>
+      <mat-select formControlName="unitId">
+        <mat-option *ngFor="let unit of data.unitList" [value]="unit.unitId">
+          {{ unit.symbol }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="budgetDetailForm.controls['unitId'].hasError('required')">
+        Unidade é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>IVA</mat-label>
+      <input matInput formControlName="iva" placeholder="IVA" (input)="getTotal()">
+      <mat-error *ngIf="budgetDetailForm.controls['iva'].hasError('required')">
+        IVA é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Desconto</mat-label>
+      <input matInput formControlName="discount" placeholder="Desconto" (input)="calcularDesconto()">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Total</mat-label>
+      <input matInput formControlName="total" placeholder="Total">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSave()">Salvar</button>
+</div>

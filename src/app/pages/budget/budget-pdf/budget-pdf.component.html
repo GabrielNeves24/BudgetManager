@@ -1,0 +1,151 @@
+<div class="container my-4">
+  <div class="row mb-6">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9 text-end">
+      <button mat-stroked-button (click)="generatePdf()">Download PDF</button>
+    </div>
+    
+  </div>
+<div class="invoice-box" id="theContent">
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top_rw">
+      <td colspan="2">
+        <h2 style="margin-bottom: 0px;">Orçamento # {{ Budget.budgetId || '*****' }}</h2>
+      </td>
+      <td style="text-align:right; font-size: 20px;">
+        <strong>Data:</strong> {{ (Budget.date | date: 'dd/MM/yyyy') || '21-11-2018' }}
+      </td>
+    </tr>
+    <tr class="top">
+      <td colspan="3">
+        <table>
+          <tr>
+            <td>
+              <b>{{ CompanyInfo.name }}</b><br>
+              {{ CompanyInfo.address }}<br>
+              {{ CompanyInfo.phone }}<br>
+              {{ CompanyInfo.email }}<br>
+              {{ CompanyInfo.zipCode }}<br>
+              IBAN: {{ CompanyInfo.IBAN }}
+            </td>
+            <td style="text-align:right;">
+              <img src="{{ CompanyInfo.logo }}" style="width:100px; max-width:300px;">
+            </td>
+           
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="information">
+      <td colspan="3">
+        <table>
+          <tr>
+            <td colspan="2">
+              <b>Endereço de Envio:</b><br>
+              {{ ClientInfo.address }}<br>
+              {{ ClientInfo.postalCode }} - {{ ClientInfo.city }}<br>
+            </td>
+            <td>
+              <b>Cliente: {{ ClientInfo.name }}</b><br>
+              {{ ClientInfo.email }}<br>
+              {{ ClientInfo.phone }}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table cellspacing="0px" cellpadding="2px">
+          <tr class="heading">
+            <td style="width:25%;">ITEM</td>
+            <td style="width:10%; text-align:center;">QTD.</td>
+            <td style="width:10%; text-align:right;">Preço (€)</td>
+            <td style="width:10%; text-align:right;">IVA</td>
+            <td style="width:10%; text-align:right;">Uni</td>
+            <td style="width:10%; text-align:right;">Desconto (%)</td>
+            <td style="width:15%; text-align:right;">Preço c/Iva (€)</td>
+          </tr>
+          <tr *ngFor="let item of BudgetDetails" class="item">
+            <td style="width:25%;">
+              {{ item.itemDescription }}<br>
+            </td>
+            <td style="width:10%; text-align:center;">
+              {{ item.quantity || 'N/A' }}
+            </td>
+            <td style="width:10%; text-align:right;">
+              {{ item.price || 'N/A' }} €
+            </td>
+            <td style="width:10%; text-align:right;">
+              {{ item.iva || 'N/A' }} %
+            </td>
+            <td style="width:10%; text-align:right;">
+              {{ getSymbolUniId(item.unitId) || 'N/A' }}
+            </td>
+            <td style="width:10%; text-align:right;">
+              {{ item.discount || '0' }} %
+            </td>
+            <td style="width:15%; text-align:right;">
+              {{ item.total || 'N/A' }} €
+            </td>
+          </tr>
+          <tr class="item last">
+            <td style="width:25%;"><b>Total</b></td>
+            <td style="width:10%; text-align:center;"></td>
+            <td style="width:10%; text-align:right;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
+            <td style="width:10%; text-align:right;"></td>
+            <td style="width:10%; text-align:right;"></td>
+            <td style="width:10%; text-align:right;"></td>
+            <td style="width:15%; text-align:right;">{{ Budget.totalWithIva || 'N/A' }} €</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="total">
+      <td colspan="3" align="right">
+        <!-- <b>Total por extenso:</b> <b>{{ valorTotalEmTexto }}</b> -->
+      </td>
+    </tr>
+    <td colspan="3">
+      <table class="tabbed-totals" cellspacing="0px" cellpadding="2px">
+        <tr>
+          <td width="50%">
+            <b>Observações:</b><br>
+            {{ Budget.obs }}<br>
+            <b *ngIf="seExist()">Declaração:</b><br>
+            {{ CompanyInfo.declaration }}<br>
+          </td>
+          <td>
+            <table>
+              <tr>
+                <td><b>Valor Sem IVA:</b></td>
+                <td style="text-align:right; font-size: 18px;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
+              </tr>
+              <tr>
+                <td><b>Valor do IVA:</b></td>
+                <td style="text-align:right; font-size: 18px;">{{ Budget.totalIva || 'N/A' }} €</td>
+              </tr>
+              <tr>
+                <td><b>Total com IVA:</b></td>
+                <td style="text-align:right; font-size: 20px;">{{ Budget.totalWithIva || 'N/A' }} €</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td width="50%"></td>
+          <td>
+            <b>Assinatura</b><br><br>
+            ...................................
+          </td>
+        </tr>
+      </table>
+    </td>
+  </table>
+
+</div>
+
+
+
+

@@ -1,0 +1,61 @@
+<form [formGroup]="BudgetManagerForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h1>{{ isEditMode ? 'Editar Empresas' : 'Criar Empresas' }}</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Empresa</mat-label>
+                <mat-select placeholder="Empresa" formControlName="companyId">
+                  <mat-option *ngFor="let company of companyList" [value]="company.companyId" >
+                    {{ company.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="BudgetManagerForm.controls['companyId'].hasError('required')">Empresa é <strong>obrigatório</strong></mat-error>
+              </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Utilizador</mat-label>
+                <mat-select placeholder="Utilizador" formControlName="userId">
+                  <mat-option *ngFor="let user of userList" [value]="user.userId" >
+                    {{ user.username }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="BudgetManagerForm.controls['userId'].hasError('required')">user é <strong>obrigatório</strong></mat-error>
+              </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <mat-label>Data Expiração</mat-label>
+                <input matInput type="date" placeholder="Data Expiração" formControlName="expirationDate">
+                <mat-error *ngIf="BudgetManagerForm.controls['expirationDate'].hasError('required')">expirationDate é <strong>obrigatório</strong></mat-error>         
+              </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-label>Active</mat-label>
+                <mat-slide-toggle formControlName="active" placeholder="Ativo?" >
+                </mat-slide-toggle>
+            </div>
+        </div>     
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">{{ isEditMode ? 'Atualizar' : 'Gravar' }}</button>
+          <button mat-raised-button color="accent" type="button" (click)="onCancel()">Cancelar</button>
+        </mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

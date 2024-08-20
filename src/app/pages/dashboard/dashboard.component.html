@@ -1,0 +1,55 @@
+<p>aa</p>
+<div class="dashboard-container">
+  <mat-toolbar color="primary">
+    <span>Dashboard</span>
+  </mat-toolbar>
+
+  <div class="dashboard-content">
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>Budget Overview</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas baseChart
+                [data]="barChartData"
+                [options]="barChartOptions"
+                [type]="barChartType">
+        </canvas>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>Clients Overview</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas baseChart
+                [data]="pieChartData"
+                [options]="pieChartOptions"
+                [type]="pieChartType">
+        </canvas>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>Budgets</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount | currency}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['name', 'amount']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['name', 'amount'];"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

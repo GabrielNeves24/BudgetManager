@@ -1,0 +1,41 @@
+<form [formGroup]="perfilForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="company-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h1>Editar Perfil</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="full-width">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Nome" formControlName="username" />
+                <mat-error *ngIf="perfilForm.controls['username'].hasError('required')">
+                Nome <strong>é obrigatório</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="full-width">
+                <mat-form-field class="full-width" >
+                    <mat-label>Password</mat-label>
+                  <input matInput type="password" placeholder="Password" formControlName="password" />
+                </mat-form-field>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit">
+            Atualizar
+            </button>
+            <button mat-raised-button color="accent" type="button" (click)="onCancel()">
+            Cancelar
+            </button>
+      </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+    
+    <!-- Remove the closing tag </mat-card> -->
+  </form>
+  

@@ -1,0 +1,100 @@
+<form [formGroup]="ClientForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h1>{{ isEditMode ? 'Editar Cliente' : 'Criar Cliente' }}</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label >Nome</mat-label>
+              <input matInput type="text" placeholder="Nome" formControlName="name">
+              @if (ClientForm.controls['name'].hasError('required')) {
+                <mat-error>Nome <strong>é obrigatório</strong></mat-error>
+              }
+            </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="full-width">
+                  <mat-label> NIF</mat-label>
+                <input matInput type="phone" placeholder="Telefone" formControlName="phone">
+                @if (ClientForm.controls['phone'].hasError('required')) {
+                    <mat-error>Telefone <strong>é obrigatório</strong></mat-error>
+                }
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+              <mat-form-field class="full-width">
+                <mat-label>Morada</mat-label>
+                <input matInput type="text" placeholder="Morada" formControlName="address">
+                @if (ClientForm.controls['address'].hasError('required')) {
+                  <mat-error>Morada <strong>é obrigatória</strong></mat-error>
+                }
+            </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+              <input matInput type="email" placeholder="Email" formControlName="email">
+              @if (ClientForm.controls['email'].hasError('required')) {
+                  <mat-error>Email <strong>é obrigatório</strong></mat-error>
+              }
+              </mat-form-field>
+          </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-6">
+              <mat-form-field class="full-width">
+                <mat-label>Cod.Postal</mat-label>
+              <input matInput type="text" placeholder="Código Postal" formControlName="postalCode">
+              @if (ClientForm.controls['postalCode'].hasError('required')) {
+                  <mat-error>Código Postal <strong>é obrigatório</strong></mat-error>
+              }
+              </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label>Localidade</mat-label>
+              <input matInput type="text" placeholder="Localidade" formControlName="city">
+              @if (ClientForm.controls['city'].hasError('required')) {
+                <mat-error>Localidade <strong>é obrigatória</strong></mat-error>
+              }
+          </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label>Telemovel</mat-label>
+            <input matInput type="tel" placeholder="Telemovel" formControlName="phone">
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="full-width">
+              <mat-label>Observações</mat-label>
+            <textarea matInput type="text" placeholder="Observações" formControlName="observations"></textarea>
+            </mat-form-field>
+          </div>
+      </div>             
+        <div class="row">
+            <div class="col">
+                <mat-label>Ativo</mat-label>
+                <mat-slide-toggle formControlName="active" placeholder="Ativo?" >
+                </mat-slide-toggle>
+            </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">{{ isEditMode ? 'Atualizar' : 'Gravar' }}</button>
+          <button mat-raised-button color="accent" type="button" (click)="onCancel()">Cancelar</button>
+        </mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

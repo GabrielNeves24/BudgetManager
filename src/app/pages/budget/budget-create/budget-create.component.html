@@ -1,0 +1,131 @@
+<form [formGroup]="budgetForm" novalidate>
+  <!-- <input matInput formControlName="someField" (keydown.enter)="$event.preventDefault()" hidden> -->
+  
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>{{ isEditMode ? 'Editar Orçamento' : 'Criar Orçamento' }}</h1>
+      </mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="row">
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Cliente" formControlName="clientId" (selectionChange)="preSelectDate()">
+              <mat-option *ngFor="let client of clientList" [value]="client.clientId">
+                {{ client.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="budgetForm.controls['clientId'].hasError('required')">
+              Cliente é <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input matInput type="date" placeholder="Data" formControlName="date">
+            <mat-error *ngIf="budgetForm.controls['date'].hasError('required')">
+              Data <strong>é obrigatória</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Origem" formControlName="origin">
+            <mat-error *ngIf="budgetForm.controls['origin'].hasError('required')">
+              Origem <strong>é obrigatória</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Observações" formControlName="obs"></textarea>
+            </mat-form-field>
+        </div>
+      </div>
+
+      <button mat-button (click)="createLine()">Adicionar Artigo</button>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" (contentChanged)="calculateTotals()">
+        <!-- Columns Definition -->
+        <ng-container matColumnDef="itemDescription">
+          <th mat-header-cell *matHeaderCellDef> Artigo </th>
+          <td mat-cell *matCellDef="let element"> {{element.itemDescription}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantidade </th>
+          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Preço </th>
+          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unit">
+          <th mat-header-cell *matHeaderCellDef> Unidade </th>
+          <td mat-cell *matCellDef="let element"> {{ getNameSymbol(element.unit)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="iva">
+          <th mat-header-cell *matHeaderCellDef> IVA </th>
+          <td mat-cell *matCellDef="let element"> {{element.iva}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="discount">
+          <th mat-header-cell *matHeaderCellDef> Desconto </th>
+          <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> Total Linha </th>
+          <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="onEdit(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onDelete(element.budgetDetailId)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!-- Display Totals on the Right Side -->
+      <div class="totals-section">
+        <mat-form-field class="total-field">
+          <input matInput readonly placeholder="Total Sem IVA" [value]=" totalWithoutIva | currency: 'EUR'">
+        </mat-form-field>
+        <mat-form-field class="total-field">
+          <input matInput readonly placeholder="Total IVA" [value]="totalIva | currency: 'EUR'">
+        </mat-form-field>
+        <mat-form-field class="total-field">
+          <input matInput readonly placeholder="Total Com IVA" [value]="totalWithIva | currency: 'EUR'">
+        </mat-form-field>
+      </div>
+
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">
+        <mat-icon>save</mat-icon>
+        {{ isEditMode ? 'Atualizar' : 'Gravar' }}
+      </button>
+      <button mat-raised-button color="accent" type="button" (click)="onCancelFull()">
+        <mat-icon>cancel</mat-icon>
+        Cancelar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

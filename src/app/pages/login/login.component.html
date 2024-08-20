@@ -1,0 +1,24 @@
+
+<hgroup>
+    <h1>Orçamentos Manager</h1>
+    <!-- <h3>By Gabriel Neves</h3> -->
+  </hgroup>
+  <form>
+    <div class="group">
+      <input type="text" name="username" [(ngModel)]="loginObj.username"><span class="highlight"></span><span class="bar"></span>
+      <label>Email</label>
+    </div>
+    <div class="group">
+      <input type="password" name="password" [(ngModel)]="loginObj.password"><span class="highlight"></span><span class="bar"></span>
+      <label>Password</label>
+    </div>
+    <button type="button" class="button buttonBlue" (click)="onLogin()">Login
+      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+    <mat-spinner *ngIf="isLoading" mode="indeterminate"></mat-spinner>
+  </form>
+  
+  <footer>
+    <!-- <a href="http://www.polymer-project.org/" target="_blank"><img src="https://www.polymer-project.org/images/logos/p-logo.svg"></a> -->
+    <!-- <p>You Gotta Love <a href="http://www.polymer-project.org/" target="_blank">Google</a></p> -->
+  </footer>

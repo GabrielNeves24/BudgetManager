@@ -84,13 +84,13 @@ export class ClientDetailComponent implements OnInit {
       labels: labels,
       datasets: [
         {
-          label: 'Count by State',
+          label: 'Estado',
           data: counts,
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
           hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
         },
         {
-          label: 'Total with IVA',
+          label: 'Total C/IVA',
           data: totalsWithIva,
           backgroundColor: ['#FF9F40', '#FFCD56', '#4BC0C0', '#FF6384'],
           hoverBackgroundColor: ['#FF9F40', '#FFCD56', '#4BC0C0', '#FF6384']

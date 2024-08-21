@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DataTableComponent } from '../../../shared/data-table/data-table.component';
 import { CompanyService } from '../../../../services/company.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-company-list',
@@ -14,7 +16,9 @@ export class CompanyListComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   columns = [
@@ -30,6 +34,7 @@ export class CompanyListComponent implements OnInit {
 
   datasource: any = [];
   ngOnInit(): void {
+    this.authService.checkIfUserIsAdmin();
     this.companyService.getAllCompanies().subscribe((data: any) => {
       this.datasource = data;
     });

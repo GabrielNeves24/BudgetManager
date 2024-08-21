@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { CompanyService } from '../../../services/company.service';
 import { BudgetmanagerService } from '../../../services/admin/budgetmanager.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-budget-manager-gestao-create',
@@ -32,7 +33,8 @@ export class BudgetManagerGestaoCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private companyService: CompanyService,
-    private budgetManagerService: BudgetmanagerService
+    private budgetManagerService: BudgetmanagerService,
+    private authService: AuthService
     ) {}
   isEditMode = false;
 
@@ -49,6 +51,7 @@ export class BudgetManagerGestaoCreateComponent implements OnInit {
   companyList: any = [];
   budgetManagerId=0;
   ngOnInit(): void {
+    this.authService.checkIfUserIsAdmin();
     this.budgetManagerId = this.route.snapshot.params['budgetManagerId'] || 0;
     if (this.budgetManagerId != 0) {
       this.isEditMode = true;

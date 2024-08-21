@@ -93,7 +93,7 @@
     color: #333;
 }
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
     .invoice-box table tr.top table td {
         width: 100%;
         display: block;
@@ -105,7 +105,7 @@
         display: block;
         text-align: center;
     }
-}
+} */
 
 .rtl {
     direction: rtl;
@@ -123,4 +123,12 @@
     width: 100px!important;
     min-width: unset!important;
     align-content: center;
+}
+@media print {
+    #theContent {
+        width: 794px; /* Width of A4 in pixels at 96 DPI */
+        height: 1123px; /* Height of A4 in pixels at 96 DPI */
+        transform: scale(1); /* Ensure no scaling */
+        transform-origin: top left;
+    }
 }

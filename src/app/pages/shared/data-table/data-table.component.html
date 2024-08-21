@@ -24,15 +24,20 @@
           </mat-form-field>
         </div>
 
-        <!-- Show/Hide Inactive Rows Button -->
-        <div class="col-md-3" *ngIf="existeActive">
-          <button mat-raised-button color="accent" (click)="toggleInactiveRows()">
-            {{ showInactive ? 'Esconder Inativos' : 'Mostrar Inativos' }}
-          </button>
-        </div>
+        
+        
 
         <!-- Add New Button -->
         <div class="col-md-9 text-end">
+          <!-- Show/Hide Inactive Rows Button -->
+          <div class="col-md-3" *ngIf="existeActive">
+            <button mat-raised-button color="accent" (click)="toggleInactiveRows()">
+              {{ showInactive ? 'Esconder Inativos' : 'Mostrar Inativos' }}
+            </button>
+          </div>
+          <button mat-stroked-button (click)="navigateBack()" *ngIf="this.routeBefore">
+            Voltar
+          </button>
           <button mat-stroked-button (click)="navigateToAddNew()">
             Novo
           </button>
@@ -68,9 +73,6 @@
                 </ng-container>
                 <ng-container *ngSwitchCase="'LastUpdate'">
                   {{ column.cell(element) | date: 'dd/MM/yyyy HH:mm' }}
-                </ng-container>
-                <ng-container *ngSwitchCase="see(element)">
-                  {{ column.cell(element) }}
                 </ng-container>
                 <ng-container *ngSwitchCase="'actions'">
                   <button mat-icon-button (click)="onEdit(element)">

@@ -17,6 +17,10 @@ import { UserService } from '../../../services/user.service';
 import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/select';
 import { ClientDetailModalComponent } from '../../client/client-detail-modal/client-detail-modal.component';
+import { ItemService } from '../../../services/item.service';
+import { UnitService } from '../../../services/unit.service';
+import { ClientService } from '../../../services/client.service';
+import { CompanyService } from '../../../services/company.service';
 
 
 @Component({
@@ -42,7 +46,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   columns: Array<{ columnDef: string; header: string; cell: (element: any) => string; }> = [];
   @Input() data: any[] = [];
   @Input() addNewRoute: string = '';  // New property for dynamic route
-  
+  @Input() routeBefore: string = '';
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = [];
   showInactive = true;
@@ -55,8 +59,11 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     private budgetService: BudgetService,
     private budgetManagerService: BudgetmanagerService,
     private userService: UserService,
-    private cdr: ChangeDetectorRef
-    
+    private cdr: ChangeDetectorRef,
+    private itemService: ItemService,
+    private unitService: UnitService,
+    private clienteService: ClientService,
+    private companyService: CompanyService,
     ) { }
     
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -126,13 +133,10 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
       this.dataSource.data = this.data.filter((value: any) => value.active === true);
     }
   }
-  see(element:any): any {
-    //this.hideColumn('Active');
+  navigateBack() {
+    this.router.navigate([this.routeBefore]);
   }
-  // exiteActive(): boolean {
-  //   this.hideColumn('Active');
-  //   return this.displayedColumns.includes('Active');
-  // }
+
   exiteState(): boolean {
     return this.displayedColumns.includes('State');
   }
@@ -173,49 +177,89 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   }
 
   onDelete(element: any) {
-    const routes = {
-      'item/create-item': ['item/delete-item', element.itemId],
-      'unit/create-unit': ['unit/delete-unit', element.unitId],
-      'client/create-client': ['client/delete-client', element.clientId],
-      'budget/create-budget': ['budget/delete-budget', element.budgetId],
-      'budgetManager/create-budgetManager': ['budgetManager/delete-budgetManager', element.budgetManagerId],
-      'company/create-company': ['company/delete-company', element.companyId],
-      'user/create-user': ['user/delete-user', element.userId],
-    };
-    if (routes[this.addNewRoute as keyof typeof routes]) {
-      this.router.navigate(routes[this.addNewRoute as keyof typeof routes]);
-    } else if (this.addNewRoute === 'budget/create-budget') {
-      this.budgetService.deleteBudget(element.budgetId).subscribe(
-        (data: any) => {
-          this.toastr.success('Orçamento eliminado com sucesso');
-          this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetId !== element.budgetId);
+    switch (this.addNewRoute) {
+      case 'item/create-item':
+        this.itemService.deleteItem(element.itemId).subscribe((data: any) => {
+          this.toastr.success('Item eliminado com sucesso');
+          this.dataSource.data = this.dataSource.data.filter((value: any) => value.itemId !== element.itemId);
         },
         (error: any) => {
-          this.toastr.error('Impossível eliminar');
-        }
-      );
-    } else if (this.addNewRoute === 'budgetManager/create-budgetManager') {
-      this.budgetManagerService.deleteBudgetManager(element.budgetManagerId).subscribe(
-        (data: any) => {
-          this.toastr.success('Eliminado com sucesso');
-          this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetManagerId !== element.budgetManagerId);
+          this.toastr.error('Erro ao eliminar Artigo');
+        });
+        break;
+
+      case 'unit/create-unit':
+        this.unitService.deleteUnit(element.unitId).subscribe((data : any) => {
+          this.toastr.success('Unidade eliminada com sucesso');
+          this.dataSource.data = this.dataSource.data.filter((value: any) => value.unitId !== element.unitId);
         },
         (error: any) => {
-          this.toastr.error('Erro ao eliminar');
-        }
-      );
-    } else if (this.addNewRoute === 'user/create-user') {
-      this.userService.deleteUser(element.userId).subscribe(
-        (data: any) => {
-          this.toastr.success('User eliminado com sucesso');
-          this.dataSource.data = this.dataSource.data.filter((value: any) => value.userId !== element.userId);
+          this.toastr.error('Erro ao eliminar Unidade');
+        });
+        break;
+
+      case 'client/create-client':
+        this.clienteService.deleteClient(element.clientId).subscribe((data: any) => {
+          this.toastr.success('Cliente eliminado com sucesso');
+          this.dataSource.data = this.dataSource.data.filter((value: any) => value.clientId !== element.clientId);
         },
         (error: any) => {
-          this.toastr.error('Erro ao eliminar');
-        }
-      );
+          this.toastr.error('Erro ao eliminar Cliente');
+        });
+        break;
+
+      case 'budget/create-budget':
+        this.budgetService.deleteBudget(element.budgetId).subscribe(
+          (data: any) => {
+            this.toastr.success('Orçamento eliminado com sucesso');
+            this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetId !== element.budgetId);
+          },
+          (error: any) => {
+            this.toastr.error('Impossível eliminar Orçamento');
+          }
+        );
+        break;
+
+      case 'budgetManager/create-budgetManager':
+        this.budgetManagerService.deleteBudgetManager(element.budgetManagerId).subscribe(
+          (data: any) => {
+            this.toastr.success('Eliminado com sucesso');
+            this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetManagerId !== element.budgetManagerId);
+          },
+          (error: any) => {
+            this.toastr.error('Erro ao eliminar');
+          }
+        );
+        break;
+
+      case 'company/create-company':
+        this.companyService.deleteCompany(element.companyId).subscribe((data: any) => {
+          this.toastr.success('Empresa eliminada com sucesso');
+          this.dataSource.data = this.dataSource.data.filter((value: any) => value.companyId !== element.companyId);
+        },
+        (error: any) => {
+          this.toastr.error('Erro ao eliminar Empresa');
+        });
+        break;
+
+      case 'user/create-user':
+        this.userService.deleteUser(element.userId).subscribe(
+          (data: any) => {
+            this.toastr.success('User eliminado com sucesso');
+            this.dataSource.data = this.dataSource.data.filter((value: any) => value.userId !== element.userId);
+          },
+          (error: any) => {
+            this.toastr.error('Erro ao eliminar');
+          }
+        );
+        break;
+
+      default:
+        this.toastr.error('Operação não reconhecida');
+        break;
     }
   }
+
 
   onPrint(element: any) {
     this.router.navigate(['budget/pdf/', element.budgetId]);

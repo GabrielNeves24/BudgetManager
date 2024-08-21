@@ -5,6 +5,7 @@ import { Company } from '../../../Model/company.model';
 import { CompanyService } from '../../../services/company.service';
 import { UserService } from '../../../services/user.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-budget-manager-gestao',
@@ -18,7 +19,8 @@ export class BudgetManagerGestaoComponent implements OnInit {
   constructor(
     private budgetManagerService: BudgetmanagerService,
     private companyService: CompanyService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   columns = [
@@ -38,6 +40,7 @@ export class BudgetManagerGestaoComponent implements OnInit {
   userList: any = [];
 
   ngOnInit(): void {
+    this.authService.checkIfUserIsAdmin();
     this.budgetManagerService.getAllBudgetManagers().subscribe((data: any) => {
       this.datasource = data;
     });

@@ -29,7 +29,8 @@ export class CompanyCreateComponent {
     private toastr: ToastrService, 
     private router: Router,
     private route: ActivatedRoute,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    
     ) {}
 
     isEditMode = false;

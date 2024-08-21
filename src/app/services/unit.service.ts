@@ -26,4 +26,8 @@ export class UnitService {
   getUnitByEmpresa(empresaId: number): Observable<Unit>{
     return this.httpService.get<Unit>('/Unit/Empresa/'+empresaId);
   }
+
+  deleteUnit(unitId: number): Observable<any>{
+    return this.httpService.delete<any>('/Unit/'+unitId);
+  }
 }

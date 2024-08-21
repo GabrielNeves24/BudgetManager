@@ -10,6 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
+import { AuthService } from '../../../../services/auth.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class UserCreateComponent {
     private toastr: ToastrService, 
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
     ) {}
 
     isEditMode = false;
@@ -44,6 +46,7 @@ export class UserCreateComponent {
     });
     userId = 0;
     ngOnInit(): void {
+      this.authService.checkIfUserIsAdmin();
       this.userId = this.route.snapshot.params['userId'];
       if (this.userId != 0 && this.userId != null) {
         this.isEditMode = true;

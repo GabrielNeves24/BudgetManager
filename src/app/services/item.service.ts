@@ -29,4 +29,8 @@ export class ItemService {
   getItemsByEmpresa(empresaId: number): Observable<Item>{
     return this.httpService.get<Item>('/Item/Empresa/'+empresaId);
   }
+
+  deleteItem(id: number): Observable<any>{
+    return this.httpService.delete<any>('/Item/'+id);
+  }
 }

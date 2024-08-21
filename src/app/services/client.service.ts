@@ -25,5 +25,9 @@ export class ClientService {
   getAllClientsByCompany(companyId:number): Observable<any>{
     return this.httpService.get<any>('/Client/Empresa/'+companyId);
   }
+
+  deleteClient(clientId: number): Observable<any>{
+    return this.httpService.delete<any>('/Client/'+clientId);
+  }
   
 }

@@ -47,7 +47,15 @@ export class AuthService implements OnInit {
 
   logout(): void {
     this.clearToken();
+    this.clearLocalStorage();
     this.router.navigate(['/login']);
+  }
+  clearLocalStorage(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('user');
+      localStorage.removeItem('empresa');
+      localStorage.removeItem('userId');
+    }
   }
 
   ngOnInit(): void {
@@ -105,5 +113,16 @@ export class AuthService implements OnInit {
       }
     }
     return throwError(() => new Error(errorMessage));
+  }
+
+  checkIfUserIsAdmin(): boolean {
+    let user = JSON.parse(localStorage.getItem('user') as string);
+    if (user.role !== 'A') {
+      this.toastr.error('Sem permissões', 'Acesso negado');
+      //navigate to the home page
+      this.router.navigate(['/budget']);
+      return false;
+    }
+    return true;
   }
 }

@@ -30,6 +30,14 @@ export class LoginComponent {
     private httpservice: HTTPService
   ) { }
   isLoading: boolean = false;
+  onBlur(event: any) {
+    if (event.target.value === '') {
+      event.target.classList.remove('used');
+    }
+  }
+  onFocus(event: any) {
+    event.target.classList.add('used');
+  }
   onLogin() {
     this.isLoading = true;
     this.httpservice.post('/User/Login', this.loginObj).subscribe(

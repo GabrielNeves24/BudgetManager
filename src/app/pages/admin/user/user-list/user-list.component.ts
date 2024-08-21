@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../../services/user.service';
 import { DataTableComponent } from '../../../shared/data-table/data-table.component';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
 @Component({
   selector: 'app-user-list',
   standalone: true,
@@ -13,7 +15,9 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router 
   ) { }
   columns = [
     { columnDef: 'UserId', header: '#', cell: (element: any) => `${element.userId}` },
@@ -26,6 +30,7 @@ export class UserListComponent implements OnInit {
   ]
   datasource: any = [];
   ngOnInit(): void {
+    this.authService.checkIfUserIsAdmin();
     this.userService.getAllUsers().subscribe((data: any) => {
       this.datasource = data;
     });

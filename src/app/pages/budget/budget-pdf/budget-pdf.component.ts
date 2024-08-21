@@ -16,12 +16,13 @@ import { CompanyService } from '../../../services/company.service';
 import { UnitService } from '../../../services/unit.service';
 import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../../services/auth.service';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-budget-pdf',
   standalone: true,
-  imports: [DatePipe,CommonModule,MatIcon],
+  imports: [DatePipe,CommonModule,MatIcon,MatButtonModule],
   templateUrl: './budget-pdf.component.html',
   styleUrl: './budget-pdf.component.css'
 })
@@ -49,6 +50,9 @@ click: any;
   companyId: number = 0;
   unitList: any;
   imageAddress: any;
+  navigateBack() {
+    this.router.navigate(['/budget']);
+  }
   ngOnInit(): void {
     localStorage.getItem('empresa') ? this.companyId = Number(localStorage.getItem('empresa')) : this.companyId = 0;
     const budgetId = this.route.snapshot.params['id'];
@@ -159,33 +163,40 @@ click: any;
 
   generatePdf() {
     const elementToPrint = document.getElementById('theContent');
-  
+    
     if (elementToPrint) {
-        // Increase the scale to enhance the quality of the output, especially on mobile
-        html2canvas(elementToPrint, { scale: 3 }).then((canvas) => {
-            const imgWidth = 210; // A4 width in mm
-            const pageHeight = 297; // A4 height in mm
-            const imgHeight = (canvas.height * imgWidth) / canvas.width; // Height based on the image aspect ratio
-            let heightLeft = imgHeight;
-            let position = 0;
-
+        // Apply CSS to ensure correct size
+        elementToPrint.style.width = '794px';
+        elementToPrint.style.height = '1123px';
+        elementToPrint.style.transform = 'scale(1)';
+        elementToPrint.style.transformOrigin = 'top left';
+        
+        // Generate PDF
+        html2canvas(elementToPrint, { scale: 2 }).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'mm', 'a4');
+            const imgWidth = 210; // A4 width in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
+            let position = 0;
+            let heightLeft = imgHeight;
 
-            // Add the image to the PDF, managing pages if necessary
-            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pdf.internal.pageSize.getHeight();
 
             while (heightLeft > 0) {
                 position = heightLeft - imgHeight;
                 pdf.addPage();
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pdf.internal.pageSize.getHeight();
             }
 
+            // Save the PDF
             pdf.save('Orçamento.pdf');
         });
     }
 }
+
+
 
   
 

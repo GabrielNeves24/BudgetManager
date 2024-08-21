@@ -24,8 +24,7 @@
 
 table {
   width: 100%;
-  overflow-x: auto;
-  display: block;
+  border-collapse: collapse;
 }
 
 th, td {
@@ -35,6 +34,9 @@ th, td {
 @media (max-width: 768px) {
   table {
       font-size: 12px;
+      display: block; /* Make the table a block element on smaller screens */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent text wrapping */
   }
 
   th, td {

@@ -1,17 +1,9 @@
 /* General styles for the form */
-.shipping-card {
-    width: 100%;
-    margin: 0 auto;
-    padding: 16px;
-  }
   
   mat-form-field {
     width: 100%;
   }
   
-  mat-card-content {
-    /* padding: 16px; */
-  }
   
   /* Grid layout adjustments for mobile devices */
   .row {
@@ -20,10 +12,7 @@
     margin: -8px;
   }
   
-  .col {
-    flex: 1 1 100%;
-    padding: 8px;
-  }
+
   
   /* Adjustments for columns with specific widths */
   .col-6 {

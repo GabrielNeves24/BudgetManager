@@ -23,6 +23,7 @@ import { BudgetDetailModalComponent } from '../budget-detail-modal/budget-detail
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { UnitService } from '../../../services/unit.service';
 import { BudgetDetailService } from '../../../services/budget-detail.service';
+
 @Component({
   selector: 'app-budget-create',
   standalone: true,
@@ -288,7 +289,7 @@ export class BudgetCreateComponent implements OnInit {
           (response: any) => {
   
             if (response && response.budget && response.budget.budgetId > 0) {
-              this.toastr.success('Orçamento criado com sucesso');
+              //this.toastr.success('Orçamento criado com sucesso');
   
               // Update budgetId in the details array
               this.budgetArray.forEach((item) => {
@@ -311,7 +312,7 @@ export class BudgetCreateComponent implements OnInit {
                       allDetailsCreatedSuccessfully = false;
                       this.toastr.error('Erro ao criar detalhe do orçamento');
                     } else {
-                      this.toastr.success('Orçamento criado com sucesso');
+                      //this.toastr.success('Orçamento criado com sucesso');
                     }
                   });
   

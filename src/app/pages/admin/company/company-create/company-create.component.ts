@@ -10,6 +10,7 @@ import { Router, ActivatedRoute  } from  '@angular/router';
 import { CommonModule } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CompanyService } from '../../../../services/company.service';
+import { AuthService } from '../../../../services/auth.service';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class CompanyCreateComponent {
     private router: Router,
     private route: ActivatedRoute,
     private companyService: CompanyService,
+    private authService: AuthService
     
     ) {}
 
@@ -55,9 +57,12 @@ export class CompanyCreateComponent {
     selectedLogo: File | null = null;
     ngOnInit(): void {
       this.companyId = this.route.snapshot.params['companyId'];
+      
       if (this.companyId != 0 && this.companyId != null) {
         this.isEditMode = true;
         this.loadCompany(this.companyId);
+      }else{
+        this.authService.checkIfUserIsAdmin();
       }
     }
     onLogoSelected(event: any) {
@@ -70,6 +75,7 @@ export class CompanyCreateComponent {
   
         this.companyService.uploadCompanyLogo(formData, this.companyId).subscribe((data: any) => {+
           this.toastr.success('Logo atualizado com sucesso');
+          this.router.navigate(['/budget']);
         }
         );
       }
@@ -94,7 +100,7 @@ export class CompanyCreateComponent {
       if (this.isEditMode) {
         this.companyService.updateCompany(this.companyForm.value, this.companyId).subscribe((data: any) => {
           this.toastr.success('Empresa atualizada com sucesso');
-          this.router.navigate(['/company']);
+          this.router.navigate(['/budget']);
         });
       } else {
         this.companyService.createCompany(this.companyForm.value).subscribe((data: any) => {

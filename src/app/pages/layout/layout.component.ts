@@ -65,7 +65,7 @@ export class LayoutComponent implements OnInit {
 
   ifUserDemo() {
     let user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (user.role == 'A') {
+    if (user.role == 'A' || user.role == 'U') {
       return true;
     }
     return false;

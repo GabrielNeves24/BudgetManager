@@ -7,6 +7,7 @@ export interface Company {
     City: string;
     IBAN: string;
     Website: string;
+    nif: string;
     Phone: string;
     CellPhone: string;
     Email: string;

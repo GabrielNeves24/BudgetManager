@@ -1,0 +1,63 @@
+/* General dialog styling */
+.mat-dialog-container {
+    border-radius: 8px; /* Rounded corners for the dialog */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Title styling */
+  .mat-dialog-title {
+    font-size: 1.25rem; /* Slightly larger font size for the title */
+    font-weight: 500; /* Medium font weight */
+    color: #333; /* Darker color for better readability */
+    padding: 16px; /* Padding around the title */
+    border-bottom: 1px solid #ddd; /* Divider line below the title */
+    background-color: #f5f5f5; /* Light background color for the title area */
+    text-align: center; /* Center the title text */
+  }
+  
+  /* Content styling */
+  .mat-dialog-content {
+    padding: 16px; /* Padding around the content */
+    color: #555; /* Slightly lighter text color */
+    font-size: 1rem; /* Standard font size for the content */
+    text-align: center; /* Center-align the content text */
+  }
+  
+  /* Action buttons container styling */
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    padding: 8px 16px; /* Padding around the buttons */
+    border-top: 1px solid #ddd; /* Divider line above the buttons */
+    background-color: #f5f5f5; /* Light background color for the buttons area */
+
+    
+  }
+  
+  /* Individual button styling */
+  .mat-dialog-actions button {
+    margin: 0 8px; /* Space between buttons */
+    font-weight: 500; /* Medium font weight for buttons */
+    text-transform: uppercase; /* Uppercase text for buttons */
+  }
+  
+  /* Confirm button styling */
+  .mat-dialog-actions button:first-child {
+    background-color: #f44336; /* Red color for 'No' button */
+    color: white; /* White text color */
+  }
+  
+  .mat-dialog-actions button:first-child:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+  }
+  
+  /* Cancel button styling */
+  .mat-dialog-actions button:last-child {
+    background-color: #4caf50; /* Green color for 'Yes' button */
+    color: white; /* White text color */
+  }
+  
+  .mat-dialog-actions button:last-child:hover {
+    background-color: #388e3c; /* Darker green on hover */
+  }
+  

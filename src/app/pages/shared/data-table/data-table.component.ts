@@ -21,7 +21,7 @@ import { ItemService } from '../../../services/item.service';
 import { UnitService } from '../../../services/unit.service';
 import { ClientService } from '../../../services/client.service';
 import { CompanyService } from '../../../services/company.service';
-
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-data-table',
@@ -34,7 +34,7 @@ import { CompanyService } from '../../../services/company.service';
      MatTableModule,
      MatButtonModule, 
      MatDividerModule, 
-     MatIconModule,MatDialogModule,MatButtonModule,DatePipe,MatSelect,MatOption
+     MatIconModule,MatDialogModule,MatButtonModule,DatePipe,MatSelect,MatOption,ConfirmationDialogComponent
      ],
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css'],
@@ -176,88 +176,106 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   }
 
   onDelete(element: any) {
-    switch (this.addNewRoute) {
-      case 'item/create-item':
-        this.itemService.deleteItem(element.itemId).subscribe((data: any) => {
-          this.toastr.success('Item eliminado com sucesso');
-          this.dataSource.data = this.dataSource.data.filter((value: any) => value.itemId !== element.itemId);
-        },
-        (error: any) => {
-          this.toastr.error('Erro ao eliminar Artigo');
-        });
-        break;
-
-      case 'unit/create-unit':
-        this.unitService.deleteUnit(element.unitId).subscribe((data : any) => {
-          this.toastr.success('Unidade eliminada com sucesso');
-          this.dataSource.data = this.dataSource.data.filter((value: any) => value.unitId !== element.unitId);
-        },
-        (error: any) => {
-          this.toastr.error('Erro ao eliminar Unidade');
-        });
-        break;
-
-      case 'client/create-client':
-        this.clienteService.deleteClient(element.clientId).subscribe((data: any) => {
-          this.toastr.success('Cliente eliminado com sucesso');
-          this.dataSource.data = this.dataSource.data.filter((value: any) => value.clientId !== element.clientId);
-        },
-        (error: any) => {
-          this.toastr.error('Erro ao eliminar Cliente');
-        });
-        break;
-
-      case 'budget/create-budget':
-        this.budgetService.deleteBudget(element.budgetId).subscribe(
-          (data: any) => {
-            this.toastr.success('Orçamento eliminado com sucesso');
-            this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetId !== element.budgetId);
-          },
-          (error: any) => {
-            this.toastr.error('Impossível eliminar Orçamento');
-          }
-        );
-        break;
-
-      case 'budgetManager/create-budgetManager':
-        this.budgetManagerService.deleteBudgetManager(element.budgetManagerId).subscribe(
-          (data: any) => {
-            this.toastr.success('Eliminado com sucesso');
-            this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetManagerId !== element.budgetManagerId);
-          },
-          (error: any) => {
-            this.toastr.error('Erro ao eliminar');
-          }
-        );
-        break;
-
-      case 'company/create-company':
-        this.companyService.deleteCompany(element.companyId).subscribe((data: any) => {
-          this.toastr.success('Empresa eliminada com sucesso');
-          this.dataSource.data = this.dataSource.data.filter((value: any) => value.companyId !== element.companyId);
-        },
-        (error: any) => {
-          this.toastr.error('Erro ao eliminar Empresa');
-        });
-        break;
-
-      case 'user/create-user':
-        this.userService.deleteUser(element.userId).subscribe(
-          (data: any) => {
-            this.toastr.success('User eliminado com sucesso');
-            this.dataSource.data = this.dataSource.data.filter((value: any) => value.userId !== element.userId);
-          },
-          (error: any) => {
-            this.toastr.error('Erro ao eliminar');
-          }
-        );
-        break;
-
-      default:
-        this.toastr.error('Operação não reconhecida');
-        break;
-    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px', height: '200px',
+      
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        switch (this.addNewRoute) {
+          case 'item/create-item':
+            this.itemService.deleteItem(element.itemId).subscribe(
+              () => {
+                this.toastr.success('Item eliminado com sucesso');
+                this.dataSource.data = this.dataSource.data.filter((value: any) => value.itemId !== element.itemId);
+              },
+              () => {
+                this.toastr.error('Erro ao eliminar Artigo');
+              }
+            );
+            break;
+  
+          case 'unit/create-unit':
+            this.unitService.deleteUnit(element.unitId).subscribe(
+              () => {
+                this.toastr.success('Unidade eliminada com sucesso');
+                this.dataSource.data = this.dataSource.data.filter((value: any) => value.unitId !== element.unitId);
+              },
+              () => {
+                this.toastr.error('Erro ao eliminar Unidade');
+              }
+            );
+            break;
+  
+          case 'client/create-client':
+            this.clienteService.deleteClient(element.clientId).subscribe(
+              () => {
+                this.toastr.success('Cliente eliminado com sucesso');
+                this.dataSource.data = this.dataSource.data.filter((value: any) => value.clientId !== element.clientId);
+              },
+              () => {
+                this.toastr.error('Erro ao eliminar Cliente');
+              }
+            );
+            break;
+  
+          case 'budget/create-budget':
+            this.budgetService.deleteBudget(element.budgetId).subscribe(
+              () => {
+                this.toastr.success('Orçamento eliminado com sucesso');
+                this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetId !== element.budgetId);
+              },
+              () => {
+                this.toastr.error('Impossível eliminar Orçamento');
+              }
+            );
+            break;
+  
+          case 'budgetManager/create-budgetManager':
+            this.budgetManagerService.deleteBudgetManager(element.budgetManagerId).subscribe(
+              () => {
+                this.toastr.success('Eliminado com sucesso');
+                this.dataSource.data = this.dataSource.data.filter((value: any) => value.budgetManagerId !== element.budgetManagerId);
+              },
+              () => {
+                this.toastr.error('Erro ao eliminar');
+              }
+            );
+            break;
+  
+          case 'company/create-company':
+            this.companyService.deleteCompany(element.companyId).subscribe(
+              () => {
+                this.toastr.success('Empresa eliminada com sucesso');
+                this.dataSource.data = this.dataSource.data.filter((value: any) => value.companyId !== element.companyId);
+              },
+              () => {
+                this.toastr.error('Erro ao eliminar Empresa');
+              }
+            );
+            break;
+  
+          case 'user/create-user':
+            this.userService.deleteUser(element.userId).subscribe(
+              () => {
+                this.toastr.success('User eliminado com sucesso');
+                this.dataSource.data = this.dataSource.data.filter((value: any) => value.userId !== element.userId);
+              },
+              () => {
+                this.toastr.error('Erro ao eliminar');
+              }
+            );
+            break;
+  
+          default:
+            this.toastr.error('Operação não reconhecida');
+            break;
+        }
+      }
+    });
   }
+  
 
 
   onPrint(element: any) {

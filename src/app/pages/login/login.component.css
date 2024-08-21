@@ -36,6 +36,11 @@ input {
 	border-bottom: 1px solid #757575;
 }
 
+.align-middle {
+  display: flex;
+  align-items: center;
+}
+
 input:focus { outline: none; }
 
 

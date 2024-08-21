@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HTTPService } from '../../services/http.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { debounce } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,MatProgressSpinnerModule,CommonModule],
+  imports: [FormsModule,MatProgressBarModule,CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -39,6 +39,7 @@ export class LoginComponent {
     event.target.classList.add('used');
   }
   onLogin() {
+    //disble the login button while the request is being processed
     this.isLoading = true;
     this.httpservice.post('/User/Login', this.loginObj).subscribe(
       (res: any) => {

@@ -26,10 +26,12 @@
     <span class="highlight"></span><span class="bar"></span>
     <label>Password</label>
   </div>
-  <button type="button" class="button buttonBlue" (click)="onLogin()">Login
+  <button type="button" class="button buttonBlue" *ngIf="!isLoading" (click)="onLogin()">Login
     <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
   </button>
-  <mat-spinner *ngIf="isLoading" mode="indeterminate"></mat-spinner>
+  <div class="align-middle" *ngIf="isLoading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
 </form>
 
 <footer>

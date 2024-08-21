@@ -1,92 +1,168 @@
-.sidenav-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 0;
-}
-
-.mainContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.sidenav {
-  width: 250px;
-  background-color: #6277e9;
+mat-toolbar {
+  background: #004a9f;
   color: white;
-  position: fixed;
-  top: 65px; /* Adjust top position to be below the fixed toolbar */
-  height: calc(100vh - 65px); /* Full height minus the toolbar height */
-  z-index: 1; 
-  align-content: middle;
 }
 
-.sidenav mat-nav-list a {
+mat-sidenav {
+  margin: 16px;
+  width: 280px; /* Increased width to accommodate expansion panels */
+  border-right: none;
+  background: #094488;
   color: white;
-  font-weight: 500;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
 }
-
-.sidenav mat-nav-list a.active-link {
-  background-color: white;
-  font-weight: 700;
-}
-
-.sidenav mat-nav-list a:hover {
-  background-color: white;
-}
-
-.toolbar {
-  position: fixed;
-  top: 0;
-  z-index: 2; 
-  width: 100%;
-  display: flex;
-  align-items: center;
-  height: 65px;
-}
-
-.spacer {
-  flex: 1 1 auto;
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 
 .content {
-  padding: 20px;
-  margin-left: 20px; /* Adjusted for sidenav width */
-  margin-right: 20px;
-  margin-top: 65px; 
-  height: calc(100vh - 65px); /* Full height minus the toolbar height */
-  overflow-y: auto; 
+  height: calc(100vh - 130px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+  padding: 16px;
+  overflow: auto;
 }
 
-mat-toolbar.mat-primary {
-  background-color: #6277e9;
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+}
+
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+  font-size: 1.2rem;
   color: white;
 }
 
-mat-icon {
+.designation {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: lightgrey;
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+mat-expansion-panel {
+  background: #2e85dc;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+mat-expansion-panel-header {
+  background: #438adb;
+}
+
+mat-expansion-panel-header .mat-panel-title {
+  font-weight: bold;
+  color: white;
+}
+
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+  background: #438adb; /* Same blue as mat-expansion-panel-header */
+  color: white; /* Ensure text is white */
+  border-radius: 8px;
+  margin-bottom: 8px; /* Space between buttons */
+}
+
+.menu-button mat-icon {
   margin-right: 8px;
+  color: black;
+  align-items:first baseline;
 }
 
-button[mat-menu-trigger-for] {
-  color: white;
-  font-weight: 500;
+.menu-button span {
+  color: black; /* Ensure span text is white */
 }
 
-/* Media query for smaller screens */
+.menu-button:hover {
+  background: #2e85dc; /* Darker blue for hover effect */
+}
+
+mat-expansion-panel a.mat-list-item {
+  background:  #2e85dc; /* White background */
+  color: #000000; /* Black text */
+  border-radius: 8px; /* Rounded corners to match the panel */
+  margin-bottom: 4px; /* Space between list items */
+  display: flex; /* Flexbox to align items */
+  align-items: center; /* Center items vertically */
+  padding: 8px 16px; /* Add padding for better spacing */
+  text-decoration: none; /* Remove underline from links */
+}
+
+mat-expansion-panel a.mat-list-item mat-icon {
+  margin-right: 8px;
+  color: #000000; /* Black icon */
+}
+
+mat-expansion-panel a.mat-list-item:hover {
+  background: #f0f0f0; /* Light grey background on hover */
+}
+
+/* Style the span inside the mat-list-item to ensure text is normal */
+mat-expansion-panel a.mat-list-item span {
+  color: #000000; /* Ensure text color is black */
+  font-size: 1rem; /* Set font size for readability */
+  font-weight: normal; /* Set font weight to normal */
+  margin-left: 8px; /* Add space between icon and text */
+  background-color: #2e85dc;
+
+}
+
+/* General container styling */
+.router-container {
+  width: 100%;
+  max-width: 1200px; /* Adjust max-width as needed */
+  margin: 0 auto;    /* Center align container horizontally */
+  padding: 16px;     /* Add padding inside the container */
+  box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+/* Responsive styling */
+@media (max-width: 1200px) {
+  .router-container {
+    padding: 16px; /* Maintain padding on smaller screens */
+  }
+}
+
 @media (max-width: 768px) {
-  .sidenav {
-    width: 200px;
-    top: 65px;
-  }
-
-  .content {
-    margin-left: 10px;
-    padding: 10px;
-  }
-
-  .toolbar label {
-    display: none;
+  .router-container {
+    padding: 8px; /* Reduced padding for smaller devices */
   }
 }
-  
+
+@media (max-width: 480px) {
+  .router-container {
+    padding: 4px; /* Even smaller padding for very small screens */
+  }
+}

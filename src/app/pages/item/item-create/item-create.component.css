@@ -1,0 +1,66 @@
+/* General styles for the form */
+.shipping-card {
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-card-content {
+    /* padding: 16px; */
+  }
+  
+  /* Grid layout adjustments for mobile devices */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8px;
+  }
+  
+  .col {
+    flex: 1 1 100%;
+    padding: 8px;
+  }
+  
+  /* Adjustments for columns with specific widths */
+  .col-6 {
+    flex: 1 1 50%;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .col-6 {
+      flex: 1 1 100%;
+    }
+  }
+  
+  /* Button styling */
+  button {
+    margin-right: 8px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  
+  /* Hide `mat-error` message when not required */
+  mat-error {
+    font-size: 0.75rem;
+    margin-top: 4px;
+  }
+  
+  /* Styles for input and select elements */
+  mat-input {
+    width: 100%;
+  }
+  
+  mat-select {
+    width: 100%;
+  }
+  
+  mat-slide-toggle {
+    display: flex;
+    align-items: center;
+  }
+  

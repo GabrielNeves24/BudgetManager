@@ -47,15 +47,30 @@ export class CompanyCreateComponent {
       cellPhone: [''],
       email: [''],
       active: [true],
+      logoPath: [''],
       declaration: [''],
     });
     companyId = 0;
-
+    selectedLogo: File | null = null;
     ngOnInit(): void {
       this.companyId = this.route.snapshot.params['companyId'];
       if (this.companyId != 0 && this.companyId != null) {
         this.isEditMode = true;
         this.loadCompany(this.companyId);
+      }
+    }
+    onLogoSelected(event: any) {
+      const file = event.target.files[0];
+      if (file && this.companyId !== null) {
+        const logoFilename = `Empresa_${this.companyId}.png`;
+  
+        const formData = new FormData();
+        formData.append('logo', file, logoFilename);
+  
+        this.companyService.uploadCompanyLogo(formData, this.companyId).subscribe((data: any) => {+
+          this.toastr.success('Logo atualizado com sucesso');
+        }
+        );
       }
     }
 

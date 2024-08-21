@@ -13,13 +13,13 @@ export class BudgetListComponent {
 
   columns = [
     { columnDef: 'BudgetId', header: '#', cell: (element: any) => `${element.budgetId}` },
-    //{ columnDef: 'ClientId', header: 'Client ID', cell: (element: any) => `${element.clientId}` },
     { columnDef: 'ClientName', header: 'Cliente', cell: (element: any) => `${element.clientName}` },
     { columnDef: 'Date', header: 'Data', cell: (element: any) => `${element.date}` },
     { columnDef: 'Total S/Iva', header: 'Total S/Iva', cell: (element: any) => `${element.totalWithoutIva} €` },
     { columnDef: 'Iva', header: 'Iva', cell: (element: any) => `${element.totalIva} €` },
     { columnDef: 'Total c/Iva', header: 'Total c/Iva', cell: (element: any) => `${element.totalWithIva} €` },
-    { columnDef: 'StatusOrcamento', header: 'Estado', cell: (element: any) => `${element.state}` },
+    { columnDef: 'State', header: 'Estado', cell: (element: any) => `${element.state}` },
+    //{ columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
     { columnDef: 'actions', header: 'Ações', cell: (element: any) => `${element.actions}` },
     { columnDef: 'print', header: 'Print', cell: (element: any) => `${element.print}` }
   ]
@@ -45,8 +45,11 @@ export class BudgetListComponent {
       this.clientService.getAllClientsByCompany(this.companyId).subscribe((clients: any[]) => {
         this.clientsList = clients;
 
-        // Merge clients into the budgets data source
-        this.datasource = this.mergeById(this.datasource, this.clientsList);
+        // join clients join only the client name
+        this.datasource.forEach((element: any) => {
+          const client = this.clientsList.find((client: any) => client.clientId === element.clientId);
+          element.clientName = client.name;
+        });
       });
     });
   }

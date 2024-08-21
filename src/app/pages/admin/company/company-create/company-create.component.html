@@ -103,6 +103,21 @@
             <mat-slide-toggle formControlName="active">Ativo?</mat-slide-toggle>
           </div>
         </div>
+        <div class="row">
+          <div class="col-12">
+            <!-- Button to trigger file input for logo upload -->
+            <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+              {{ isEditMode ? 'Editar Logo' : 'Adicionar Logo' }}
+            </button>
+            <input
+              #fileInput
+              type="file"
+              (change)="onLogoSelected($event)"
+              accept="image/*"
+              style="display: none;"
+            />
+          </div>
+        </div>
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit">

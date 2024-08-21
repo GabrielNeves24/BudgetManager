@@ -12,5 +12,6 @@ export interface Company {
     Email: string;
     Active: boolean;
     Declaration: string;
+    LogoPath: string;
     LastUpdate: Date;
 }

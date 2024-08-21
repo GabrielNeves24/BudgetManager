@@ -54,8 +54,18 @@ export class HTTPService {
   }
 
   post<T>(endpoint: string, obj: any): Observable<T> {
-    const headers = this.getAuthHeaders();
-    return this.http.post<T>(`${this.apiUrl}${endpoint}`, obj, { headers })
+    const token = this.authService.getToken();
+    
+    // Set headers differently if `obj` is an instance of FormData
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+  
+    // If obj is FormData, let the browser set the Content-Type
+    const options = obj instanceof FormData ? { headers } : { headers: headers.set('Content-Type', 'application/json') };
+  
+    return this.http.post<T>(`${this.apiUrl}${endpoint}`, obj, options)
       .pipe(catchError(this.handleError));
   }
 

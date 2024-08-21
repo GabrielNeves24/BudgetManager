@@ -1,24 +1,52 @@
 <div class="container my-4">
   <div class="row mb-6">
+    <!-- Filter Input Field -->
     <div class="col-md-3">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilters($event)" placeholder="Pesquisar" #input>
       </mat-form-field>
     </div>
+
+    <!-- State Dropdown and Action Buttons -->
     <div class="col-md-9 text-end">
-      
-      <button mat-raised-button color="accent" (click)="toggleInactiveRows()">
-        {{ showInactive ? 'Esconder Inativos' : 'Mostrar Inativos' }}
-      </button>
-      <button mat-stroked-button (click)="navigateToAddNew()">Novo</button>
+      <div class="row">
+        <!-- State Dropdown -->
+        <div class="col-md-3" *ngIf="exiteState()">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Estado</mat-label>
+            <mat-select [(value)]="selectedState" (selectionChange)="filterByState($event)">
+              <mat-option value="Todos">Todos</mat-option> <!-- Added an 'all' option to show all data -->
+              <mat-option value="Aberto">Aberto</mat-option>
+              <mat-option value="Fechado">Fechado</mat-option>
+              <mat-option value="Concluido">Concluido</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Show/Hide Inactive Rows Button -->
+        <div class="col-md-3" *ngIf="existeActive">
+          <button mat-raised-button color="accent" (click)="toggleInactiveRows()">
+            {{ showInactive ? 'Esconder Inativos' : 'Mostrar Inativos' }}
+          </button>
+        </div>
+
+        <!-- Add New Button -->
+        <div class="col-md-9 text-end">
+          <button mat-stroked-button (click)="navigateToAddNew()">
+            Novo
+          </button>
+        </div>
+      </div>
     </div>
-    
   </div>
+
+  <!-- Table and Paginator -->
   <div class="row">
     <div class="col-12">
       <div class="table-responsive">
-        <table mat-table [dataSource]="dataSource " matSort class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <!-- Define Columns -->
           <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
             <td mat-cell *matCellDef="let element">
@@ -41,8 +69,8 @@
                 <ng-container *ngSwitchCase="'LastUpdate'">
                   {{ column.cell(element) | date: 'dd/MM/yyyy HH:mm' }}
                 </ng-container>
-                <ng-container *ngSwitchCase="see(element)"  >
-                  {{ column.cell(element)  }}
+                <ng-container *ngSwitchCase="see(element)">
+                  {{ column.cell(element) }}
                 </ng-container>
                 <ng-container *ngSwitchCase="'actions'">
                   <button mat-icon-button (click)="onEdit(element)">
@@ -53,19 +81,30 @@
                   </button>
                 </ng-container>
                 <ng-container *ngSwitchCase="'print'">
-                  <button mat-icon-button (click)="onPrint(element)"><mat-icon>print</mat-icon></button>
-                </ng-container>             
+                  <button mat-icon-button (click)="onPrint(element)">
+                    <mat-icon>print</mat-icon>
+                  </button>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Extrato'">
+                  <button mat-icon-button (click)="onClientDetail(element)">
+                    <mat-icon>receipt</mat-icon>
+                  </button>
+                </ng-container>
                 <ng-container *ngSwitchDefault>
                   {{ column.cell(element) }}
                 </ng-container>
               </ng-container>
             </td>
           </ng-container>
+
+          <!-- Table Header and Rows -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'active-row': row.active, 'inactive-row': !row.active && showInactive}"></tr>
         </table>
       </div>
-      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+      <!-- Paginator -->
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
 </div>

@@ -22,6 +22,7 @@ export class AuthService implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object
     ) { }
 
+
   getApiUrl(): string {
     return this.apiUrl || '';
   }

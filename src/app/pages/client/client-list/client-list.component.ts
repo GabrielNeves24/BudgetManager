@@ -20,9 +20,10 @@ export class ClientListComponent implements OnInit {
     { columnDef: 'Email', header: 'Email', cell: (element: any) => `${element.email}` },
     { columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
     //{ columnDef: 'lastUpdate', header: 'Last Updated', cell: (element: any) => `${element.lastUpdate}` }
-    { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` }
+    { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` },
+    { columnDef: 'Extrato', header: 'Extrato', cell: (element: any) => `${element.extrato}` }
   ]
-  datasource = [];
+  datasource:any = [];
   constructor(
     private clientService: ClientService
   ) { }

@@ -31,6 +31,9 @@ export class BudgetService {
   getBudgetByCompanyId(companyId: number): Observable<any> {
     return this.httpService.get<any>('/budget/Empresa/' + companyId);
   }
+  getBudgetByClientID(clientId: number): Observable<any> {
+    return this.httpService.get<any>('/budget/client/' + clientId);
+  }
 
 
 }

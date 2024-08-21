@@ -50,12 +50,12 @@ export class ProfileComponent {
   });
 
   onCancel(){
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/budget']);
   }
   onSubmit(){
     this.userService.updateUserPassword(this.perfilForm.value).subscribe((data: any) => {
       this.toastr.success('User editado com sucesso');
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/budget']);
     });
   }
 

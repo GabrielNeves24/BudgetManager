@@ -25,4 +25,7 @@ export class CompanyService {
   getCompanyById(companyId: number): Observable<any> {
     return this.httpService.get<any>('/company/' + companyId);
   }
+  uploadCompanyLogo(formData: FormData, companyId: number): Observable<any> {
+    return this.httpService.post<any>('/company/logo/' + companyId, formData);
+  }
 }

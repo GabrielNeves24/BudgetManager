@@ -196,6 +196,22 @@ click: any;
     }
 }
 
+generatePdf2() {
+  const elementToPrint = document.getElementById('theContent');
+  if (elementToPrint) {
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    pdf.html(elementToPrint, {
+      callback: function (doc) {
+        doc.save('Orçamento.pdf');
+      },
+      x: 10,
+      y: 10,
+      width: 190, // Adjust the width to fit A4 size
+      windowWidth: 794 // Ensure the width matches your content's width
+    });
+  }
+}
+
 
 
   

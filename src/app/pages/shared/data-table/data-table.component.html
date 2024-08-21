@@ -1,7 +1,7 @@
 <div class="container my-4">
-  <div class="row mb-6">
+  <div class="row mb-6 align-items-center">
     <!-- Filter Input Field -->
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilters($event)" placeholder="Pesquisar" #input>
@@ -9,14 +9,14 @@
     </div>
 
     <!-- State Dropdown and Action Buttons -->
-    <div class="col-md-9 text-end">
-      <div class="row">
+    <div class="col-lg-9 col-md-8 col-sm-6 text-end">
+      <div class="row justify-content-end">
         <!-- State Dropdown -->
-        <div class="col-md-3" *ngIf="exiteState()">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-2" *ngIf="exiteState()">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Estado</mat-label>
             <mat-select [(value)]="selectedState" (selectionChange)="filterByState($event)">
-              <mat-option value="Todos">Todos</mat-option> <!-- Added an 'all' option to show all data -->
+              <mat-option value="Todos">Todos</mat-option>
               <mat-option value="Pendente">Pendente</mat-option>
               <mat-option value="Adjudicado">Adjudicado</mat-option>
               <mat-option value="Rejeitado">Rejeitado</mat-option>
@@ -24,17 +24,11 @@
           </mat-form-field>
         </div>
 
-        
-        
-
-        <!-- Add New Button -->
-        <div class="col-md-9 text-end">
-          <!-- Show/Hide Inactive Rows Button -->
-          <div class="col-md-3" *ngIf="existeActive">
-            <button mat-raised-button color="accent" (click)="toggleInactiveRows()">
-              {{ showInactive ? 'Esconder Inativos' : 'Mostrar Inativos' }}
-            </button>
-          </div>
+        <!-- Add New Button and Other Actions -->
+        <div class="col-lg-9 col-md-8 col-sm-12 text-end d-flex justify-content-end flex-wrap">
+          <button mat-raised-button color="accent" (click)="toggleInactiveRows()" *ngIf="existeActive">
+            {{ showInactive ? 'Esconder Inativos' : 'Mostrar Inativos' }}
+          </button>
           <button mat-stroked-button (click)="navigateBack()" *ngIf="this.routeBefore">
             Voltar
           </button>

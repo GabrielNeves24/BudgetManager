@@ -104,7 +104,6 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     this.filterData();
   }
   filterByState(event: any) {
-    debugger;
     const state = event.value;
     if (state === 'Todos') {
       this.dataSource.data = this.data; // Show all data if 'all' is selected

@@ -45,21 +45,12 @@ export class BudgetListComponent {
       this.clientService.getAllClientsByCompany(this.companyId).subscribe((clients: any[]) => {
         this.clientsList = clients;
 
-        // join clients join only the client name
+        // Merge client name into the datasource
         this.datasource.forEach((element: any) => {
           const client = this.clientsList.find((client: any) => client.clientId === element.clientId);
-          element.clientName = client.name;
+          element.clientName = client ? client.name : 'Unknown'; // Store client name in a new property
         });
       });
     });
   }
-
-  mergeById(datasource: any, clientsList: any) {
-    datasource.forEach((element: any) => {
-      const client = clientsList.find((client: any) => client.clientId === element.clientId);
-      element.clientName = client.name;
-    });
-  }
-
-
 }

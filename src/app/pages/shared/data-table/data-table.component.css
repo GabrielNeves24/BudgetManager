@@ -31,10 +31,9 @@ td.mat-cell {
   color: black;
 }
 
-.mat-elevation-z8 {
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+.mat-sort-header-arrow {
+  color: black;
 }
-
 /* Add some spacing around the table */
 .mat-table {
   margin: 16px 0;

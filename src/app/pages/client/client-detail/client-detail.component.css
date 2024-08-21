@@ -1,0 +1,64 @@
+.client-detail-container {
+  margin: 20px;
+}
+
+.client-info {
+  margin-bottom: 20px;
+}
+
+.summary-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  gap: 20px; /* Adds space between the summary and chart */
+}
+
+.budget-summary {
+  flex: 1;
+}
+
+.chart-container {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Centers the chart horizontally */
+  align-items: center; /* Centers the chart vertically */
+  size: 50px;
+}
+
+.budget-details {
+  margin-top: 40px;
+}
+
+.budget-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.budget-details th, .budget-details td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.budget-details th {
+  background-color: #f2f2f2;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .summary-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart-container {
+    margin-top: 20px;
+  }
+}
+
+/* Styling for the chart */
+canvas {
+  width: 100%;
+  max-width: 400px;
+  height: auto; /* Maintain aspect ratio */
+}

@@ -7,10 +7,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-client-detail-modal',
   standalone: true,
-  imports: [MatTabsModule,CommonModule,MatDialogModule,MatTableModule,MatPaginatorModule],
+  imports: [MatTabsModule,
+    CommonModule,
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+  MatButtonModule],
   templateUrl: './client-detail-modal.component.html',
   styleUrl: './client-detail-modal.component.css'
 })
@@ -25,7 +34,10 @@ export class ClientDetailModalComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-  constructor(public dialogRef: MatDialogRef<ClientDetailModalComponent>, @Inject(MAT_DIALOG_DATA) public dialogData: any) {}
+  constructor(public dialogRef: MatDialogRef<ClientDetailModalComponent>,
+     @Inject(MAT_DIALOG_DATA) public dialogData: any,
+     private router: Router
+     ) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.dialogData.budgetsList || []);
@@ -54,5 +66,11 @@ export class ClientDetailModalComponent implements OnInit {
   onClose(): void {
     this.dialogRef.close();
   }
+  onPrint(element: any): void {
+    //close this modal
+    this.dialogRef.close();
+    this.router.navigate(['budget/pdf/', element.budgetId]);
+  }
+  
 
 }

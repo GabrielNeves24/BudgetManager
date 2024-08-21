@@ -18,7 +18,7 @@
             </div>
             <div class="col-6">
                 <mat-form-field class="full-width">
-                  <mat-label> NIF</mat-label>
+                  <mat-label> Telefone</mat-label>
                 <input matInput type="phone" placeholder="Telefone" formControlName="phone">
                 @if (ClientForm.controls['phone'].hasError('required')) {
                     <mat-error>Telefone <strong>é obrigatório</strong></mat-error>
@@ -76,11 +76,25 @@
           </div>
           <div class="col-6">
             <mat-form-field class="full-width">
-              <mat-label>Observações</mat-label>
-            <textarea matInput type="text" placeholder="Observações" formControlName="observations"></textarea>
+              <mat-label>NIF</mat-label>
+            <textarea matInput type="number" placeholder="NIF" formControlName="nif"></textarea>
             </mat-form-field>
           </div>
-      </div>             
+      </div>   
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Telemovel</mat-label>
+          <input matInput type="tel" placeholder="Telemovel" formControlName="phone">
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Observações</mat-label>
+          <textarea matInput type="text" placeholder="Observações" formControlName="observations"></textarea>
+          </mat-form-field>
+        </div>
+      </div>            
         <div class="row">
             <div class="col">
                 <mat-label>Ativo</mat-label>

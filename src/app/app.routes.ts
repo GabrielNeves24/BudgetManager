@@ -19,6 +19,7 @@ import { UserListComponent } from './pages/admin/user/user-list/user-list.compon
 import { UserCreateComponent } from './pages/admin/user/user-create/user-create.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ClientDetailComponent } from './pages/client/client-detail/client-detail.component';
 
 export const routes: Routes = [
 
@@ -48,6 +49,7 @@ export const routes: Routes = [
             { path: 'unit/edit-unit/:unitID', component: UnitCreateComponent, canActivate: [authGuard] },
 
             { path: 'client', component: ClientListComponent, canActivate: [authGuard] },
+            { path: 'client/:clientId', component: ClientDetailComponent, canActivate: [authGuard] },
             { path: 'client/create-client', component: ClientCreateComponent, canActivate: [authGuard] },
             { path: 'client/edit-client/:clientID', component: ClientCreateComponent, canActivate: [authGuard] },
 

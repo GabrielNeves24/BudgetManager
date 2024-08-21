@@ -221,15 +221,17 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   }
   budgetsList: any[] = [];
   onClientDetail(element: any) {
-    this.budgetService.getBudgetByClientID(element.clientId).subscribe(
-      (data: any) => {
-        this.budgetsList = data;
-        this.openClientDetailModal(element.clientId);
-      },
-      (error: any) => {
-        this.toastr.error('Erro ao obter os orçamentos');
-      }
-    );
+    //nvigate to the client detail page
+    this.router.navigate(['client/'+ element.clientId]);
+    // this.budgetService.getBudgetByClientID(element.clientId).subscribe(
+    //   (data: any) => {
+    //     this.budgetsList = data;
+    //     this.openClientDetailModal(element.clientId);
+    //   },
+    //   (error: any) => {
+    //     this.toastr.error('Erro ao obter os orçamentos');
+    //   }
+    // );
   }
   
 

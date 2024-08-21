@@ -1,10 +1,10 @@
 <mat-toolbar class="mat-elevation-z8">
-  <button
+  <button class="buttonMenu"
     mat-icon-button
     *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()"
   >
-    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon  *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
   {{companyName}}
@@ -124,7 +124,7 @@
     </button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="content mat-elevation-z8">
+    <div >
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

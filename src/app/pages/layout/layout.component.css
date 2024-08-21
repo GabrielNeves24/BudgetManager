@@ -21,15 +21,17 @@ img {
 
 .content {
   height: calc(100vh - 130px);
-  border-radius: 10px;
+  /*border-radius: 10px;
   margin: 16px;
   margin-left: 32px;
-  padding: 16px;
+   padding: 16px; 
+  overflow: auto;*/
   overflow: auto;
 }
 
 mat-sidenav-container {
   height: calc(100vh - 65px);
+  overflow: hidden;
 }
 
 .menu-button {
@@ -82,7 +84,12 @@ mat-expansion-panel-header .mat-panel-title {
   color: white;
 }
 
-
+.buttonMenu {
+  color: white;
+  font-size: 20px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
 .menu-button {
   width: 100%;
   display: flex;

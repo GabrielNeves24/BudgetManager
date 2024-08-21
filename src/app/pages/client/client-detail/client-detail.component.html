@@ -1,0 +1,24 @@
+<div class="client-detail-container">
+  <div class="client-info">
+    <h1>{{ client?.name }} || {{ client.nif }}</h1>
+  </div>
+
+  <div class="summary-container">
+    <div class="budget-summary">
+      <h2>Budgets Summary</h2>
+      <p><strong>Nº Orçamentos:</strong> {{ totalBudgets }}</p>
+      <p><strong>Total S/Iva:</strong> {{ totalWithoutIva  }} €</p>
+      <p><strong>Total Iva:</strong> {{ totalIva  }} €</p>
+      <p><strong>Total C/Iva:</strong> {{ totalWithIva  }} €</p>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="budgetStateChart"></canvas>
+    </div>
+  </div>
+
+  <div class="client-info">
+    <h1>Orçamentos</h1>
+    <app-data-table [columns]="columns" [data]="datasource" addNewRoute=""></app-data-table>
+  </div>
+</div>

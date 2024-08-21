@@ -15,6 +15,7 @@ import { ItemService } from '../../../services/item.service';
 import { CompanyService } from '../../../services/company.service';
 import { UnitService } from '../../../services/unit.service';
 import { MatIcon } from '@angular/material/icon';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -37,8 +38,8 @@ click: any;
     private route: ActivatedRoute,
     private itemService: ItemService,
     private companyService: CompanyService,
-    private unitService: UnitService
-  ) { }
+    private unitService: UnitService,
+    private authService: AuthService  ) { }
 
   Budget: any;
   BudgetDetails: any;
@@ -47,6 +48,7 @@ click: any;
   ItemList: any;
   companyId: number = 0;
   unitList: any;
+  imageAddress: any;
   ngOnInit(): void {
     localStorage.getItem('empresa') ? this.companyId = Number(localStorage.getItem('empresa')) : this.companyId = 0;
     const budgetId = this.route.snapshot.params['id'];
@@ -69,6 +71,9 @@ click: any;
         this.toastr.error('Erro ao carregar a lista de unidades', err);
       }
     });
+    //get the logo of the company
+    this.imageAddress = `${this.authService.getApiUrl()}/company/logo/${this.companyId}`;
+    
   }
   getSymbolUniId(unitId: any) {
     const unit = this.unitList.find((unit: { unitId: any; }) => unit.unitId === unitId);

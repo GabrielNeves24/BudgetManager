@@ -75,7 +75,7 @@
         </ng-container>
 
         <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef> Preço </th>
+          <th mat-header-cell *matHeaderCellDef> Preço (s/iva) </th>
           <td mat-cell *matCellDef="let element"> {{element.price}} </td>
         </ng-container>
 
@@ -95,7 +95,7 @@
         </ng-container>
 
         <ng-container matColumnDef="total">
-          <th mat-header-cell *matHeaderCellDef> Total Linha </th>
+          <th mat-header-cell *matHeaderCellDef> Total Linha (c/iva) </th>
           <td mat-cell *matCellDef="let element"> {{element.total}} </td>
         </ng-container>
 
@@ -118,12 +118,15 @@
       <!-- Display Totals on the Right Side -->
       <div class="totals-section">
         <mat-form-field class="total-field">
+          <mat-label>Total Sem IVA</mat-label>
           <input matInput readonly placeholder="Total Sem IVA" [value]=" totalWithoutIva | currency: 'EUR'">
         </mat-form-field>
         <mat-form-field class="total-field">
+          <mat-label>Total IVA</mat-label>
           <input matInput readonly placeholder="Total IVA" [value]="totalIva | currency: 'EUR'">
         </mat-form-field>
         <mat-form-field class="total-field">
+          <mat-label>Total Com IVA</mat-label>
           <input matInput readonly placeholder="Total Com IVA" [value]="totalWithIva | currency: 'EUR'">
         </mat-form-field>
       </div>

@@ -23,14 +23,14 @@
           <tr>
             <td>
               <b>{{ CompanyInfo.name }}</b><br>
-              {{ CompanyInfo.address }}<br>
-              {{ CompanyInfo.phone }}<br>
-              {{ CompanyInfo.email }}<br>
-              {{ CompanyInfo.zipCode }}<br>
+              Morada. {{ CompanyInfo.address }}<br>
+              Tel. {{ CompanyInfo.phone }}<br>
+              Email. {{ CompanyInfo.email }}<br>
+              Cod.Postal. {{ CompanyInfo.postalCode }} {{ CompanyInfo.city }}<br>
               IBAN: {{ CompanyInfo.iban }}
             </td>
             <td style="text-align:right;">
-              <img src="{{ CompanyInfo.logo }}" style="width:100px; max-width:300px;">
+              <img *ngIf="imageAddress" [src]="imageAddress" alt="Company Logo" style="width:100px; max-width:300px;">
             </td>
            
           </tr>
@@ -61,11 +61,11 @@
           <tr class="heading">
             <td style="width:25%;">ITEM</td>
             <td style="width:10%; text-align:center;">QTD.</td>
-            <td style="width:10%; text-align:right;">Preço (€)</td>
+            <td style="width:10%; text-align:right;">Preço S/Iva</td>
             <td style="width:10%; text-align:right;">IVA</td>
             <td style="width:10%; text-align:right;">Uni</td>
             <td style="width:10%; text-align:right;">Desconto (%)</td>
-            <td style="width:15%; text-align:right;">Preço c/Iva (€)</td>
+            <td style="width:15%; text-align:right;">Total C/Iva (€)</td>
           </tr>
           <tr *ngFor="let item of BudgetDetails" class="item">
             <td style="width:25%;">

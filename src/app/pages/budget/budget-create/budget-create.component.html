@@ -48,9 +48,9 @@
         <div class="col-3">
           <mat-form-field class="full-width">
             <mat-select placeholder="Estado" formControlName="state">
-              <mat-option value="Aberto">Aberto</mat-option>
-              <mat-option value="Fechado">Fechado</mat-option>
-              <mat-option value="Concluido">Concluido</mat-option>
+              <mat-option value="Pendente">Pendente</mat-option>
+              <mat-option value="Adjudicado">Adjudicado</mat-option>
+              <mat-option value="Rejeitado">Rejeitado</mat-option>
             </mat-select>
             <mat-error *ngIf="budgetForm.controls['state'].hasError('required')">
               Estado é <strong>obrigatório</strong>

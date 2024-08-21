@@ -17,9 +17,9 @@
             <mat-label>Estado</mat-label>
             <mat-select [(value)]="selectedState" (selectionChange)="filterByState($event)">
               <mat-option value="Todos">Todos</mat-option> <!-- Added an 'all' option to show all data -->
-              <mat-option value="Aberto">Aberto</mat-option>
-              <mat-option value="Fechado">Fechado</mat-option>
-              <mat-option value="Concluido">Concluido</mat-option>
+              <mat-option value="Pendente">Pendente</mat-option>
+              <mat-option value="Adjudicado">Adjudicado</mat-option>
+              <mat-option value="Rejeitado">Rejeitado</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

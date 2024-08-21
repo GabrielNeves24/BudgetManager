@@ -49,9 +49,9 @@ export const routes: Routes = [
             { path: 'unit/edit-unit/:unitID', component: UnitCreateComponent, canActivate: [authGuard] },
 
             { path: 'client', component: ClientListComponent, canActivate: [authGuard] },
-            { path: 'client/:clientId', component: ClientDetailComponent, canActivate: [authGuard] },
             { path: 'client/create-client', component: ClientCreateComponent, canActivate: [authGuard] },
             { path: 'client/edit-client/:clientID', component: ClientCreateComponent, canActivate: [authGuard] },
+            { path: 'client/:clientId', component: ClientDetailComponent, canActivate: [authGuard] },
 
             { path: 'budget', component: BudgetListComponent, canActivate: [authGuard] },
             { path: 'budget/create-budget', component: BudgetCreateComponent, canActivate: [authGuard] },

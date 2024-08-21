@@ -58,22 +58,47 @@ export class ClientDetailComponent implements OnInit {
   }
 
   createBudgetStateChart() {
+    // Create an object to hold the aggregated data
     const budgetStates = this.budgets.reduce((acc, budget) => {
-      acc[budget.state] = (acc[budget.state] || 0) + 1;
+      // Initialize the state if it doesn't exist
+      if (!acc[budget.state]) {
+        acc[budget.state] = { count: 0, totalWithIva: 0 };
+      }
+      
+      // Increment the count of budgets for this state
+      acc[budget.state].count += 1;
+      // Add the total with IVA to the state total
+      acc[budget.state].totalWithIva += budget.totalWithIva;
+
       return acc;
     }, {});
 
-    const data = {
-      labels: Object.keys(budgetStates),
-      datasets: [{
-        label: 'Budgets by State',
-        data: Object.values(budgetStates),
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+    // Create labels and datasets for the chart
+    const labels = Object.keys(budgetStates);
+    const counts = labels.map(state => budgetStates[state].count);
+    const totalsWithIva = labels.map(state => budgetStates[state].totalWithIva);
+    const totalsWithoutIva = labels.map(state => budgetStates[state].totalWithoutIva);
+    const totalIva = labels.map(state => budgetStates[state].totalIva);
 
-      }]
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Count by State',
+          data: counts,
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+        },
+        {
+          label: 'Total with IVA',
+          data: totalsWithIva,
+          backgroundColor: ['#FF9F40', '#FFCD56', '#4BC0C0', '#FF6384'],
+          hoverBackgroundColor: ['#FF9F40', '#FFCD56', '#4BC0C0', '#FF6384']
+        },
+      ]
     };
 
+    // Initialize the chart with the data
     this.chart = new Chart('budgetStateChart', {
       type: 'doughnut',
       data: data,
@@ -83,6 +108,7 @@ export class ClientDetailComponent implements OnInit {
       }
     });
   }
+
   columns = [
     { columnDef: 'BudgetId', header: '#', cell: (element: any) => `${element.budgetId}` },
     { columnDef: 'Date', header: 'Data', cell: (element: any) => `${element.date}` },

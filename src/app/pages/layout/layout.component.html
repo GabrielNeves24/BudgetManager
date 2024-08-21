@@ -58,8 +58,19 @@
       </a>
     </mat-expansion-panel>
 
+
+    <button mat-button class="menu-button" routerLink="/budget" (click)="sidenav.close()">
+      <mat-icon>request_quote</mat-icon>
+      <span>Orçamentos</span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/client" (click)="sidenav.close()">
+      <mat-icon>people</mat-icon>
+      <span>Clientes</span>
+    </button>
+
     <!-- Orçamentos Section -->
-    <mat-expansion-panel>
+    <!-- <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>request_quote</mat-icon>
@@ -74,10 +85,10 @@
         <mat-icon>receipt</mat-icon>
         Recibos
       </a>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
 
     <!-- Clients Section -->
-    <mat-expansion-panel>
+    <!-- <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>people</mat-icon>
@@ -92,7 +103,7 @@
         <mat-icon>attach_money</mat-icon>
         Pendentes
       </a>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
 
     <!-- Admin Section -->
     <mat-expansion-panel *ngIf="isAdmin">

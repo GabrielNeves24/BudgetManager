@@ -56,6 +56,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     private budgetManagerService: BudgetmanagerService,
     private userService: UserService,
     private cdr: ChangeDetectorRef
+    
     ) { }
     
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -220,9 +221,10 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     this.router.navigate(['budget/pdf/', element.budgetId]);
   }
   budgetsList: any[] = [];
+
   onClientDetail(element: any) {
     //nvigate to the client detail page
-    this.router.navigate(['client/'+ element.clientId]);
+    this.router.navigate(['client/', element.clientId]);
     // this.budgetService.getBudgetByClientID(element.clientId).subscribe(
     //   (data: any) => {
     //     this.budgetsList = data;

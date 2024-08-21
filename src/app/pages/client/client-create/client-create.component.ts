@@ -43,7 +43,7 @@ export class ClientCreateComponent implements OnInit {
     email: ['', [Validators.required]],
     nif: [''],
     obs: [''],
-    active: ['' , [Validators.required]],
+    active: [true , [Validators.required]],
     lastUpdated: null
   });
   clientId = 0;

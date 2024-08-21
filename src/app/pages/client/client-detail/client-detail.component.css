@@ -10,11 +10,13 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 40px;
-  gap: 20px; /* Adds space between the summary and chart */
+  gap: 10px; /* Adds space between the summary and chart */
+  margin-left: auto;
 }
 
 .budget-summary {
   flex: 1;
+
 }
 
 .chart-container {

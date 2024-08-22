@@ -16,8 +16,8 @@ export class UserService {
   createUser(user: any): Observable<any> {
     return this.httpService.post<any>('/user', user);
   }
-  updateUser(user: any,userId: number): Observable<any> {
-    return this.httpService.put<any>('/user/'+userId, user);
+  updateUser(user: any): Observable<any> {
+    return this.httpService.put<any>('/user/updateFields', user);
   }
   deleteUser(userId: number): Observable<any> {
     return this.httpService.delete<any>('/user/' + userId);

@@ -41,8 +41,8 @@ export class UserCreateComponent {
       username: ['', [Validators.required]],
       role: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      active: [true],
+      password: [''],
+      active: [true , [Validators.required]],
     });
     userId = 0;
     ngOnInit(): void {
@@ -65,7 +65,7 @@ export class UserCreateComponent {
 
     onSubmit(): void {
       if (this.isEditMode) {
-        this.userService.updateUser(this.userForm.value, this.userId).subscribe(() => {
+        this.userService.updateUser(this.userForm.value).subscribe(() => {
           this.toastr.success('User atualizado com sucesso!');
           this.router.navigate(['/user']);
         });

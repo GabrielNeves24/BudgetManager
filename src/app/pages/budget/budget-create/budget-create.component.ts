@@ -58,6 +58,7 @@ export class BudgetCreateComponent implements OnInit {
     private unitService: UnitService,
     private budgetDetailService: BudgetDetailService
   ) {
+    this.companyId = Number(localStorage.getItem('empresa'));
   }
 
   budgetArray: BudgetDetail[] = []; // Initialize the budgetArray property
@@ -76,7 +77,7 @@ export class BudgetCreateComponent implements OnInit {
   budgetForm = this.fb.group({
     budgetId: 0,
     clientId: [0,[Validators.required,Validators.min(1)]],
-    companyId: [0,[Validators.required,Validators.min(1)]],
+    companyId: [0],
     date: [new Date().toISOString(),[Validators.required]],
     origin: '',
     totalWithoutIva: [0,[Validators.required, Validators.min(0.01)]],
@@ -202,6 +203,7 @@ export class BudgetCreateComponent implements OnInit {
           result.budgetDetailId = 0;
           result.budgetId = 0;
         }
+        debugger;
         this.budgetArray.push(result);
         this.dataSource.data = this.budgetArray;
       }
@@ -271,6 +273,7 @@ export class BudgetCreateComponent implements OnInit {
 
   
   getNameSymbol(unitId:any): any {
+
     //get from itemList the symbol  
     const unit = this.unitList.find((unit) => unit.unitId === unitId);
     return unit ? unit.symbol : '';

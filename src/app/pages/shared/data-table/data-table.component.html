@@ -95,7 +95,14 @@
 
           <!-- Table Header and Rows -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'active-row': row.active, 'inactive-row': !row.active && showInactive}"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+          [ngClass]="{
+              'active-row': row.active ,
+              'inactive-row': !row.active && showInactive,
+              'adjudicado-row': row.state == 'Adjudicado',
+              'rejeitado-row': row.state == 'Rejeitado'
+          }">
+      </tr>
         </table>
       </div>
 

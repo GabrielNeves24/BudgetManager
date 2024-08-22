@@ -13,9 +13,16 @@ th, td {
 .active-row {
   background-color: white;
 }
+.adjudicado-row {
+  background-color: lightgreen;
+}
+
 
 .inactive-row {
   background-color: #ffebee; /* Light red background */
+}
+.rejeitado-row {
+  background-color: lightcoral; /* Light red background */
 }
 th.mat-header-cell {
   background-color: #f1f1f1;

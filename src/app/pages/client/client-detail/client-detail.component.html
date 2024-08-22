@@ -7,9 +7,9 @@
     <div class="budget-summary">
       <h2>Resumo de Orçamentos</h2>
       <p><strong>Nº Orçamentos:</strong> {{ totalBudgets }}</p>
-      <p><strong>Total S/Iva:</strong> {{ totalWithoutIva  }} €</p>
-      <p><strong>Total Iva:</strong> {{ totalIva  }} €</p>
-      <p><strong>Total C/Iva:</strong> {{ totalWithIva  }} €</p>
+      <p><strong>Total S/Iva:</strong> {{ totalWithoutIva | currency: 'EUR'  }}</p>
+      <p><strong>Total Iva:</strong> {{ totalIva | currency: 'EUR'  }}</p>
+      <p><strong>Total C/Iva:</strong> {{ totalWithIva | currency: 'EUR'  }}</p>
     </div>
 
     <div class="chart-container">

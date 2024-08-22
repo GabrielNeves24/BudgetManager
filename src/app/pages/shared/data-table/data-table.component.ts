@@ -49,7 +49,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   @Input() routeBefore: string = '';
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = [];
-  showInactive = true;
+  showInactive = false;
   filteredDataSource = new MatTableDataSource<any>
 
   constructor(

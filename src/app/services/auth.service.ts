@@ -12,8 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AuthService implements OnInit {
   private readonly tokenKey = 'authToken';
-  private apiUrl = 'https://plataforma-orcamentos.somee.com/api';
-  //private apiUrl = 'https://localhost:7231/api';
+  //private apiUrl = 'https://plataforma-orcamentos.somee.com/api';
+  private apiUrl = 'https://localhost:7231/api';
 
   constructor(
     private router: Router,
@@ -102,14 +102,14 @@ export class AuthService implements OnInit {
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An unknown error occurred!';
+    let errorMessage = 'Occorreu um erro. Por favor, tente novamente.';
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Client-side error: ${error.error.message}`;
     } else {
       if (error.status === 0) {
-        errorMessage = 'The server is currently unreachable. Please try again later.';
+        errorMessage = 'O Servidor não está disponível. Por favor, tente mais tarde.';
       } else {
-        errorMessage = `Server error (${error.status}): ${error.message}`;
+        errorMessage = `Erro (${error.status}): ${error.message}`;
       }
     }
     return throwError(() => new Error(errorMessage));

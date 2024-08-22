@@ -20,6 +20,8 @@ import { UserCreateComponent } from './pages/admin/user/user-create/user-create.
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ClientDetailComponent } from './pages/client/client-detail/client-detail.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/shared/about/about.component';
 
 export const routes: Routes = [
 
@@ -39,6 +41,8 @@ export const routes: Routes = [
             
             { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
             { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+            { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+            { path: 'about', component: AboutComponent, canActivate: [authGuard] },
 
             { path: 'item', component: ItemListComponent, canActivate: [authGuard] },
             { path: 'item/create-item', component: ItemCreateComponent,canActivate: [authGuard] },

@@ -52,7 +52,7 @@ export class LoginComponent {
           localStorage.setItem('user', JSON.stringify(res.user));
           //set a userID
           localStorage.setItem('userId', res.user.userId);
-          this.router.navigate(['/budget']);
+          this.router.navigate(['/home']);
         } else {
           // Handle error case
           this.toastr.error(res.message);

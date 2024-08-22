@@ -39,7 +39,7 @@ export class ClientCreateComponent implements OnInit {
     address: ['', [Validators.required]],
     city: ['', [Validators.required]],
     postalCode: ['', [Validators.required]],
-    phone: [null],
+    phone: ['', [Validators.required]],
     email: ['', [Validators.required]],
     nif: [''],
     obs: [''],

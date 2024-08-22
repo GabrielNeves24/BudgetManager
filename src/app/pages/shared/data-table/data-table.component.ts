@@ -172,7 +172,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     };
     if (routes[this.addNewRoute]) {
       this.router.navigate(routes[this.addNewRoute]);
-    }
+    } 
   }
 
   onDelete(element: any) {

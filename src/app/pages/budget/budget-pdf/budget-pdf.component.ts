@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ClientService } from '../../../services/client.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,6 +17,7 @@ import { UnitService } from '../../../services/unit.service';
 import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../../services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
+import { borderTopRightRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 
 
 @Component({
@@ -50,6 +51,8 @@ click: any;
   companyId: number = 0;
   unitList: any;
   imageAddress: any;
+
+
   navigateBack() {
     this.router.navigate(['/budget']);
   }

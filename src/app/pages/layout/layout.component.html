@@ -18,7 +18,10 @@
     <p class="designation">{{companyName}}</p>
 
     <mat-divider></mat-divider>
-
+    <button mat-button class="menu-button" routerLink="/home">
+      <mat-icon>dashboard</mat-icon>
+      <span>Home</span>
+    </button>
     <button mat-button class="menu-button" routerLink="/profile" *ngIf="ifUserDemo()">
       <mat-icon>person</mat-icon>
       <span>Perfil</span>
@@ -31,7 +34,7 @@
       <mat-icon>exit_to_app</mat-icon>
       <span>Logout</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/about">
+    <button mat-button class="menu-button" routerLink="/about" (click)="sidenav.close()">
       <mat-icon>info</mat-icon>
       <span>Sobre</span>
     </button>

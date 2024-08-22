@@ -118,15 +118,15 @@
       <!-- Display Totals on the Right Side -->
       <div class="totals-section">
         <mat-form-field class="total-field">
-          <mat-label>Total Sem IVA</mat-label>
+          <mat-label>Total Bruto</mat-label>
           <input matInput readonly placeholder="Total Sem IVA" [value]=" totalWithoutIva | currency: 'EUR'">
         </mat-form-field>
         <mat-form-field class="total-field">
-          <mat-label>Total IVA</mat-label>
+          <mat-label>Total Iva</mat-label>
           <input matInput readonly placeholder="Total IVA" [value]="totalIva | currency: 'EUR'">
         </mat-form-field>
         <mat-form-field class="total-field">
-          <mat-label>Total Com IVA</mat-label>
+          <mat-label>Total</mat-label>
           <input matInput readonly placeholder="Total Com IVA" [value]="totalWithIva | currency: 'EUR'">
         </mat-form-field>
       </div>

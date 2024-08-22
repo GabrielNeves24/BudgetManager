@@ -75,13 +75,13 @@ export class BudgetCreateComponent implements OnInit {
   private fb = inject(FormBuilder);
   budgetForm = this.fb.group({
     budgetId: 0,
-    clientId: [0,[Validators.required]],
-    companyId: 0,
+    clientId: [0,[Validators.required,Validators.min(1)]],
+    companyId: [0,[Validators.required,Validators.min(1)]],
     date: [new Date().toISOString(),[Validators.required]],
     origin: '',
-    totalWithoutIva: [0],
-    totalIva: [0],
-    totalWithIva: [0],
+    totalWithoutIva: [0,[Validators.required, Validators.min(0.01)]],
+    totalIva: [0,[Validators.required, Validators.min(0.01)]],
+    totalWithIva: [0,[Validators.required, Validators.min(0.01)]],
     obs:'',
     state: 'Pendente',
     active: true,

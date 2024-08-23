@@ -110,12 +110,12 @@ export class ClientDetailComponent implements OnInit {
   }
 
   columns = [
-    { columnDef: 'BudgetId', header: '#', cell: (element: any) => `${element.budgetId}` },
-    { columnDef: 'Date', header: 'Data', cell: (element: any) => `${element.date}` },
-    { columnDef: 'Total S/Iva', header: 'Total S/Iva', cell: (element: any) => `${element.totalWithoutIva} €` },
-    { columnDef: 'Iva', header: 'Iva', cell: (element: any) => `${element.totalIva} €` },
-    { columnDef: 'Total c/Iva', header: 'Total c/Iva', cell: (element: any) => `${element.totalWithIva} €` },
-    { columnDef: 'State', header: 'Estado', cell: (element: any) => `${element.state}` },
+    { columnDef: 'budgetId', header: '#', cell: (element: any) => `${element.budgetId}` },
+    { columnDef: 'date', header: 'Data', cell: (element: any) => `${element.date}` },
+    { columnDef: 'totalWithoutIva', header: 'Total S/Iva', cell: (element: any) => `${element.totalWithoutIva} €` },
+    { columnDef: 'totalIva', header: 'Iva', cell: (element: any) => `${element.totalIva} €` },
+    { columnDef: 'totalWithIva', header: 'Total c/Iva', cell: (element: any) => `${element.totalWithIva} €` },
+    { columnDef: 'estado', header: 'Estado', cell: (element: any) => `${element.state}` },
     //{ columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
     { columnDef: 'actions', header: 'Ações', cell: (element: any) => `${element.actions}` },
     { columnDef: 'print', header: 'Print', cell: (element: any) => `${element.print}` }

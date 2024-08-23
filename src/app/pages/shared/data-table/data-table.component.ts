@@ -3,7 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
@@ -50,8 +50,12 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = [];
   showInactive = false;
-  filteredDataSource = new MatTableDataSource<any>
-
+  filteredDataSource = new MatTableDataSource<any>();
+  sortedData: [] = [];
+  existeActive: boolean = false; 
+  @ViewChild(MatSort) sort: MatSort | undefined;
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -66,9 +70,8 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     private companyService: CompanyService,
     ) { }
     
-  @ViewChild(MatSort) sort: MatSort | undefined;
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  sortedData: [] = [];
+
+
   ngOnInit() {
     if (this.data && Array.isArray(this.data)) {
       this.dataSource.data = this.data;
@@ -77,7 +80,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
       this.toastr.error('Erro ao obter os dados');
     }
   }
-  existeActive: boolean = false; 
+ 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['columns'] && this.columns) {
       this.displayedColumns = this.columns.map(c => c.columnDef);
@@ -85,17 +88,15 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
         this.displayedColumns.push('actions');
       }
     }
-    
-
     if (changes['data'] && this.data) {
       this.dataSource.data = this.data;
       this.filterData(); 
-      this.cdr.detectChanges();
+      //this.cdr.detectChanges();
     }
     //if the datasource has the column active 
-    if (this.displayedColumns.includes('Active')) {
+    if (this.displayedColumns.includes('active')) {
       this.existeActive = true;
-      this.hideColumn('Active');
+      this.hideColumn('active');
     }
   }
   toggleInactiveRows() {
@@ -114,29 +115,6 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
         this.toastr.error('Erro ao obter os dados');
       }
     }
-  }
-
-  
-  sortData(sort: Sort) {  
-    const data = this.data.slice();
-    if (!sort.active || sort.direction === '') {
-      this.dataSource.data = data;
-      return;
-    }
-
-    this.dataSource.data = data.sort((a: any, b: any) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'BudgetId': return compare(a.budgetId, b.budgetId, isAsc);
-        case 'ClientName': return compare(a.clientName, b.clientName, isAsc);
-        case 'Date': return compare(new Date(a.date), new Date(b.date), isAsc);
-        case 'Total S/Iva': return compare(a.totalWithoutIva, b.totalWithoutIva, isAsc);
-        case 'Iva': return compare(a.totalIva, b.totalIva, isAsc);
-        case 'Total c/Iva': return compare(a.totalWithIva, b.totalWithIva, isAsc);
-        case 'Estado': return compare(a.state, b.state, isAsc);
-        default: return 0;
-      }
-    });
   }
 
 
@@ -160,7 +138,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   }
 
   exiteState(): boolean {
-    return this.displayedColumns.includes('Estado');
+    return this.displayedColumns.includes('estado');
   }
   selectedState: string = 'Todos';
   ngAfterViewInit() {

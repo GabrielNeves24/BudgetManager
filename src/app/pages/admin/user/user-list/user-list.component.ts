@@ -20,12 +20,12 @@ export class UserListComponent implements OnInit {
     private router: Router 
   ) { }
   columns = [
-    { columnDef: 'UserId', header: '#', cell: (element: any) => `${element.userId}` },
-    { columnDef: 'Username', header: 'Nome', cell: (element: any) => `${element.username}` },
-    { columnDef: 'Role', header: 'Função', cell: (element: any) => `${element.role}` },
-    { columnDef: 'Email', header: 'Email', cell: (element: any) => `${element.email}` },
-    { columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
-    { columnDef: 'LastLogin', header: 'Último Login', cell: (element: any) => `${element.lastLogin}` },
+    { columnDef: 'userId', header: '#', cell: (element: any) => `${element.userId}` },
+    { columnDef: 'username', header: 'Nome', cell: (element: any) => `${element.username}` },
+    { columnDef: 'role', header: 'Função', cell: (element: any) => `${element.role}` },
+    { columnDef: 'email', header: 'Email', cell: (element: any) => `${element.email}` },
+    { columnDef: 'active', header: 'Ativo', cell: (element: any) => `${element.active}` },
+    { columnDef: 'lastLogin', header: 'Último Login', cell: (element: any) => `${element.lastLogin}` },
     { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` }
   ]
   datasource: any = [];

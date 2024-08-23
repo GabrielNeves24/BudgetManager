@@ -18,10 +18,10 @@ export class UnitListComponent implements OnInit {
     private unitService: UnitService
   ) { }
   columns = [
-    { columnDef: 'UnitId', header: '#', cell: (element: any) => `${element.unitId}` },
-    { columnDef: 'Name', header: 'Nome', cell: (element: any) => `${element.name}` },
-    { columnDef: 'Symbol', header: 'Simbolo', cell: (element: any) => `${element.symbol}` },
-    { columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
+    { columnDef: 'unitId', header: '#', cell: (element: any) => `${element.unitId}` },
+    { columnDef: 'name', header: 'Nome', cell: (element: any) => `${element.name}` },
+    { columnDef: 'symbol', header: 'Simbolo', cell: (element: any) => `${element.symbol}` },
+    { columnDef: 'active', header: 'Ativo', cell: (element: any) => `${element.active}` },
     { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` }
   ]
   datasource: any = [];

@@ -25,13 +25,13 @@ export class BudgetManagerGestaoComponent implements OnInit {
 
   columns = [
     { columnDef: 'budgetManagerId', header: '#', cell: (element: any) => `${element.budgetManagerId}` },
-    { columnDef: 'companyId', header: 'Empresa', cell: (element: any) => `${element.companyname}` },
-    { columnDef: 'userId', header: 'Usuário', cell: (element: any) => `${element.username}` },
-    { columnDef: 'LastLogin', header: 'Último Login', cell: (element: any) => `${element.lastLogin || 'N/A'} ` },
-    { columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
-    { columnDef: 'CreationDate', header: 'Data Criação', cell: (element: any) => `${element.creationDate || 'N/A'}` },
-    { columnDef: 'ExpirationDate', header: 'Data Expiração', cell: (element: any) => `${element.expirationDate || 'N/A'}` },
-    { columnDef: 'LastUpdate', header: 'Última Atualização', cell: (element: any) => `${element.lastUpdate || 'N/A'}` },
+    { columnDef: 'companyname', header: 'Empresa', cell: (element: any) => `${element.companyname}` },
+    { columnDef: 'username', header: 'Usuário', cell: (element: any) => `${element.username}` },
+    { columnDef: 'lastLogin', header: 'Último Login', cell: (element: any) => `${element.lastLogin || 'N/A'} ` },
+    { columnDef: 'active', header: 'Ativo', cell: (element: any) => `${element.active}` },
+    { columnDef: 'creationDate', header: 'Data Criação', cell: (element: any) => `${element.creationDate || 'N/A'}` },
+    { columnDef: 'expirationDate', header: 'Data Expiração', cell: (element: any) => `${element.expirationDate || 'N/A'}` },
+    { columnDef: 'lastUpdate', header: 'Última Atualização', cell: (element: any) => `${element.lastUpdate || 'N/A'}` },
     { columnDef: 'actions', header: 'Ações', cell: (element: any) => `${element.actions}` }
   ]
 

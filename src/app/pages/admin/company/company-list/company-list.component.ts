@@ -22,13 +22,13 @@ export class CompanyListComponent implements OnInit {
   ) { }
 
   columns = [
-    { columnDef: 'CompanyId', header: '#', cell: (element: any) => `${element.companyId}` },
-    { columnDef: 'Name', header: 'Nome', cell: (element: any) => `${element.name}` },
-    { columnDef: 'Address', header: 'Endereço', cell: (element: any) => `${element.address}` },
-    { columnDef: 'Phone', header: 'Telefone', cell: (element: any) => `${element.phone}` },
-    { columnDef: 'Email', header: 'Email', cell: (element: any) => `${element.email}` },
-    { columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
-    { columnDef: 'LastUpdate', header: 'Última Atualização', cell: (element: any) => `${element.lastUpdate}` },
+    { columnDef: 'companyId', header: '#', cell: (element: any) => `${element.companyId}` },
+    { columnDef: 'name', header: 'Nome', cell: (element: any) => `${element.name}` },
+    { columnDef: 'address', header: 'Endereço', cell: (element: any) => `${element.address}` },
+    { columnDef: 'phone', header: 'Telefone', cell: (element: any) => `${element.phone}` },
+    { columnDef: 'email', header: 'Email', cell: (element: any) => `${element.email}` },
+    { columnDef: 'active', header: 'Ativo', cell: (element: any) => `${element.active}` },
+    { columnDef: 'lastUpdate', header: 'Última Atualização', cell: (element: any) => `${element.lastUpdate}` },
     { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` }
   ]
 

@@ -16,14 +16,14 @@ export class ItemListComponent implements OnInit {
 
   columns = [
     { columnDef: 'ItemId', header: '#', cell: (element: any) => `${element.itemId}` },
-    { columnDef: 'Code', header: 'Codigo', cell: (element: any) => `${element.code}` },
-    { columnDef: 'Name', header: 'Nome', cell: (element: any) => `${element.name}` },
-    { columnDef: 'UnitId', header: 'Unidade Medida', cell: (element: any) => `${element.symbol}` },
-    { columnDef: 'CostPrice', header: 'Preço Custo (S/Iva)', cell: (element: any) => `${element.costPrice} €` },
-    { columnDef: 'Margin', header: 'Margem ', cell: (element: any) => `${element.margin} %` },
-    { columnDef: 'SellingPrice', header: 'Preço Venda (S/Iva)', cell: (element: any) => `${element.sellingPrice} €` },
-    { columnDef: 'Iva', header: 'Iva', cell: (element: any) => `${element.iva} %` },
-    { columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
+    { columnDef: 'code', header: 'Codigo', cell: (element: any) => `${element.code}` },
+    { columnDef: 'name', header: 'Nome', cell: (element: any) => `${element.name}` },
+    { columnDef: 'symbol', header: 'Unidade Medida', cell: (element: any) => `${element.symbol}` },
+    { columnDef: 'costPrice', header: 'Preço Custo (S/Iva)', cell: (element: any) => `${element.costPrice} €` },
+    { columnDef: 'margin', header: 'Margem ', cell: (element: any) => `${element.margin} %` },
+    { columnDef: 'sellingPrice', header: 'Preço Venda (S/Iva)', cell: (element: any) => `${element.sellingPrice} €` },
+    { columnDef: 'iva', header: 'Iva', cell: (element: any) => `${element.iva} %` },
+    { columnDef: 'active', header: 'Ativo', cell: (element: any) => `${element.active}` },
     //{ columnDef: 'lastUpdated', header: 'Last Updated', cell: (element: any) => `${element.lastUpdated}` },
     { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` }
   ]

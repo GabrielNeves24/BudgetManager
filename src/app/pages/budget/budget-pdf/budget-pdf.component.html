@@ -76,8 +76,8 @@
             <td style="width:10%; text-align:right;">Preço S/Iva</td>
             <td style="width:10%; text-align:right;">IVA</td>
             <td style="width:10%; text-align:right;">Uni</td>
-            <td style="width:10%; text-align:right;">Desconto (%)</td>
-            <td style="width:15%; text-align:right;">Total C/Iva (€)</td>
+            <td style="width:10%; text-align:right;">Desconto</td>
+            <td style="width:15%; text-align:right;">Total</td>
           </tr>
           <tr *ngFor="let item of BudgetDetails" class="item">
             <td style="width:25%;">
@@ -131,15 +131,15 @@
           <td>
             <table>
               <tr>
-                <td><b>Valor Sem IVA:</b></td>
+                <td><b>Total Bruto:</b></td>
                 <td style="text-align:right; font-size: 18px;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
               </tr>
               <tr>
-                <td><b>Valor do IVA:</b></td>
+                <td><b>Total IVA:</b></td>
                 <td style="text-align:right; font-size: 18px;">{{ Budget.totalIva || 'N/A' }} €</td>
               </tr>
               <tr>
-                <td><b>Total com IVA:</b></td>
+                <td><b>Total</b></td>
                 <td style="text-align:right; font-size: 20px;">{{ Budget.totalWithIva || 'N/A' }} €</td>
               </tr>
             </table>

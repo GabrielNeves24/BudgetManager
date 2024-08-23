@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
 
+For a Demo os this website check : https://plataforma-orcamentos.vercel.app/login with user: Demo and password: 123
+
 
 ## Development server
 

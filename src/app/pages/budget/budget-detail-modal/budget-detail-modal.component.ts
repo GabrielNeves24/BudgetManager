@@ -92,16 +92,28 @@ export class BudgetDetailModalComponent implements OnInit {
 
     if (this.data.budgetDetailId != 0) {
       this.budgetDetailForm.patchValue({
+        itemId: item.itemId,
         quantity: item.quantity || 1,
         price: item.sellingPrice,
         iva: item.iva,
         unitId: item.unitId,
-        itemDescription: item.name
+        itemDescription: item.name,
       });
       
+    }else{
+      this.budgetDetailForm.patchValue({
+        itemId: item.itemId,
+        quantity: item.quantity || 1,
+        price: item.sellingPrice,
+        iva: item.iva,
+        unitId: item.unitId,
+        itemDescription: item.name,
+      });
     }
+
     this.getTotal();
   }
+
 
   onSave(): void {
     if (this.budgetDetailForm.valid) {

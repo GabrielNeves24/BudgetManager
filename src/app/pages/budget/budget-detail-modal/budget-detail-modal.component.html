@@ -3,8 +3,8 @@
   <form [formGroup]="budgetDetailForm">
     <mat-form-field appearance="fill">
       <mat-label>Artigo</mat-label>
-      <mat-select formControlName="itemId" >
-        <mat-option *ngFor="let item of data.itemList" [value]="item.itemId" (onSelectionChange)="onChangeProduct(item)">
+      <mat-select formControlName="itemId" (selectionChange)="onChangeProduct($event.source.value)">
+        <mat-option *ngFor="let item of data.itemList" [value]="item">
           {{ item.name }}
         </mat-option>
       </mat-select>

@@ -3,7 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
@@ -68,7 +68,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-
+  sortedData: [] = [];
   ngOnInit() {
     if (this.data && Array.isArray(this.data)) {
       this.dataSource.data = this.data;
@@ -76,7 +76,6 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     }else{
       this.toastr.error('Erro ao obter os dados');
     }
-
   }
   existeActive: boolean = false; 
   ngOnChanges(changes: SimpleChanges): void {
@@ -117,6 +116,30 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     }
   }
 
+  
+  sortData(sort: Sort) {  
+    const data = this.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this.dataSource.data = data;
+      return;
+    }
+
+    this.dataSource.data = data.sort((a: any, b: any) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'BudgetId': return compare(a.budgetId, b.budgetId, isAsc);
+        case 'ClientName': return compare(a.clientName, b.clientName, isAsc);
+        case 'Date': return compare(new Date(a.date), new Date(b.date), isAsc);
+        case 'Total S/Iva': return compare(a.totalWithoutIva, b.totalWithoutIva, isAsc);
+        case 'Iva': return compare(a.totalIva, b.totalIva, isAsc);
+        case 'Total c/Iva': return compare(a.totalWithIva, b.totalWithIva, isAsc);
+        case 'Estado': return compare(a.state, b.state, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+
   hideColumn(columnName: string) {
     const index = this.displayedColumns.indexOf(columnName);
     if (index !== -1) {
@@ -137,7 +160,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   }
 
   exiteState(): boolean {
-    return this.displayedColumns.includes('State');
+    return this.displayedColumns.includes('Estado');
   }
   selectedState: string = 'Todos';
   ngAfterViewInit() {
@@ -178,6 +201,7 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   onDelete(element: any) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px', height: '200px',
+      data: { message : 'Tem a certeza que deseja eliminar?' }
       
     });
   
@@ -319,4 +343,8 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
   }
 }
 
+
+function compare(a: any, b: any, isAsc: boolean): number {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
 

@@ -23,6 +23,7 @@ import { BudgetDetailModalComponent } from '../budget-detail-modal/budget-detail
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { UnitService } from '../../../services/unit.service';
 import { BudgetDetailService } from '../../../services/budget-detail.service';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-budget-create',
@@ -40,7 +41,7 @@ import { BudgetDetailService } from '../../../services/budget-detail.service';
     MatIcon,
     MatDatepicker,
     MatDatepickerModule,
-    MatCheckboxModule,FormsModule,BudgetDetailModalComponent,MatDialogModule
+    MatCheckboxModule,FormsModule,BudgetDetailModalComponent,MatDialogModule,ConfirmationDialogComponent
   ],
   templateUrl: './budget-create.component.html',
   styleUrl: './budget-create.component.css',
@@ -203,36 +204,84 @@ export class BudgetCreateComponent implements OnInit {
           result.budgetDetailId = 0;
           result.budgetId = 0;
         }
-        debugger;
         this.budgetArray.push(result);
         this.dataSource.data = this.budgetArray;
       }
     });
   }
   onDelete(index: number): void {
-    const itemToDelete = index;
-    if(this.numberOfBudgetIfEdit > 0){
-      this.budgetDetailService.deleteBudgetDetail(itemToDelete).subscribe(
-        (response: any) => {
-          if (response) {
-            const index2 = this.budgetArray.findIndex(item =>
-              item.budgetDetailId === itemToDelete
-            );
-            this.budgetArray.splice(index2, 1);
-            this.dataSource.data = [...this.budgetArray];
-            this.toastr.success('Linha eliminada com sucesso');
-          } else {
-            this.toastr.error('Erro a eliminar a linha');
-          }
-        },
-        (error) => {
-          this.toastr.error('Occoreu um erro ao tentar remover a linha');
-        }
-      );
-    }else{
-      this.budgetArray.splice(index, 1);
-      this.dataSource.data = [...this.budgetArray];
+    const indexToDelete = index;
+  
+    if (this.numberOfBudgetIfEdit > 0) {
+      if (this.budgetArray.length === 1) {
+        this.confirmDeleteBudget();
+      } else {
+        this.confirmDeleteLine(indexToDelete);
+      }
+    } else {
+      this.removeItemFromArray(indexToDelete);
     }
+  }
+  
+  private confirmDeleteBudget(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: { message: 'Deseja eliminar o orçamento todo' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.budgetService.deleteBudget(this.numberOfBudgetIfEdit).subscribe(
+          (response: any) => {
+            if (response) {
+              this.toastr.success('Orçamento eliminado com sucesso');
+              this.router.navigate(['/budget']);
+            } else {
+              this.toastr.error('Erro a eliminar o orçamento');
+            }
+          },
+          (error) => {
+            this.toastr.error('Occoreu um erro ao tentar remover o orçamento');
+          }
+        );
+      } else {
+        this.toastr.error('O orçamento tem de ter pelo menos uma linha');
+      }
+    });
+  }
+  
+  private confirmDeleteLine(indexToDelete: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: { message: 'Deseja eliminar o linha?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.budgetDetailService.deleteBudgetDetail(indexToDelete).subscribe(
+          (response: any) => {
+            if (response) {
+              const index2 = this.budgetArray.findIndex(item => item.budgetDetailId === indexToDelete);
+              if (index2 !== -1) {
+                this.budgetArray.splice(index2, 1);
+                this.dataSource.data = [...this.budgetArray];
+                this.toastr.success('Linha eliminada com sucesso');
+              }
+            } else {
+              this.toastr.error('Erro a eliminar a linha');
+            }
+          },
+          (error) => {
+            this.toastr.error('Occoreu um erro ao tentar remover a linha');
+          }
+        );
+      }
+    });
+  }
+  
+  private removeItemFromArray(indexToDelete: number): void {
+    this.budgetArray.splice(indexToDelete, 1);
+    this.dataSource.data = [...this.budgetArray];
   }
    
 

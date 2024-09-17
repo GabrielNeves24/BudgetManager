@@ -15,7 +15,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Descrição</mat-label>
-      <input matInput formControlName="itemDescription" placeholder="Descrição" (input)="getTotal()">
+      <textarea matInput formControlName="itemDescription" placeholder="Descrição" (input)="getTotal()" (keydown.enter)="$event.stopPropagation()"></textarea>
       <mat-error *ngIf="budgetDetailForm.controls['itemDescription'].hasError('required')">
         Descrição é obrigatória
       </mat-error>

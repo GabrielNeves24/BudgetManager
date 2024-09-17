@@ -24,7 +24,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { UnitService } from '../../../services/unit.service';
 import { BudgetDetailService } from '../../../services/budget-detail.service';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-budget-create',
   standalone: true,
@@ -47,7 +47,7 @@ import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/co
   styleUrl: './budget-create.component.css',
 })
 export class BudgetCreateComponent implements OnInit {
-
+value: any;
   constructor(
     private toastr: ToastrService,
     private router: Router,
@@ -222,7 +222,6 @@ export class BudgetCreateComponent implements OnInit {
       this.removeItemFromArray(indexToDelete);
     }
   }
-  
   private confirmDeleteBudget(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
@@ -309,6 +308,45 @@ export class BudgetCreateComponent implements OnInit {
       totalWithIva: this.totalWithIva
     });
   }
+  isManualUpdate = false;
+  onManualTotalChange(event: any): void {
+    this.isManualUpdate = true;
+    //get $event.target value
+    // Extract the value from the event
+    let value = event.value;
+    
+    // Remove the currency symbol if present
+    if (value.includes('€')) {
+      value = value.replace('€', '').trim();
+    }
+    
+    // Parse the value to a float
+    const totalWithIva = parseFloat(value.replace(',', '.'));
+
+    // Ensure the parsed value is valid
+    if (isNaN(totalWithIva)) {
+      console.error('Invalid total value');
+      return;
+    }
+    debugger;
+    // Calculate totalWithoutIva and totalIva
+    this.totalWithIva = totalWithIva;
+    const conta = this.totalWithIva / 1.23;
+    this.totalWithoutIva = //only 2 decimals
+
+    parseFloat(conta.toFixed(2));
+    this.totalIva = this.totalWithIva - this.totalWithoutIva;
+
+    this.budgetForm.get('totalWithoutIva')?.setValue(this.totalWithoutIva);
+    this.budgetForm.get('totalIva')?.setValue(this.totalIva);
+    this.budgetForm.get('totalWithIva')?.setValue(this.totalWithIva);
+    
+
+
+  
+  }
+  
+
 
   preSelectDate(): void {
     //set the date to today
@@ -331,6 +369,7 @@ export class BudgetCreateComponent implements OnInit {
   displayedColumns: string[] = ['itemDescription', 'quantity', 'price','unit' ,'iva', 'discount', 'total', 'actions'];
 
   onSubmit(): void {
+    debugger;
     if (this.budgetForm.valid && this.budgetArray.length > 0) {
       const budgetData = this.budgetForm.value;
   

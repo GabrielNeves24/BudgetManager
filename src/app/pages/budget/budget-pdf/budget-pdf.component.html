@@ -80,8 +80,8 @@
             <td style="width:15%; text-align:right;">Total</td>
           </tr>
           <tr *ngFor="let item of BudgetDetails" class="item">
-            <td style="width:25%;">
-              {{ item.itemDescription }}<br>
+            <td style="white-space: pre-wrap; width:25%;">
+              {{ item.itemDescription }}
             </td>
             <td style="width:10%; text-align:center;">
               {{ item.quantity || 'N/A' }}
@@ -124,7 +124,9 @@
         <tr>
           <td width="50%">
             <b *ngIf="seExist2()">Observações:</b><br>
-            {{ Budget.obs }}<br>
+            <div style="white-space: pre-wrap;">
+              {{ Budget.obs }}
+            </div><br>
             <b *ngIf="seExist()">Declaração:</b><br>
             {{ CompanyInfo.declaration }}<br>
           </td>

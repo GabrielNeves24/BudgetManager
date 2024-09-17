@@ -20,7 +20,7 @@
             <div class="col-6">
               <mat-form-field class="full-width">
                 <mat-label >Nome</mat-label>
-                <input matInput type="text" placeholder="Nome" formControlName="name">
+                <textarea matInput type="text" placeholder="Nome" formControlName="name" (keydown.enter)="$event.stopPropagation()"> </textarea> 
                 @if (ItemForm.controls['name'].hasError('required')) {
                   <mat-error>Nome <strong>é obrigatório</strong></mat-error>
                 }

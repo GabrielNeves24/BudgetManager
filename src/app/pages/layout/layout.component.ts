@@ -33,7 +33,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent implements OnInit {
-  title = 'angular-material-tutorial';
+  title = 'Plataforma Orçamentos';
   opened = false;
   imageAddress: any;
   constructor(private router: Router, private company: CompanyService,private authService: AuthService) {}

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -9,7 +9,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-budget-detail-modal',
   standalone: true,
@@ -20,13 +22,17 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,MatAutocompleteModule
   ],
   templateUrl: './budget-detail-modal.component.html',
   styleUrls: ['./budget-detail-modal.component.css']
 })
 export class BudgetDetailModalComponent implements OnInit {
   budgetDetailForm: FormGroup;
+  myControl = new FormControl('');
+  filteredItems: Observable<any[]> | undefined;
+
+
 
   constructor(
     private fb: FormBuilder,
@@ -50,6 +56,10 @@ export class BudgetDetailModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filteredItems = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || ''))
+    );
     if (this.data.budgetDetailId > 0 && this.data.itemList) {
       this.budgetDetailForm.patchValue({
         budgetDetailId: this.data.budgetDetailId,
@@ -66,6 +76,10 @@ export class BudgetDetailModalComponent implements OnInit {
       });
     }
   }
+  private _filter(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.data.itemList.filter((item: any) => item.name.toLowerCase().includes(filterValue));
+  }
   calcularDesconto(){
     //discount comes in percentage
     const { quantity, price, iva, discount } = this.budgetDetailForm.value;
@@ -78,6 +92,27 @@ export class BudgetDetailModalComponent implements OnInit {
     }
   }
 
+  onChangeProduct(selectedItem: any): void {
+    if (selectedItem) {
+      this.budgetDetailForm.patchValue({
+        itemId: selectedItem.itemId,
+        quantity: selectedItem.quantity || 1,
+        price: selectedItem.sellingPrice,
+        iva: selectedItem.iva,
+        unitId: selectedItem.unitId,
+        itemDescription: selectedItem.name,
+      });
+      // Add a short delay before clearing the input
+    setTimeout(() => {
+      this.myControl.setValue('');  // Resetting input
+    }, 200);
+    }
+    this.getTotal();
+  }
+  displayFn(item: any): string {
+    return item ? item.name : '';
+  }
+
   getTotal(): void {
     const { quantity, price, iva } = this.budgetDetailForm.value;
     if (quantity && price && iva !== null) {
@@ -86,32 +121,6 @@ export class BudgetDetailModalComponent implements OnInit {
         total: total.toFixed(2)
       });
     }
-  }
-
-  onChangeProduct(item: any): void {
-
-    if (this.data.budgetDetailId != 0) {
-      this.budgetDetailForm.patchValue({
-        itemId: item.itemId,
-        quantity: item.quantity || 1,
-        price: item.sellingPrice,
-        iva: item.iva,
-        unitId: item.unitId,
-        itemDescription: item.name,
-      });
-      
-    }else{
-      this.budgetDetailForm.patchValue({
-        itemId: item.itemId,
-        quantity: item.quantity || 1,
-        price: item.sellingPrice,
-        iva: item.iva,
-        unitId: item.unitId,
-        itemDescription: item.name,
-      });
-    }
-
-    this.getTotal();
   }
 
 

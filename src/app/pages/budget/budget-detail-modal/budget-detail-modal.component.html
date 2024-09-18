@@ -3,15 +3,21 @@
   <form [formGroup]="budgetDetailForm">
     <mat-form-field appearance="fill">
       <mat-label>Artigo</mat-label>
-      <mat-select formControlName="itemId" (selectionChange)="onChangeProduct($event.source.value)">
-        <mat-option *ngFor="let item of data.itemList" [value]="item">
-          {{ item.name }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="budgetDetailForm.controls['itemId'].hasError('required')">
-        Item ID é obrigatório
-      </mat-error>
-    </mat-form-field>
+        <input type="text"
+               matInput
+               placeholder="Selecionar Artigo"
+               [formControl]="myControl"
+               [matAutocomplete]="auto"
+               (focus)="myControl.setValue('')"> <!-- Clear input on focus -->
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onChangeProduct($event.option.value)" autoActiveFirstOption="true">
+          <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+            {{ item.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="budgetDetailForm.controls['itemId'].hasError('required')">
+          Item ID é obrigatório
+        </mat-error>
+      </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Descrição</mat-label>

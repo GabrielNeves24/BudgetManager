@@ -91,7 +91,7 @@ value: any;
   });
 
   companyId: number = 0;
-
+  isEditing = true;
   ngOnInit(): void {
     localStorage.getItem('empresa') ? this.companyId = Number(localStorage.getItem('empresa')) : this.companyId = 0;
     this.clientService.getAllClientsByCompany(this.companyId).subscribe((data: any) => {
@@ -109,16 +109,17 @@ value: any;
 
     if (this.numberOfBudgetIfEdit != 0 && this.numberOfBudgetIfEdit != null) {
       this.budgetService.getBudgetById(this.numberOfBudgetIfEdit).subscribe((data: any) => {
+
         if (data.date) {
           data.date = new Date(data.date).toISOString().split('T')[0];
         }
-        this.budgetForm.patchValue(data);
+        this.budgetForm.setValue(data);
+        this.isEditing = false;
       });
       this.budgetDetailService.getAllBudgetDetails(this.numberOfBudgetIfEdit).subscribe((data: any) => {  
         this.budgetArray = data;
         this.dataSource.data = this.budgetArray;
       });
-
     }   
     window.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') {
@@ -285,7 +286,8 @@ value: any;
    
 
   calculateTotals(): void {
-    this.totalWithoutIva = 0;
+    if(this.isEditing){
+      this.totalWithoutIva = 0;
     this.totalIva = 0;
     this.totalWithIva = 0;
     this.budgetArray.forEach(item => {
@@ -307,6 +309,8 @@ value: any;
       totalIva: this.totalIva,
       totalWithIva: this.totalWithIva
     });
+    }
+    this.isEditing=true;
   }
   isManualUpdate = false;
   onManualTotalChange(event: any): void {
@@ -328,7 +332,7 @@ value: any;
       console.error('Invalid total value');
       return;
     }
-    debugger;
+
     // Calculate totalWithoutIva and totalIva
     this.totalWithIva = totalWithIva;
     const conta = this.totalWithIva / 1.23;
@@ -366,10 +370,10 @@ value: any;
     return unit ? unit.symbol : '';
   }
 
-  displayedColumns: string[] = ['itemDescription', 'quantity', 'price','unit' ,'iva', 'discount', 'total', 'actions'];
+  displayedColumns: string[] = ['itemDescription', 'quantity', 'price','unit' ,'iva', 'discount','totalsiva', 'total', 'actions'];
 
   onSubmit(): void {
-    debugger;
+
     if (this.budgetForm.valid && this.budgetArray.length > 0) {
       const budgetData = this.budgetForm.value;
   

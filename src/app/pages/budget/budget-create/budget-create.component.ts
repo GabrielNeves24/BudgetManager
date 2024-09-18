@@ -82,7 +82,7 @@ value: any;
     date: [new Date().toISOString(),[Validators.required]],
     origin: '',
     totalWithoutIva: [0,[Validators.required, Validators.min(0.01)]],
-    totalIva: [0,[Validators.required, Validators.min(0.01)]],
+    totalIva: [0,[Validators.required]],
     totalWithIva: [0,[Validators.required, Validators.min(0.01)]],
     obs:'',
     state: 'Pendente',

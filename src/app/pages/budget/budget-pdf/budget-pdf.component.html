@@ -35,9 +35,9 @@
             <td>
               <b>{{ CompanyInfo.name }}</b><br>
               Morada. {{ CompanyInfo.address }}<br>
+              Cod.Postal. {{ CompanyInfo.postalCode }} {{ CompanyInfo.city }}<br>
               Tel. {{ CompanyInfo.phone }}<br>
               Email. {{ CompanyInfo.email }}<br>
-              Cod.Postal. {{ CompanyInfo.postalCode }} {{ CompanyInfo.city }}<br>
               NIF: {{ CompanyInfo.cellPhone }}
               IBAN: {{ CompanyInfo.iban }}
             </td>
@@ -71,38 +71,64 @@
       <td colspan="3">
         <table cellspacing="0px" cellpadding="2px">
           <tr class="heading">
-            <td style="width:25%;">ITEM</td>
-            <td style="width:10%; text-align:center;">QTD.</td>
-            <td style="width:10%; text-align:right;">Preço S/Iva</td>
+            @if(existValuesWithDiscont){
+            <td style="width:25%;">Artigo</td>
+            }@else{
+              <td style="width:35%;">Artigo</td>
+            }
+
+            <td style="width:7.5%; text-align:center;">QTD.</td>
+            <td style="width:10%; text-align:right;">Unidade</td>
+            <td style="width:12.5%; text-align:right;">Preço S/Iva</td>
             <td style="width:10%; text-align:right;">IVA</td>
-            <td style="width:10%; text-align:right;">Uni</td>
-            <td style="width:10%; text-align:right;">Desconto</td>
-            <td style="width:15%; text-align:right;">Total</td>
+            
+            @if(existValuesWithDiscont){
+              <td style="width:10%; text-align:right;">Desconto</td>
+              <td style="width:15%; text-align:right;">Total</td>
+            }@else {
+              <td style="width:15%; text-align:right;">Total</td>
+            }
+            
+            
           </tr>
           <tr *ngFor="let item of BudgetDetails" class="item">
+            @if(existValuesWithDiscont){
             <td style="white-space: pre-wrap; width:25%;">
               {{ item.itemDescription }}
             </td>
-            <td style="width:10%; text-align:center;">
-              {{ item.quantity || 'N/A' }}
+          }@else{
+            <td style="white-space: pre-wrap; width:35%;">
+              {{ item.itemDescription }}
+            </td>
+          }
+
+            <td style="width:7.5%; text-align:center;">
+              {{ item.quantity  }}
             </td>
             <td style="width:10%; text-align:right;">
-              {{ item.price || 'N/A' }} €
+              {{ getSymbolUniId(item.unitId) }}
+            </td>
+            <td style="width:12.5%; text-align:right;">
+              {{ item.price }} €
             </td>
             <td style="width:10%; text-align:right;">
-              {{ item.iva || 'N/A' }} %
+              {{ item.iva+' %'  }}
             </td>
-            <td style="width:10%; text-align:right;">
-              {{ getSymbolUniId(item.unitId) || 'N/A' }}
-            </td>
-            <td style="width:10%; text-align:right;">
-              {{ item.discount || '0' }} %
-            </td>
+            
+            @if(existValuesWithDiscont){
+              <td style="width:10%; text-align:right;">
+                  {{item.discount+' %'}} 
+              </td>
+              <td style="width:15%; text-align:right;">
+                {{ item.total+' €'  }}
+              </td>
+            }@else{
             <td style="width:15%; text-align:right;">
-              {{ item.total || 'N/A' }} €
+              {{ item.total+' €'  }}
             </td>
+            }
           </tr>
-          <tr class="item last">
+          <!-- <tr class="item last">
             <td style="width:25%;"><b>Total</b></td>
             <td style="width:10%; text-align:center;"></td>
             <td style="width:10%; text-align:right;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
@@ -110,7 +136,7 @@
             <td style="width:10%; text-align:right;"></td>
             <td style="width:10%; text-align:right;"></td>
             <td style="width:15%; text-align:right;">{{ Budget.totalWithIva || 'N/A' }} €</td>
-          </tr>
+          </tr> -->
         </table>
       </td>
     </tr>

@@ -288,27 +288,27 @@ value: any;
   calculateTotals(): void {
     if(this.isEditing){
       this.totalWithoutIva = 0;
-    this.totalIva = 0;
-    this.totalWithIva = 0;
-    this.budgetArray.forEach(item => {
-      // Parse quantity and price as numbers before performing calculations
-      const quantity = parseFloat(item.quantity.toString());
-      const price = parseFloat(item.price.toString());
-      const iva = parseFloat(item.iva.toString());
-      const total = parseFloat(item.total.toString());
-  
-      if (!isNaN(quantity) && !isNaN(price) && !isNaN(iva) && !isNaN(total)) {
-        this.totalWithoutIva += quantity * price;
-        this.totalIva += quantity * price * iva / 100;
-        this.totalWithIva += total;
-      }
-    });
-  
-    this.budgetForm.patchValue({
-      totalWithoutIva: this.totalWithoutIva,
-      totalIva: this.totalIva,
-      totalWithIva: this.totalWithIva
-    });
+      this.totalIva = 0;
+      this.totalWithIva = 0;
+      this.budgetArray.forEach(item => {
+        // Parse quantity and price as numbers before performing calculations
+        const quantity = parseFloat(item.quantity.toString());
+        const price = parseFloat(item.price.toString());
+        const iva = parseFloat(item.iva.toString());
+        const total = parseFloat(item.total.toString());
+    
+        if (!isNaN(quantity) && !isNaN(price) && !isNaN(iva) && !isNaN(total)) {
+          this.totalWithoutIva += quantity * price;
+          this.totalIva += quantity * price * iva / 100;
+          this.totalWithIva += total;
+        }
+      });
+    
+      this.budgetForm.patchValue({
+        totalWithoutIva: this.totalWithoutIva,
+        totalIva: this.totalIva,
+        totalWithIva: this.totalWithIva
+      });
     }
     this.isEditing=true;
   }

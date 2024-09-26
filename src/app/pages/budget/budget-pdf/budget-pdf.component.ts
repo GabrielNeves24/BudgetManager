@@ -99,12 +99,27 @@ click: any;
   }
 
   valorTotalEmTexto: string = '';
-
+  existValuesWithDiscont: boolean = false;
   loadBudgetData(budgetId: number) {
     this.budgetService.getBudgetById(budgetId).subscribe({
       next: (budgetData: any) => {
 
         this.Budget = budgetData;
+        //if Budget.totalWithIva is over >1000 the put the , on the value
+          //value is 111000 so we need to put the , on the value
+          this.Budget.totalWithIva = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(this.Budget.totalWithIva);
+          this.Budget.totalWithoutIva = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(this.Budget.totalWithoutIva);
+          this.Budget.totalIva = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(this.Budget.totalIva);
+
 
         if (this.Budget && this.Budget.clientId) {
           // Now we have the budget, we can proceed to get the client info
@@ -121,6 +136,21 @@ click: any;
                   this.budgetDetailService.getAllBudgetDetails(budgetId).subscribe({
                     next: (budgetDetailsData: any) => {
                       this.BudgetDetails = budgetDetailsData;
+                      //put the , on the value total
+                      this.BudgetDetails.forEach((element: any) => {
+                        
+                        element.price = new Intl.NumberFormat('en-US', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                        }).format(element.price);
+                        
+                        element.total = new Intl.NumberFormat('en-US', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                        }).format(element.total);
+                        if(this.existValuesWithDiscont==false)
+                          this.existValuesWithDiscont = element.discount > 0 ? true : false;
+                      });
                     },
                     error: (err) => {
                       this.toastr.error('Erro a carregar os detalhes do orçamento', err);

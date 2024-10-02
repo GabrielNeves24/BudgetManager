@@ -10,4 +10,5 @@ export interface BudgetDetail {
     iva: number; //nova
     discount: number;
     total: number;
+    order: number;
 }

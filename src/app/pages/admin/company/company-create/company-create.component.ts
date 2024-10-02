@@ -42,16 +42,17 @@ export class CompanyCreateComponent {
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
       address2: [''],
-      postalCode: [''],
+      postalCode: [''],//
       city: [''],
-      iban: [''],
-      website: [''],
+      iban: [''],//
+      website: [''],//
       phone: [''],
       cellPhone: [''],
       email: [''],
       active: [true],
       logoPath: [''],
       declaration: [''],
+      nif: [''],//
     });
     companyId = 0;
     selectedLogo: File | null = null;

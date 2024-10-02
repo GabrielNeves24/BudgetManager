@@ -21,6 +21,17 @@
       margin-bottom: 10px;
   }
 }
+.cdk-drag-preview {
+  background-color: #ccc;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-handle {
+  cursor: move;
+}
 
 table {
   width: 100%;
@@ -77,4 +88,29 @@ button.mat-raised-button {
   .col-4 {
       min-width: 25%;
   }
+}
+
+.table-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Adjust based on the number of columns */
+}
+
+.table-header, .table-row {
+  display: contents; /* Makes each div act like a table row */
+}
+
+.header-cell, .cell {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.header-cell {
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
 }

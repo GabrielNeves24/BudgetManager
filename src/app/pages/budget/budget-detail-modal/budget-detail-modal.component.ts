@@ -51,7 +51,8 @@ export class BudgetDetailModalComponent implements OnInit {
       price: [data.price || 0, Validators.required],
       iva: [data.iva || 0, Validators.required],
       discount: [data.discount || 0],
-      total: [{ value: data.total || 0, disabled: false }]
+      total: [{ value: data.total || 0, disabled: false }],
+      order: [data.order || 1],
     });
   }
 
@@ -72,13 +73,14 @@ export class BudgetDetailModalComponent implements OnInit {
         price: this.data.price,
         iva: this.data.iva,
         discount: this.data.discount,
-        total: this.data.total
+        total: this.data.total,
+        order: this.data.order,
       });
     }
   }
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
-    return this.data.itemList.filter((item: any) => item.name.toLowerCase().includes(filterValue));
+    return this.data.itemList.filter((item: any) => item.name.toLowerCase().includes(filterValue) || item.code.toLowerCase().includes(filterValue));
   }
   calcularDesconto(){
     //discount comes in percentage

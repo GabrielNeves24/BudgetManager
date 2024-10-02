@@ -25,6 +25,8 @@ import { UnitService } from '../../../services/unit.service';
 import { BudgetDetailService } from '../../../services/budget-detail.service';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,DragDropModule   } from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-budget-create',
   standalone: true,
@@ -41,7 +43,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIcon,
     MatDatepicker,
     MatDatepickerModule,
-    MatCheckboxModule,FormsModule,BudgetDetailModalComponent,MatDialogModule,ConfirmationDialogComponent
+    MatCheckboxModule,FormsModule,BudgetDetailModalComponent,MatDialogModule,ConfirmationDialogComponent,CdkDropList,DragDropModule 
   ],
   templateUrl: './budget-create.component.html',
   styleUrl: './budget-create.component.css',
@@ -63,7 +65,7 @@ value: any;
   }
 
   budgetArray: BudgetDetail[] = []; // Initialize the budgetArray property
-  dataSource = new MatTableDataSource<BudgetDetail>(this.budgetArray);
+  dataSource = new MatTableDataSource<any>([]);
   isEditMode = false;
   clientList: any[] = [];
   itemList: any[] = [];
@@ -119,6 +121,7 @@ value: any;
       this.budgetDetailService.getAllBudgetDetails(this.numberOfBudgetIfEdit).subscribe((data: any) => {  
         this.budgetArray = data;
         this.dataSource.data = this.budgetArray;
+        this.dataSource = data.sort((a:any, b:any) => a.order - b.order);
       });
     }   
     window.addEventListener('keydown', function(e) {
@@ -127,6 +130,32 @@ value: any;
       }
     }); 
   }
+
+  drop(event: CdkDragDrop<any[]>) {
+    //moveItemInArray(this.budgetArray, event.previousIndex, event.currentIndex);
+    //this.updateItemOrder();
+    //get the value of the item moved and where too
+//     const previousIndex = event.previousIndex;
+//     const currentIndex = event.currentIndex;
+// console.log(previousIndex);
+// console.log(currentIndex-1);
+//
+  }
+  
+  updateItemOrder(itemPosicaoAntiga: any, itemPosicaoNova: any): void {
+    // this.budgetArray.forEach((item) => {
+    //   if (item.order === itemPosicaoAntiga) {
+    //     item.order = itemPosicaoNova;
+    //   } else if (item.order === itemPosicaoNova) {
+    //     item.order = itemPosicaoAntiga;
+    //   }
+    // });
+    // //reorder the array
+    // this.budgetArray.sort((a, b) => a.order - b.order);
+    // this.dataSource.data = [...this.budgetArray];
+  }
+
+
 
 
   validateForm(item:any): void {
@@ -188,6 +217,7 @@ value: any;
           result.companyId = this.companyId;
           result.budgetDetailId = 0;
           result.budgetId = this.numberOfBudgetIfEdit;
+          result.order = this.budgetArray.length + 1; // Set the order to the last item in the array + 1
           this.budgetDetailService.createBudgetDetail(result).subscribe(
             (response: any) => {
               if (response && response.budgetDetail && response.budgetDetail.budgetDetailId > 0) {
@@ -204,6 +234,7 @@ value: any;
         }else{
           result.budgetDetailId = 0;
           result.budgetId = 0;
+          result.order = this.budgetArray.length + 1;
         }
         this.budgetArray.push(result);
         this.dataSource.data = this.budgetArray;

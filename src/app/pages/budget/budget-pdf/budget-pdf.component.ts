@@ -222,9 +222,7 @@ generatePdf() {
 
   // Add company logo
   if (this.imageAddress) {
-    const logoWidth = 50; // Adjust the width of the logo
-    const logoHeight = (logoWidth / this.imageAddress.width) * this.imageAddress.height; // Calculate the height based on the aspect ratio
-    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - logoWidth, currentY, logoWidth, logoHeight); // Adjust logo position and size
+    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - 50, currentY, 50, 50); // Adjust logo position to align right
   }
 
   // Add company information
@@ -277,8 +275,8 @@ generatePdf() {
       item.itemDescription,
       item.quantity,
       this.getSymbolUniId(item.unitId),
-      `${item.price} € `,
-      `${item.iva} % `
+      `${item.price} €`,
+      `${item.iva} %`
     ];
     if (this.existValuesWithDiscont) {
       row.push(`${item.discount} %`, `${item.total} €`);

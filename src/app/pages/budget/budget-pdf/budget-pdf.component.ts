@@ -211,10 +211,10 @@ generatePdf() {
   const margin = 10;
   let currentY = margin;
   // Add budget information
-  doc.setFontSize(16);
+  doc.setFontSize(14);
   doc.setFont("helvetica", "bold");
   doc.text(`Orçamento # ${this.Budget.budgetId || '*****'}`, margin, currentY);
-  doc.setFontSize(16);
+  doc.setFontSize(14);
   doc.setFont("helvetica", "normal");
   const currentDate = new Date().toLocaleDateString('en-GB');
   doc.text(`Data: ${currentDate}`, pageWidth - margin , currentY, { align: 'right' });
@@ -222,7 +222,7 @@ generatePdf() {
 
   // Add company logo
   if (this.imageAddress) {
-    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - 50, currentY, 50, 50); // Adjust logo position to align right
+    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - 100, currentY, 100, 50); // Adjust logo position to align right
   }
 
   // Add company information
@@ -275,8 +275,8 @@ generatePdf() {
       item.itemDescription,
       item.quantity,
       this.getSymbolUniId(item.unitId),
-      `${item.price} €`,
-      `${item.iva} %`
+      `${item.price}€`,
+      `${item.iva}%`
     ];
     if (this.existValuesWithDiscont) {
       row.push(`${item.discount} %`, `${item.total} €`);
@@ -315,46 +315,25 @@ generatePdf() {
     theme: 'striped',
   });
 
-  // Calculate finalY manually
-  const startY = currentY; // The initial Y position where the table starts
-  const rowHeight = 10; // The height of each row
-  const numRows = rows.length; // The number of rows in the table
-
-  const finalY = startY + (numRows * rowHeight)+5;
+  
 
   doc.setFontSize(14);
+// Calculate finalY manually
+const startY = currentY; // The initial Y position where the table starts
+const rowHeight = 10; // The height of each row
+const numRows = rows.length; // The number of rows in the table
 
-  // Draw box for totals
-  const boxWidth = 80;
-  const boxHeight = 30;
-  const boxX = pageWidth - margin - boxWidth;
-  const boxY = finalY + 10;
-  doc.setDrawColor(0);
-  doc.setFillColor(221, 221, 221);
-  doc.rect(boxX, boxY, boxWidth, boxHeight, 'F');
+const finalY = startY + (numRows * rowHeight)+5 +10;
 
-  // Total Bruto
-  doc.setFont("helvetica", "bold");
-  doc.text(`Total Bruto:`, boxX + 5, boxY + 7, { align: 'left' });
-  doc.text(`${this.Budget.totalWithoutIva || 'N/A'} €`, boxX + boxWidth - 5, boxY + 7, { align: 'right' });
-
-  // Total IVA
-  doc.setFont("helvetica", "bold");
-  doc.text(`Total IVA:`, boxX + 5, boxY + 14, { align: 'left' });
-  doc.text(`${this.Budget.totalIva || 'N/A'} €`, boxX + boxWidth - 5, boxY + 14, { align: 'right' });
-
-  // Total
-  doc.setFont("helvetica", "bold");
-  doc.text(`Total:`, boxX + 5, boxY + 21, { align: 'left' });
-  doc.text(`${this.Budget.totalWithIva || 'N/A'} €`, boxX + boxWidth - 5, boxY + 21, { align: 'right' });
+ 
 
   const budgetObsLineBreaks = this.Budget.obs.split('\n').length - 1;
   const companyDeclarationLineBreaks = this.CompanyInfo.declaration.split('\n').length - 1;
-  currentY = finalY + 30;
+
   // Add observations and declarations
   if (this.seExist2() || this.seExist()) {
     // Add observations
-    currentY += 30 + (budgetObsLineBreaks * 5);
+    currentY +=  (budgetObsLineBreaks * 5)+20;
     const headers3 = ['Observações','Declaração'];
     //console.log(this.Budget.obs)
     const rows3 = [[this.Budget.obs, this.CompanyInfo.declaration]];
@@ -385,16 +364,30 @@ generatePdf() {
       },
       theme: 'striped',
     });
+    //get the last position of this table
+    
   }
-  // Add signature line
-  //currentY += 30;
-  //doc.setFontSize(12);
-  //doc.setFont("helvetica", "bold");
-  //doc.text('Assinatura:', margin, currentY);
-  //doc.setFont("helvetica", "normal");
-  //doc.text('...................................', margin, currentY + 5);
 
-  // Add page number at the bottom
+  const finalY2 = currentY + (1 * rowHeight);
+    currentY = finalY;
+
+
+  autoTable(doc, {
+    startY: currentY,
+    body: [
+      ['Total Bruto:', `${this.Budget.totalWithoutIva || 'N/A'} €`],
+      ['Total IVA:', `${this.Budget.totalIva || 'N/A'} €`],
+      ['Total:', `${this.Budget.totalWithIva || 'N/A'} €`],
+    ],
+    theme: 'plain',
+    margin: { left: pageWidth - margin - 80 },
+    styles: {
+      fontSize: 12,
+      cellPadding: 2,
+      halign: 'right',
+    },
+  });
+
   const pageCount = doc.internal.pages.length-1;
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);

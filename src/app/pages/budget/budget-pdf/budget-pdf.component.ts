@@ -222,7 +222,38 @@ generatePdf() {
 
   // Add company logo
   if (this.imageAddress) {
-    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - 50, currentY, 50, 100); // Adjust logo position to align right
+    // Create a new image object
+  var img = new Image();
+  img.src = this.imageAddress;
+
+  img.onload = () => {
+    // Get the image's natural dimensions
+    const imgWidth = img.naturalWidth;
+    const imgHeight = img.naturalHeight;
+
+    // Define the maximum width or height for the image
+    const maxWidth = 50; // Adjust based on your desired width
+    const maxHeight = 50; // Adjust based on your desired height
+
+    // Calculate the aspect ratio
+    const aspectRatio = imgWidth / imgHeight;
+
+    // Initialize the scaled width and height
+    let width = maxWidth;
+    let height = maxHeight;
+
+    // Adjust dimensions based on the aspect ratio
+    if (imgWidth > imgHeight) {
+      // Landscape-oriented image
+      height = maxWidth / aspectRatio;
+    } else {
+      // Portrait-oriented image or square
+      width = maxHeight * aspectRatio;
+    }
+
+    // Add the image to the PDF with the calculated dimensions
+    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - width, currentY, width, height);
+  };
   }
 
   // Add company information

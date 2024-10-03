@@ -222,37 +222,10 @@ generatePdf() {
 
   // Add company logo
   if (this.imageAddress) {
-    let img = new Image();
-    img.src = this.imageAddress;
-  
-    img.onload = () => {
-      let imgWidth = img.width;
-      let imgHeight = img.height;
-  
-      // Set the maximum dimensions for the image in the PDF
-      const maxWidth = 50;  // Example maximum width
-      const maxHeight = 50; // Example maximum height
-  
-      let width, height;
-  
-      // Calculate the dimensions to maintain the aspect ratio
-      if (imgWidth > imgHeight) {
-        width = maxWidth;
-        height = (imgHeight / imgWidth) * maxWidth; // Calculate height based on width
-      } else {
-        height = maxHeight;
-        width = (imgWidth / imgHeight) * maxHeight; // Calculate width based on height
-      }
-  
-      // Now add the image to the PDF with the calculated dimensions
-      doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - width, currentY, width, height); // Align the image as needed
-    };
-  
-    img.onerror = (error) => {
-      console.error('Error loading image', error);
-    };
+    const logoWidth = 50; // Adjust the width of the logo
+    const logoHeight = (logoWidth / this.imageAddress.width) * this.imageAddress.height; // Calculate the height based on the aspect ratio
+    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - logoWidth, currentY, logoWidth, logoHeight); // Adjust logo position and size
   }
-  
 
   // Add company information
   const companyInfoX = 10; // X position for company info after logo
@@ -304,8 +277,8 @@ generatePdf() {
       item.itemDescription,
       item.quantity,
       this.getSymbolUniId(item.unitId),
-      `${item.price} €`,
-      `${item.iva} %`
+      `${item.price} € `,
+      `${item.iva} % `
     ];
     if (this.existValuesWithDiscont) {
       row.push(`${item.discount} %`, `${item.total} €`);

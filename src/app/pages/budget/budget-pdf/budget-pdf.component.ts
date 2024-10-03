@@ -222,7 +222,7 @@ generatePdf() {
 
   // Add company logo
   if (this.imageAddress) {
-    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - 100, currentY, 100, 50); // Adjust logo position to align right
+    doc.addImage(this.imageAddress, 'PNG', pageWidth - margin - 90, currentY, 90, 50); // Adjust logo position to align right
   }
 
   // Add company information
@@ -369,7 +369,7 @@ const finalY = startY + (numRows * rowHeight)+5 +10;
   }
 
   const finalY2 = currentY + (1 * rowHeight);
-    currentY = finalY;
+    currentY = finalY+10;
 
 
   autoTable(doc, {

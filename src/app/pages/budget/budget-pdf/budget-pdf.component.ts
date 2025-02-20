@@ -17,7 +17,7 @@ import { UnitService } from '../../../services/unit.service';
 import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../../services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
-
+import html2pdf from 'html2pdf.js';
 @Component({
   selector: 'app-budget-pdf',
   standalone: true,
@@ -436,30 +436,21 @@ const finalY = startY + (numRows * rowHeight)+5 +10;
 //   }
 // }
   generatePdf22() {
-    const elementToPrint = document.getElementById('theContent');
-    // Apply CSS to ensure correct size
-    
+    const element = document.getElementById('theContent'); // Your invoice container
 
+    html2pdf()
+      .set({
+      margin: 10,
+      filename: 'orcamento.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true, useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all','css', 'legacy'] } // Ensures multi-page support
+      })
+      .from(element)
+      .save();
 
-    if (elementToPrint) {
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const options = {
-        callback: function (doc: { save: (arg0: string) => void; }) {
-          doc.save('Orçamento.pdf');
-        },
-        x: 10,
-        y: 10,
-        width: 190, // Adjust the width to fit A4 size
-        windowWidth: 794, // Ensure the width matches your content's width
-        autoPaging: true,
-        afterPageContent: function (currentPage: any, totalPage: any) {
-          if (currentPage !== totalPage) {
-            pdf.addPage();
-          }
-        },
-      };
-      pdf.html(elementToPrint, options);
-    }
+      
 
   }
 }

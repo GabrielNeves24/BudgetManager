@@ -13,9 +13,9 @@
       <button mat-stroked-button (click)="generatePdf22()" class="btn btn-secondary">
         Imprimir
       </button>
-      <button mat-stroked-button (click)="generatePdf()" class="btn btn-secondary">
+      <!-- <button mat-stroked-button (click)="generatePdf()" class="btn btn-secondary">
         Imprimir Completo
-      </button>
+      </button> -->
     </div>
   </div>
 </div>
@@ -72,75 +72,49 @@
     </tr>
     <tr>
       <td colspan="3">
-        <table cellspacing="0px" cellpadding="2px" style="page-break-inside: always; page-break-before: avoid; margin-top:5px;" >
-          <tr class="heading">
-            @if(existValuesWithDiscont){
-            <td style="width:25%;">Artigo</td>
-            }@else{
-              <td style="width:35%;">Artigo</td>
-            }
-
-            <td style="width:7.5%; text-align:center;">QTD.</td>
-            <td style="width:10%; text-align:right;">Unidade</td>
-            <td style="width:12.5%; text-align:right;">Preço S/Iva</td>
-            <td style="width:10%; text-align:right;">IVA</td>
-            
-            @if(existValuesWithDiscont){
-              <td style="width:10%; text-align:right;">Desconto</td>
-              <td style="width:15%; text-align:right;">Total</td>
-            }@else {
-              <td style="width:15%; text-align:right;">Total</td>
-            }
-            
-            
-          </tr>
-          <tr *ngFor="let item of BudgetDetails" class="item">
-            @if(existValuesWithDiscont){
-            <td style="white-space: pre-wrap; width:25%;">
-              {{ item.itemDescription }}
-            </td>
-          }@else{
-            <td style="white-space: pre-wrap; width:35%;">
-              {{ item.itemDescription }}
-            </td>
-          }
-
-            <td style="width:7.5%; text-align:center;">
-              {{ item.quantity  }}
-            </td>
-            <td style="width:10%; text-align:right;">
-              {{ getSymbolUniId(item.unitId) }}
-            </td>
-            <td style="width:12.5%; text-align:right;">
-              {{ item.price }} €
-            </td>
-            <td style="width:10%; text-align:right;">
-              {{ item.iva+' %'  }}
-            </td>
-            
-            @if(existValuesWithDiscont){
-              <td style="width:10%; text-align:right;">
-                  {{item.discount+' %'}} 
-              </td>
-              <td style="width:15%; text-align:right;">
-                {{ item.total+' €'  }}
-              </td>
-            }@else{
-            <td style="width:15%; text-align:right;">
-              {{ item.total+' €'  }}
-            </td>
-            }
-          </tr>
-          <!-- <tr class="item last">
-            <td style="width:25%;"><b>Total</b></td>
-            <td style="width:10%; text-align:center;"></td>
-            <td style="width:10%; text-align:right;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
-            <td style="width:10%; text-align:right;"></td>
-            <td style="width:10%; text-align:right;"></td>
-            <td style="width:10%; text-align:right;"></td>
-            <td style="width:15%; text-align:right;">{{ Budget.totalWithIva || 'N/A' }} €</td>
-          </tr> -->
+        <table cellspacing="0px" cellpadding="2px" class="items">
+          <thead>
+            <tr class="heading">
+              @if(existValuesWithDiscont){
+                <th style="width:40%; text-align:left;">Artigo</th>
+              }@else{
+                <th style="width:50%; text-align:left;">Artigo</th>
+              }
+              <th style="width:7.5%; text-align:center;">QTD.</th>
+              <th style="width:5%; text-align:center;">Unidade</th>
+              <th style="width:12.5%; text-align:right;">Preço S/Iva</th>
+              <th style="width:10%; text-align:right;">IVA</th>
+              
+              @if(existValuesWithDiscont){
+                <th style="width:10%; text-align:right;">Desconto</th>
+                <th style="width:10%; text-align:right;">Total</th>
+              }@else {
+                <th style="width:10%; text-align:right;">Total</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of BudgetDetails" class="item">
+              @if(existValuesWithDiscont){
+                <td style="white-space: pre-wrap; width:35%;">{{ item.itemDescription }}</td>
+              }@else{
+                <td style="white-space: pre-wrap; width:45%;">{{ item.itemDescription }}</td>
+              }
+              <td style="width:7.5%; text-align:center;">{{ item.quantity }}</td>
+              <td style="width:5%; text-align:center;">{{ getSymbolUniId(item.unitId) }}</td>
+              <td style="width:12.5%; text-align:right;">{{ item.price }} €</td>
+              <td style="width:10%; text-align:right;">{{ item.iva }} %</td>
+              
+              @if(existValuesWithDiscont){
+                <td style="width:5%; text-align:right;">{{ item.discount }} %</td>
+                <td style="width:10%; text-align:right;">{{ item.total }} €</td>
+              }@else{
+                <td style="width:10%; text-align:right;">{{ item.total }} €</td>
+              }
+            </tr>
+          </tbody>
         </table>
+        
       </td>
     </tr>
     <tr class="total">
@@ -188,6 +162,7 @@
   </table>
 
 </div>
+
 
 
 

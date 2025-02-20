@@ -4,15 +4,45 @@
     padding: 10px;
     border: 0px solid #eee;
     box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    /* line-height: 22px; */
     font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
     color: #555;
 }
+.items {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  .items th {
+    background-color: #f8f9fa;
+    padding: 12px 8px;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+  }
+
+  .items td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .items tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  .item td {
+    vertical-align: middle;
+  }
+
+  .items tbody tr:last-child td {
+    border-bottom: 2px solid #dee2e6;
+  }
 
 .invoice-box table {
     width: 100%;
     line-height: inherit;
+    border-collapse: collapse;
     text-align: left;
     border-bottom: solid 1px #ccc;
 }
@@ -21,7 +51,16 @@
     padding: 5px;
     vertical-align: middle;
 }
-
+.invoice-box table.items  {
+    page-break-inside: always;
+    page-break-before: avoid;
+    margin-top: 5px;
+}
+.invoice-box table.tabbed-totals  {
+    page-break-inside: always;
+    page-break-before: avoid;
+    margin-top: 5px;
+}
 .invoice-box table tr td:nth-child(2) {
     text-align: right;
 }
@@ -49,6 +88,7 @@
 
 .invoice-box table tr.item td {
     border-bottom: 1px solid #eee;
+    
 }
 
 .invoice-box table tr.item.last td {
@@ -65,7 +105,7 @@
 }
 
 .invoice-box .total td {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     border-top: 2px solid #eee;
 }
@@ -93,42 +133,8 @@
     color: #333;
 }
 
-/* @media only screen and (max-width: 600px) {
-    .invoice-box table tr.top table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-    }
 
-    .invoice-box table tr.information table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-    }
-} */
 
-.rtl {
-    direction: rtl;
-    font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-}
 
-.rtl table {
-    text-align: right;
-}
 
-.rtl table tr td:nth-child(2) {
-    text-align: left;
-}
-.my-class{
-    width: 100px!important;
-    min-width: unset!important;
-    align-content: center;
-}
-@media print {
-    #theContent {
-        width: 794px; /* Width of A4 in pixels at 96 DPI */
-        height: 1123px; /* Height of A4 in pixels at 96 DPI */
-        transform: scale(1); /* Ensure no scaling */
-        transform-origin: top left;
-    }
-}
+

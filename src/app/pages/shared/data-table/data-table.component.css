@@ -1,67 +1,64 @@
-/* Base table styling */
+/* Base Table Styling */
 table {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
+  font-size: 16px; /* Adjust font size for readability */
 }
 
 th, td {
-  padding: 8px;
+  padding: 10px;
   text-align: left;
-  word-wrap: break-word; /* Ensure long text breaks */
-}
-.active-row {
-  background-color: white;
-}
-.adjudicado-row {
-  background-color: lightgreen;
+  word-wrap: break-word;
+  white-space: nowrap; /* Prevent wrapping on mobile */
 }
 
-
-.inactive-row {
-  background-color: #ffebee; /* Light red background */
-}
-.rejeitado-row {
-  background-color: lightcoral; /* Light red background */
-}
 th.mat-header-cell {
   background-color: #f1f1f1;
   font-weight: bold;
   color: #000;
 }
 
-td.mat-cell {
-  padding: 8px;
-}
-
-.mat-sort-header-sorted {
-  color: black;
-}
-
-.mat-sort-header-arrow {
-  color: black;
-}
-/* Add some spacing around the table */
-.mat-table {
-  margin: 16px 0;
-}
-
-.mat-label {
-  color: #000;
+/* Sticky Table Header (Optional) */
+.table-responsive thead {
+  position: sticky;
+  top: 0;
+  background: #f1f1f1;
+  z-index: 10;
 }
 
 /* Table wrapper to allow horizontal scrolling */
 .table-responsive {
   overflow-x: auto;
+  display: block;
   width: 100%;
   max-width: 100%;
 }
 
-.inactive-row {
-  background-color: #ffe0e0; /* Light red for inactive terminals */
+/* Alternate Row Colors */
+.active-row {
+  background-color: white;
 }
 
-/* Buttons and inputs alignment on mobile */
+.adjudicado-row {
+  background-color: lightgreen;
+}
+
+.inactive-row {
+  background-color: #ffebee;
+}
+
+.rejeitado-row {
+  background-color: lightcoral;
+}
+
+/* Improve Spacing & Readability */
+td.mat-cell {
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* Button & Input Responsiveness */
 @media (max-width: 768px) {
   .row.mb-6.align-items-center {
     flex-direction: column;
@@ -82,12 +79,18 @@ td.mat-cell {
     text-align: center;
   }
 
-  .row.mb-6.align-items-center .col-lg-3, .row.mb-6.align-items-center .col-md-4, .row.mb-6.align-items-center .col-sm-6, .row.mb-6.align-items-center .col-sm-12 {
+  .row.mb-6.align-items-center .col-lg-3, 
+  .row.mb-6.align-items-center .col-md-4, 
+  .row.mb-6.align-items-center .col-sm-6, 
+  .row.mb-6.align-items-center .col-sm-12 {
     flex: 0 0 100%;
     max-width: 100%;
   }
 
-  .row.mb-6.align-items-center .col-lg-3 .mat-form-field, .row.mb-6.align-items-center .col-md-4 .mat-form-field, .row.mb-6.align-items-center .col-sm-6 .mat-form-field, .row.mb-6.align-items-center .col-sm-12 .mat-form-field {
+  .row.mb-6.align-items-center .col-lg-3 .mat-form-field, 
+  .row.mb-6.align-items-center .col-md-4 .mat-form-field, 
+  .row.mb-6.align-items-center .col-sm-6 .mat-form-field, 
+  .row.mb-6.align-items-center .col-sm-12 .mat-form-field {
     width: 100%;
   }
 
@@ -96,31 +99,21 @@ td.mat-cell {
   }
 }
 
-/* Hide columns based on screen size */
-@media (max-width: 1200px) {
-  .mat-header-cell:nth-child(n+4),
-  .mat-cell:nth-child(n+4) {
-    display: none;
+/* Improve Table Readability on Small Screens */
+@media (max-width: 768px) {
+  table {
+    font-size: 14px; /* Reduce font size */
+  }
+
+  th, td {
+    padding: 8px; /* Adjust padding */
   }
 }
 
-@media (max-width: 1000px) {
-  .mat-header-cell:nth-child(n+3),
-  .mat-cell:nth-child(n+3) {
-    display: none;
-  }
-}
-
-@media (max-width: 800px) {
-  .mat-header-cell:nth-child(n+2),
-  .mat-cell:nth-child(n+2) {
-    display: none;
-  }
-}
-
+/* Add subtle shadow for mobile */
 @media (max-width: 600px) {
-  .mat-header-cell:nth-child(n+1),
-  .mat-cell:nth-child(n+1) {
-    display: none;
+  .table-responsive {
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   }
 }

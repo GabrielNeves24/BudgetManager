@@ -69,7 +69,8 @@ export class AuthService implements OnInit {
     return this.http.post<any>(`${this.apiUrl}/User/Login`, json, {
       headers: {
         'Content-Type': 'application/json',
-        'charset': 'UTF-8'
+        'charset': 'UTF-8',
+        'accept': '*/*'
       },
       withCredentials: true
     }).pipe(

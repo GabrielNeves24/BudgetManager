@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 .invoice-box {
     max-width: 890px;
     margin: auto;
@@ -6,38 +8,38 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, .15);
     font-size: 14px;
     /* line-height: 22px; */
-    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
     color: #555;
 }
 .items {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-  }
+    /* margin: 20px 0; */
+}
 
-  .items th {
+.items th {
     background-color: #f8f9fa;
     padding: 12px 8px;
     border-bottom: 2px solid #dee2e6;
     font-weight: 600;
-  }
+}
 
-  .items td {
+.items td {
     padding: 12px 8px;
     border-bottom: 1px solid #dee2e6;
-  }
+}
 
-  .items tbody tr:hover {
+.items tbody tr:hover {
     background-color: #f8f9fa;
-  }
+}
 
-  .item td {
+.item td {
     vertical-align: middle;
-  }
+}
 
-  .items tbody tr:last-child td {
+.items tbody tr:last-child td {
     border-bottom: 2px solid #dee2e6;
-  }
+}
 
 .invoice-box table {
     width: 100%;
@@ -58,7 +60,7 @@
 }
 .invoice-box table.tabbed-totals  {
     page-break-inside: avoid;
-    margin-top: 20px;
+    margin-top: 10px;
     padding-top: 10px;
 }
 .invoice-box table tr td:nth-child(2) {
@@ -66,7 +68,7 @@
 }
 
 .invoice-box table tr.top table td {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .invoice-box table tr.top table td.title {
@@ -76,7 +78,7 @@
 }
 
 .invoice-box table tr.information table td {
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 
 .invoice-box table tr.heading td {
@@ -133,10 +135,6 @@
     color: #333;
 }
 
-
 .invoice-box table.tabbed-totals td {
     text-align: left; /* Ensure all cells in tabbed-totals are left-aligned */
 }
-
-
-

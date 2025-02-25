@@ -57,9 +57,9 @@
     margin-top: 5px;
 }
 .invoice-box table.tabbed-totals  {
-    page-break-inside: always;
-    page-break-before: avoid;
-    margin-top: 5px;
+    page-break-inside: avoid;
+    margin-top: 20px;
+    padding-top: 10px;
 }
 .invoice-box table tr td:nth-child(2) {
     text-align: right;
@@ -97,7 +97,7 @@
 
 .invoice-box table tr.total td:nth-child(2) {
     border-top: 2px solid #eee;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .invoice-box .top_rw {
@@ -106,7 +106,7 @@
 
 .invoice-box .total td {
     font-size: 14px;
-    font-weight: bold;
+    /* font-weight: bold; */
     border-top: 2px solid #eee;
 }
 
@@ -134,7 +134,9 @@
 }
 
 
-
+.invoice-box table.tabbed-totals td {
+    text-align: left; /* Ensure all cells in tabbed-totals are left-aligned */
+}
 
 
 

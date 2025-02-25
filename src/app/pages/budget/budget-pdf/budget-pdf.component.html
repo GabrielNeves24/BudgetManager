@@ -115,47 +115,50 @@
       </td>
     </tr>
     <tr class="total">
-      <td colspan="3" align="right">
-        <!-- <b>Total por extenso:</b> <b>{{ valorTotalEmTexto }}</b> -->
+      <td colspan="3"  >
+        <table class="tabbed-totals" cellspacing="2" cellpadding="2">
+          <tr>
+            <td style="text-align:left;">
+                <b *ngIf="seExist2()">Observações:</b>
+                <div style="white-space: pre-wrap;">
+                    {{ Budget.obs }}
+                </div>
+                <b *ngIf="seExist()">Declaração:</b>
+                <div style="white-space: pre-wrap;">
+                    {{ CompanyInfo.declaration }}
+                </div>
+            </td>
+            <td style="text-align:right;">
+              <table>
+                <tr>
+                  <td><b>Total Bruto:</b></td>
+                  <td style="text-align:right; font-size: 18px;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
+                </tr>
+                <tr>
+                  <td><b>Total IVA:</b></td>
+                  <td style="text-align:right; font-size: 18px;">{{ Budget.totalIva || 'N/A' }} €</td>
+                </tr>
+                <tr>
+                  <td><b>Total:</b></td>
+                  <td style="text-align:right; font-size: 20px;">{{ Budget.totalWithIva || 'N/A' }} €</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%"></td>
+            <td>
+              <b>Assinatura</b><br><br>
+              ...................................
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>
-    <td colspan="3">
-      <table class="tabbed-totals" cellspacing="0px" cellpadding="2px">
-        <tr>
-          <td width="50%">
-            <b *ngIf="seExist2()">Observações:</b><br>
-            <div style="white-space: pre-wrap;">
-              {{ Budget.obs }}
-            </div><br>
-            <b *ngIf="seExist()">Declaração:</b><br>
-            {{ CompanyInfo.declaration }}<br>
-          </td>
-          <td>
-            <table>
-              <tr>
-                <td><b>Total Bruto:</b></td>
-                <td style="text-align:right; font-size: 18px;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
-              </tr>
-              <tr>
-                <td><b>Total IVA:</b></td>
-                <td style="text-align:right; font-size: 18px;">{{ Budget.totalIva || 'N/A' }} €</td>
-              </tr>
-              <tr>
-                <td><b>Total</b></td>
-                <td style="text-align:right; font-size: 20px;">{{ Budget.totalWithIva || 'N/A' }} €</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td width="50%"></td>
-          <td>
-            <b>Assinatura</b><br><br>
-            ...................................
-          </td>
-        </tr>
-      </table>
-    </td>
+    <tr class="total2" style="background-color:blue;" >
+      
+    </tr>
+   
   </table>
 
 </div>

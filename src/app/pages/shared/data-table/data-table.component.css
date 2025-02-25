@@ -3,45 +3,63 @@ table {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
-  font-size: 16px; /* Adjust font size for readability */
+  font-size: 16px;
 }
 
+/* Table Header */
 th, td {
-  padding: 10px;
+  padding: 12px;
   text-align: left;
-  word-wrap: break-word;
-  white-space: nowrap; /* Prevent wrapping on mobile */
+  white-space: nowrap;
 }
+th.mat-header-cell {
+  text-align: center !important;
+}
+
+td.mat-cell, td.mat-footer-cell {
+  text-align: center !important;
+}
+th.mat-header-cell {
+  text-align: center !important;
+}
+
 
 th.mat-header-cell {
-  background-color: #f1f1f1;
+  background-color: #f8f9fa;
   font-weight: bold;
-  color: #000;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+  text-align: center;
+  
 }
 
-/* Sticky Table Header (Optional) */
+/* Sticky Table Header */
 .table-responsive thead {
   position: sticky;
   top: 0;
-  background: #f1f1f1;
+  background: #f8f9fa;
   z-index: 10;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  
 }
 
-/* Table wrapper to allow horizontal scrolling */
+/* Table Wrapper */
 .table-responsive {
   overflow-x: auto;
   display: block;
   width: 100%;
   max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Alternate Row Colors */
+/* Row Colors */
 .active-row {
   background-color: white;
 }
 
 .adjudicado-row {
-  background-color: lightgreen;
+  background-color: #c8e6c9;
 }
 
 .inactive-row {
@@ -49,13 +67,19 @@ th.mat-header-cell {
 }
 
 .rejeitado-row {
-  background-color: lightcoral;
+  background-color: #ffcdd2;
 }
 
-/* Improve Spacing & Readability */
+/* Hover Effect */
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Cell Styling */
 td.mat-cell {
   padding: 12px;
   font-size: 14px;
+  border-bottom: 1px solid #ddd;
 }
 
 /* Button & Input Responsiveness */
@@ -102,18 +126,19 @@ td.mat-cell {
 /* Improve Table Readability on Small Screens */
 @media (max-width: 768px) {
   table {
-    font-size: 14px; /* Reduce font size */
+    font-size: 14px;
   }
 
   th, td {
-    padding: 8px; /* Adjust padding */
+    padding: 10px;
   }
 }
 
-/* Add subtle shadow for mobile */
+/* Subtle shadow for mobile */
 @media (max-width: 600px) {
   .table-responsive {
     border-radius: 8px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   }
 }
+

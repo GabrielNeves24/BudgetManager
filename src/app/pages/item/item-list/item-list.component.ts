@@ -15,7 +15,7 @@ import { Unit } from '../../../Model/unit.model';
 export class ItemListComponent implements OnInit {
 
   columns = [
-    { columnDef: 'ItemId', header: '#', cell: (element: any) => `${element.itemId}` },
+    // { columnDef: 'ItemId', header: '#', cell: (element: any) => `${element.itemId}` },
     { columnDef: 'code', header: 'Codigo', cell: (element: any) => `${element.code}` },
     { columnDef: 'name', header: 'Nome', cell: (element: any) => `${element.name}` },
     { columnDef: 'symbol', header: 'Unidade Medida', cell: (element: any) => `${element.symbol}` },
@@ -25,7 +25,7 @@ export class ItemListComponent implements OnInit {
     { columnDef: 'iva', header: 'Iva', cell: (element: any) => `${element.iva} %` },
     { columnDef: 'active', header: 'Ativo', cell: (element: any) => `${element.active}` },
     //{ columnDef: 'lastUpdated', header: 'Last Updated', cell: (element: any) => `${element.lastUpdated}` },
-    { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` }
+    { columnDef: 'actions', header: '', cell: (element: any) => `${element.actions}` }
   ]
   datasource: any = [];
   constructor(

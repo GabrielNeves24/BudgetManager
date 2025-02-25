@@ -22,7 +22,9 @@
   <table cellpadding="0" cellspacing="0">
     <tr class="top_rw">
       <td colspan="2">
-        <h2 style="margin-bottom: 0px;">Orçamento # {{ Budget.budgetId || '*****' }}</h2>
+        <h2 style="margin-bottom: 0px;">Orçamento
+          
+        </h2>
       </td>
       <td style="text-align:right; font-size: 20px;">
         <strong>Data:</strong> {{ (Budget.date | date: 'dd/MM/yyyy') || '21-11-2018' }}
@@ -79,8 +81,8 @@
               }
               <th style="width:7.5%; text-align:center;">QTD.</th>
               <th style="width:5%; text-align:center;">Unidade</th>
-              <th style="width:12.5%; text-align:right;">Preço S/Iva</th>
-              <th style="width:10%; text-align:right;">IVA</th>
+              <th style="width:15%; text-align:right;">Preço S/Iva</th>
+              <th style="width:5%; text-align:right;">IVA</th>
               
               @if(existValuesWithDiscont){
                 <th style="width:10%; text-align:right;">Desconto</th>
@@ -104,9 +106,9 @@
               
               @if(existValuesWithDiscont){
                 <td style="width:5%; text-align:right;">{{ item.discount }} %</td>
-                <td style="width:10%; text-align:right;">{{ item.total }} €</td>
+                <td style="width:25%; text-align:right;">{{ item.total }} €</td>
               }@else{
-                <td style="width:10%; text-align:right;">{{ item.total }} €</td>
+                <td style="width:25%; text-align:right;">{{ item.total }} €</td>
               }
             </tr>
           </tbody>
@@ -139,20 +141,20 @@
     
           <!-- Totals Section -->
           <tr>
-            <td style="width: 70%;"></td>
-            <td style="width: 30%;">
+            <td style="width: 10%;"></td>
+            <td style="width: 90%;">
               <table style="width: 100%; margin-left: auto;">
                 <tr>
                   <td style="text-align: left;"><b>Total Bruto:</b></td>
-                  <td style="text-align: right; font-size: 18px; padding-left: 20px;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
+                  <td style="text-align: right; font-size: 18px; padding-left: 10px;">{{ Budget.totalWithoutIva || 'N/A' }} €</td>
                 </tr>
                 <tr>
                   <td style="text-align: left;"><b>Total IVA:</b></td>
-                  <td style="text-align: right; font-size: 18px; padding-left: 20px;">{{ Budget.totalIva || 'N/A' }} €</td>
+                  <td style="text-align: right; font-size: 18px; padding-left: 10px;">{{ Budget.totalIva || 'N/A' }} €</td>
                 </tr>
                 <tr>
                   <td style="text-align: left;"><b>Total:</b></td>
-                  <td style="text-align: right; font-size: 20px; padding-left: 20px;">{{ Budget.totalWithIva || 'N/A' }} €</td>
+                  <td style="text-align: right; font-size: 20px; padding-left: 10px;">{{ Budget.totalWithIva || 'N/A' }} €</td>
                 </tr>
               </table>
             </td>

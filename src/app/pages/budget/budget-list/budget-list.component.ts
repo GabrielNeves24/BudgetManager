@@ -12,16 +12,16 @@ import { ClientService } from '../../../services/client.service';
 export class BudgetListComponent {
 
   columns = [
-    { columnDef: 'budgetId', header: '#', cell: (element: any) => `${element.budgetId}` },
-    { columnDef: 'clientName', header: 'Cliente', cell: (element: any) => `${element.clientName}` },
+    // { columnDef: 'budgetId', header: '#', cell: (element: any) => `${element.budgetId}` },
     { columnDef: 'date', header: 'Data', cell: (element: any) => `${element.date}` },
+    { columnDef: 'clientName', header: 'Cliente', cell: (element: any) => `${element.clientName}` },
     { columnDef: 'totalWithoutIva', header: 'Total S/Iva', cell: (element: any) => `${element.totalWithoutIva} €` },
     { columnDef: 'totalIva', header: 'Iva', cell: (element: any) => `${element.totalIva} €` },
     { columnDef: 'totalWithIva', header: 'Total c/Iva', cell: (element: any) => `${element.totalWithIva} €` },
     { columnDef: 'estado', header: 'Estado', cell: (element: any) => `${element.state}` },
     //{ columnDef: 'Active', header: 'Ativo', cell: (element: any) => `${element.active}` },
-    { columnDef: 'actions', header: 'Ações', cell: (element: any) => `${element.actions}` },
-    { columnDef: 'print', header: 'Print', cell: (element: any) => `${element.print}` }
+    { columnDef: 'actions', header: '', cell: (element: any) => `${element.actions}` },
+    { columnDef: 'print', header: 'PDF', cell: (element: any) => `${element.print}` }
   ]
   
   constructor(

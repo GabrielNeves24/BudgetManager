@@ -12,7 +12,7 @@ import { ClientService } from '../../../services/client.service';
 export class ClientListComponent implements OnInit {
 
   columns = [
-    { columnDef: 'clientId', header: '#', cell: (element: any) => `${element.clientId}` },
+    // { columnDef: 'clientId', header: '#', cell: (element: any) => `${element.clientId}` },
     { columnDef: 'name', header: 'Nome', cell: (element: any) => `${element.name}` },
     { columnDef: 'address', header: 'Morada', cell: (element: any) => `${element.address}` },
     { columnDef: 'city', header: 'Cidade', cell: (element: any) => `${element.city}` },
@@ -20,8 +20,9 @@ export class ClientListComponent implements OnInit {
     { columnDef: 'email', header: 'Email', cell: (element: any) => `${element.email}` },
     { columnDef: 'active', header: 'Ativo', cell: (element: any) => `${element.active}` },
     //{ columnDef: 'lastUpdate', header: 'Last Updated', cell: (element: any) => `${element.lastUpdate}` }
-    { columnDef: 'actions', header: 'Actions', cell: (element: any) => `${element.actions}` },
-    { columnDef: 'Extrato', header: 'Extrato', cell: (element: any) => `${element.extrato}` }
+    
+    { columnDef: 'Extrato', header: 'Resumo', cell: (element: any) => `${element.extrato}` },
+    { columnDef: 'actions', header: '', cell: (element: any) => `${element.actions}` }
   ]
   datasource:any = [];
   constructor(

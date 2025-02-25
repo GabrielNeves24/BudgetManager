@@ -148,6 +148,23 @@ export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  
     if (this.paginator) {
       this.dataSource.paginator = this.paginator;
     }
+    if (this.displayedColumns.includes('date')) {
+      this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'date': return new Date(item.date);
+        default: return item[property];
+      }
+      };
+      this.dataSource.sortData = (data, sort) => {
+      const active = sort.active;
+      const direction = sort.direction === 'asc' ? 1 : -1;
+      return data.sort((a, b) => {
+        const valueA = this.dataSource.sortingDataAccessor(a, active);
+        const valueB = this.dataSource.sortingDataAccessor(b, active);
+        return (valueA < valueB ? -1 : 1) * direction;
+      });
+      };
+    }
   }
 
   applyFilters(event: Event) {

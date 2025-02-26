@@ -110,6 +110,7 @@ value: any;
     this.numberOfBudgetIfEdit = this.route.snapshot.params['budgetId'];
 
     if (this.numberOfBudgetIfEdit != 0 && this.numberOfBudgetIfEdit != null) {
+      this.isEditMode = true;
       this.budgetService.getBudgetById(this.numberOfBudgetIfEdit).subscribe((data: any) => {
 
         if (data.date) {
@@ -409,7 +410,7 @@ value: any;
       const budgetData = this.budgetForm.value;
   
       // Check if it's a new budget or an existing one
-      if (budgetData.budgetId === 0) {
+      if (budgetData.budgetId == 0 || budgetData.budgetId == null) {
         budgetData.companyId = this.companyId;
         this.budgetService.createBudget(budgetData).subscribe(
           (response: any) => {

@@ -2,30 +2,32 @@
 
 .invoice-box {
     max-width: 890px;
-    margin: auto;
-    padding: 10px;
+    align-items: center;
+    margin:auto;
+    padding: 5px;
     border: 0px solid #eee;
     box-shadow: 0 0 10px rgba(0, 0, 0, .15);
     font-size: 14px;
     /* line-height: 22px; */
-    font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    font-family: 'Poppins';
     color: #555;
 }
 .items {
     width: 100%;
     border-collapse: collapse;
+    font-size: 12px;
     /* margin: 20px 0; */
 }
 
 .items th {
     background-color: #f8f9fa;
-    padding: 12px 8px;
+    
     border-bottom: 2px solid #dee2e6;
     font-weight: 600;
 }
 
 .items td {
-    padding: 12px 8px;
+    
     border-bottom: 1px solid #dee2e6;
 }
 
@@ -138,3 +140,4 @@
 .invoice-box table.tabbed-totals td {
     text-align: left; /* Ensure all cells in tabbed-totals are left-aligned */
 }
+

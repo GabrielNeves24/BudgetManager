@@ -24,21 +24,19 @@ import { CompanyService } from '../../../services/company.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-data-table',
-  standalone: true,
-  imports: [CommonModule,
-    MatInputModule, 
-    MatFormFieldModule,
-     MatPaginatorModule, 
-     MatSortModule, 
-     MatTableModule,
-     MatButtonModule, 
-     MatDividerModule, 
-     MatIconModule,MatDialogModule,MatButtonModule,DatePipe,MatSelect,MatOption,ConfirmationDialogComponent
-     ],
-  templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.css'],
-  
+    selector: 'app-data-table',
+    imports: [CommonModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule, MatDialogModule, MatButtonModule, DatePipe, MatSelect, MatOption, ConfirmationDialogComponent
+    ],
+    templateUrl: './data-table.component.html',
+    styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent<T> implements OnChanges, AfterViewInit, OnInit  {
 

@@ -5,11 +5,10 @@ import { Unit } from '../../../Model/unit.model';
 import { DataTableComponent } from '../../shared/data-table/data-table.component';
 
 @Component({
-  selector: 'app-unit-list',
-  standalone: true,
-  imports: [DataTableComponent],
-  templateUrl: './unit-list.component.html',
-  styleUrl: './unit-list.component.css'
+    selector: 'app-unit-list',
+    imports: [DataTableComponent],
+    templateUrl: './unit-list.component.html',
+    styleUrl: './unit-list.component.css'
 })
 export class UnitListComponent implements OnInit {
 

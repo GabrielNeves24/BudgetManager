@@ -3,11 +3,10 @@ import { DataTableComponent } from '../../shared/data-table/data-table.component
 import { ClientService } from '../../../services/client.service';
 
 @Component({
-  selector: 'app-client-list',
-  standalone: true,
-  imports: [DataTableComponent],
-  templateUrl: './client-list.component.html',
-  styleUrl: './client-list.component.css'
+    selector: 'app-client-list',
+    imports: [DataTableComponent],
+    templateUrl: './client-list.component.html',
+    styleUrl: './client-list.component.css'
 })
 export class ClientListComponent implements OnInit {
 

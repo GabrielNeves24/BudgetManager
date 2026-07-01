@@ -1,18 +1,25 @@
 <mat-toolbar class="mat-elevation-z8">
-  <button class="buttonMenu"
-    mat-icon-button
-    *ngIf="sidenav.mode === 'over'"
-    (click)="sidenav.toggle()"
-  >
-    <mat-icon  *ngIf="!sidenav.opened"> menu </mat-icon>
-    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-  </button>
+  @if (sidenav.mode === 'over') {
+    <button class="buttonMenu"
+      mat-icon-button
+      (click)="sidenav.toggle()"
+      >
+      @if (!sidenav.opened) {
+        <mat-icon > menu </mat-icon>
+      }
+      @if (sidenav.opened) {
+        <mat-icon> close </mat-icon>
+      }
+    </button>
+  }
   {{companyName}}
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img *ngIf="imageAddress" [src]="imageAddress" alt="Company Logo" />
+    @if (imageAddress) {
+      <img [src]="imageAddress" alt="Company Logo" />
+    }
 
     <h4 class="name">{{nameUser}}</h4>
     <p class="designation">{{companyName}}</p>
@@ -22,14 +29,18 @@
       <mat-icon>dashboard</mat-icon>
       <span>Home</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/profile" *ngIf="ifUserDemo()">
-      <mat-icon>person</mat-icon>
-      <span>Perfil</span>
-    </button>
-    <button mat-button class="menu-button" (click)="goToEditCompany()" *ngIf="ifUserDemo()">
-      <mat-icon>person</mat-icon>
-      <span>Empresa</span>
-    </button>
+    @if (ifUserDemo()) {
+      <button mat-button class="menu-button" routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+      </button>
+    }
+    @if (ifUserDemo()) {
+      <button mat-button class="menu-button" (click)="goToEditCompany()">
+        <mat-icon>person</mat-icon>
+        <span>Empresa</span>
+      </button>
+    }
     <button mat-button class="menu-button" (click)="onLogout()">
       <mat-icon>exit_to_app</mat-icon>
       <span>Logout</span>
@@ -74,72 +85,74 @@
 
     <!-- Orçamentos Section -->
     <!-- <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon>request_quote</mat-icon>
-          Orçamentos
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a class="mat-list-item" mat-list-item routerLink="/budget" routerLinkActive="active-link" (click)="sidenav.close()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         <mat-icon>request_quote</mat-icon>
         Orçamentos
-      </a>
-      <a class="mat-list-item" mat-list-item routerLink="/receipt" routerLinkActive="active-link" (click)="sidenav.close()">
-        <mat-icon>receipt</mat-icon>
-        Recibos
-      </a>
-    </mat-expansion-panel> -->
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <a class="mat-list-item" mat-list-item routerLink="/budget" routerLinkActive="active-link" (click)="sidenav.close()">
+      <mat-icon>request_quote</mat-icon>
+      Orçamentos
+    </a>
+    <a class="mat-list-item" mat-list-item routerLink="/receipt" routerLinkActive="active-link" (click)="sidenav.close()">
+      <mat-icon>receipt</mat-icon>
+      Recibos
+    </a>
+  </mat-expansion-panel> -->
 
-    <!-- Clients Section -->
-    <!-- <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon>people</mat-icon>
-         <span>Clientes</span>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a class="mat-list-item" mat-list-item routerLink="/client" routerLinkActive="active-link" (click)="sidenav.close()">
-        <mat-icon>people</mat-icon>
-        Clientes
-      </a>
-      <a class="mat-list-item" mat-list-item routerLink="/budget" routerLinkActive="active-link" (click)="sidenav.close()">
-        <mat-icon>attach_money</mat-icon>
-        Pendentes
-      </a>
-    </mat-expansion-panel> -->
+  <!-- Clients Section -->
+  <!-- <mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon>people</mat-icon>
+      <span>Clientes</span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <a class="mat-list-item" mat-list-item routerLink="/client" routerLinkActive="active-link" (click)="sidenav.close()">
+    <mat-icon>people</mat-icon>
+    Clientes
+  </a>
+  <a class="mat-list-item" mat-list-item routerLink="/budget" routerLinkActive="active-link" (click)="sidenav.close()">
+    <mat-icon>attach_money</mat-icon>
+    Pendentes
+  </a>
+</mat-expansion-panel> -->
 
-    <!-- Admin Section -->
-    <mat-expansion-panel *ngIf="isAdmin">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon>admin_panel_settings</mat-icon>
-          Administração
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <a class="mat-list-item" mat-list-item routerLink="/budgetManager" routerLinkActive="active-link" (click)="sidenav.close()">
-        <mat-icon>manage_accounts</mat-icon>
-        Gestor Empresas
-      </a>
-      <a class="mat-list-item" mat-list-item routerLink="/company" routerLinkActive="active-link" (click)="sidenav.close()">
-        <mat-icon>business</mat-icon>
-        Empresa
-      </a>
-      <a  class="mat-list-item"mat-list-item routerLink="/user" routerLinkActive="active-link" (click)="sidenav.close()">
-        <mat-icon>people_alt</mat-icon>
-        Users
-      </a>
-    </mat-expansion-panel>
+<!-- Admin Section -->
+@if (isAdmin) {
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>admin_panel_settings</mat-icon>
+        Administração
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <a class="mat-list-item" mat-list-item routerLink="/budgetManager" routerLinkActive="active-link" (click)="sidenav.close()">
+      <mat-icon>manage_accounts</mat-icon>
+      Gestor Empresas
+    </a>
+    <a class="mat-list-item" mat-list-item routerLink="/company" routerLinkActive="active-link" (click)="sidenav.close()">
+      <mat-icon>business</mat-icon>
+      Empresa
+    </a>
+    <a  class="mat-list-item"mat-list-item routerLink="/user" routerLinkActive="active-link" (click)="sidenav.close()">
+      <mat-icon>people_alt</mat-icon>
+      Users
+    </a>
+  </mat-expansion-panel>
+}
 
-    <mat-divider></mat-divider>
+<mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="/help">
-      <mat-icon>help</mat-icon>
-      <span>Help</span>
-    </button>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div >
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
+<button mat-button class="menu-button" routerLink="/help">
+  <mat-icon>help</mat-icon>
+  <span>Help</span>
+</button>
+</mat-sidenav>
+<mat-sidenav-content>
+  <div >
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-content>
 </mat-sidenav-container>

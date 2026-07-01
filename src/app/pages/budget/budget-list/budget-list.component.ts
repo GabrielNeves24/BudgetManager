@@ -3,11 +3,10 @@ import { DataTableComponent } from '../../shared/data-table/data-table.component
 import { BudgetService } from '../../../services/budget.service';
 import { ClientService } from '../../../services/client.service';
 @Component({
-  selector: 'app-budget-list',
-  standalone: true,
-  imports: [DataTableComponent],
-  templateUrl: './budget-list.component.html',
-  styleUrl: './budget-list.component.css'
+    selector: 'app-budget-list',
+    imports: [DataTableComponent],
+    templateUrl: './budget-list.component.html',
+    styleUrl: './budget-list.component.css'
 })
 export class BudgetListComponent {
 

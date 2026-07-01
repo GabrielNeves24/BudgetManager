@@ -5,7 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,16 +15,10 @@ import { BudgetmanagerService } from '../../../services/admin/budgetmanager.serv
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-budget-manager-gestao-create',
-  standalone: true,
-  imports: [MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    ReactiveFormsModule,CommonModule,MatSlideToggleModule],
-  templateUrl: './budget-manager-gestao-create.component.html',
-  styleUrl: './budget-manager-gestao-create.component.css'
+    selector: 'app-budget-manager-gestao-create',
+    imports: [MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatCardModule, ReactiveFormsModule, MatSlideToggleModule],
+    templateUrl: './budget-manager-gestao-create.component.html',
+    styleUrl: './budget-manager-gestao-create.component.css'
 })
 export class BudgetManagerGestaoCreateComponent implements OnInit {
   constructor(

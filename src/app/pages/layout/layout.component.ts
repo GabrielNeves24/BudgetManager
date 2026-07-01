@@ -6,7 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-import { CommonModule } from '@angular/common';
+
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -14,9 +14,8 @@ import { CompanyService } from '../../services/company.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-layout',
-  standalone: true,
-  imports: [
+    selector: 'app-layout',
+    imports: [
     RouterLink,
     RouterOutlet,
     MatSidenavModule,
@@ -25,12 +24,11 @@ import { AuthService } from '../../services/auth.service';
     MatButtonModule,
     MatListModule,
     MatMenuModule,
-    CommonModule,
     MatSlideToggleModule,
     MatExpansionModule
-  ],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+],
+    templateUrl: './layout.component.html',
+    styleUrl: './layout.component.css'
 })
 export class LayoutComponent implements OnInit {
   title = 'Plataforma Orçamentos';

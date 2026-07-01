@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 
 @Component({
-  selector: 'app-company-list',
-  standalone: true,
-  imports: [DataTableComponent],
-  templateUrl: './company-list.component.html',
-  styleUrl: './company-list.component.css'
+    selector: 'app-company-list',
+    imports: [DataTableComponent],
+    templateUrl: './company-list.component.html',
+    styleUrl: './company-list.component.css'
 })
 export class CompanyListComponent implements OnInit {
 

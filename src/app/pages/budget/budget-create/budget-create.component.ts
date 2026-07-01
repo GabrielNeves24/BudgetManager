@@ -28,25 +28,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,DragDropModule   } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-budget-create',
-  standalone: true,
-  imports: [
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    CommonModule,
-    MatSlideToggleModule,
-    MatTableModule,
-    MatIcon,
-    MatDatepicker,
-    MatDatepickerModule,
-    MatCheckboxModule,FormsModule,BudgetDetailModalComponent,MatDialogModule,ConfirmationDialogComponent,CdkDropList,DragDropModule 
-  ],
-  templateUrl: './budget-create.component.html',
-  styleUrl: './budget-create.component.css',
+    selector: 'app-budget-create',
+    imports: [
+        MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        CommonModule,
+        MatSlideToggleModule,
+        MatTableModule,
+        MatIcon,
+        MatDatepicker,
+        MatDatepickerModule,
+        MatCheckboxModule, FormsModule, BudgetDetailModalComponent, MatDialogModule, ConfirmationDialogComponent, CdkDropList, DragDropModule
+    ],
+    templateUrl: './budget-create.component.html',
+    styleUrl: './budget-create.component.css'
 })
 export class BudgetCreateComponent implements OnInit {
 value: any;

@@ -8,13 +8,13 @@
         Voltar
       </button>
       <!-- <button mat-stroked-button (click)="generatePdf()" class="btn btn-secondary">
-        Imprimir
-      </button> -->
-      <button mat-stroked-button (click)="generatePdf22()" class="btn btn-secondary">
-        Imprimir
-      </button> 
-    </div>
+      Imprimir
+    </button> -->
+    <button mat-stroked-button (click)="generatePdf22()" class="btn btn-secondary">
+      Imprimir
+    </button>
   </div>
+</div>
 </div>
 
 
@@ -23,7 +23,7 @@
     <tr class="top_rw">
       <td colspan="2">
         <h2 style="margin-bottom: 0px;">Orçamento
-          
+
         </h2>
       </td>
       <td style="text-align:right; font-size: 20px;">
@@ -44,9 +44,11 @@
               IBAN: {{ CompanyInfo.iban }}
             </td>
             <td style="text-align:right;">
-              <img *ngIf="imageAddress" [src]="imageAddress" alt="Company Logo" style="width:100px; max-width:300px;">
+              @if (imageAddress) {
+                <img [src]="imageAddress" alt="Company Logo" style="width:100px; max-width:300px;">
+              }
             </td>
-           
+
           </tr>
         </table>
       </td>
@@ -76,44 +78,45 @@
             <tr class="heading">
               @if(existValuesWithDiscont){
                 <th style="width:40%; text-align:left;">Artigo</th>
-              }@else{
+                }@else{
                 <th style="width:50%; text-align:left;">Artigo</th>
               }
               <th style="width:7.5%; text-align:center;">QTD.</th>
               <th style="width:5%; text-align:center;">Unidade</th>
               <th style="width:15%; text-align:right;">Preço S/Iva</th>
               <th style="width:5%; text-align:right;">IVA</th>
-              
+
               @if(existValuesWithDiscont){
                 <th style="width:10%; text-align:right;">Desconto</th>
                 <th style="width:10%; text-align:right;">Total</th>
-              }@else {
+                }@else {
                 <th style="width:10%; text-align:right;">Total</th>
               }
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of BudgetDetails" class="item">
-              @if(existValuesWithDiscont){
-                <td style="white-space: pre-wrap; width:35%;">{{ item.itemDescription }}</td>
-              }@else{
-                <td style="white-space: pre-wrap; width:45%;">{{ item.itemDescription }}</td>
-              }
-              <td style="width:7.5%; text-align:center;">{{ item.quantity }}</td>
-              <td style="width:5%; text-align:center;">{{ getSymbolUniId(item.unitId) }}</td>
-              <td style="width:12.5%; text-align:right;">{{ item.price }} €</td>
-              <td style="width:10%; text-align:right;">{{ item.iva }} %</td>
-              
-              @if(existValuesWithDiscont){
-                <td style="width:5%; text-align:right;">{{ item.discount }} %</td>
-                <td style="width:25%; text-align:right;">{{ item.total }} €</td>
-              }@else{
-                <td style="width:25%; text-align:right;">{{ item.total }} €</td>
-              }
-            </tr>
+            @for (item of BudgetDetails; track item) {
+              <tr class="item">
+                @if(existValuesWithDiscont){
+                  <td style="white-space: pre-wrap; width:35%;">{{ item.itemDescription }}</td>
+                  }@else{
+                  <td style="white-space: pre-wrap; width:45%;">{{ item.itemDescription }}</td>
+                }
+                <td style="width:7.5%; text-align:center;">{{ item.quantity }}</td>
+                <td style="width:5%; text-align:center;">{{ getSymbolUniId(item.unitId) }}</td>
+                <td style="width:12.5%; text-align:right;">{{ item.price }} €</td>
+                <td style="width:10%; text-align:right;">{{ item.iva }} %</td>
+                @if(existValuesWithDiscont){
+                  <td style="width:5%; text-align:right;">{{ item.discount }} %</td>
+                  <td style="width:25%; text-align:right;">{{ item.total }} €</td>
+                  }@else{
+                  <td style="width:25%; text-align:right;">{{ item.total }} €</td>
+                }
+              </tr>
+            }
           </tbody>
         </table>
-        
+
       </td>
     </tr>
     <tr class="total">
@@ -122,23 +125,27 @@
           <!-- Observations Section -->
           <tr>
             <td colspan="2" style="text-align:left;font-size: 12px;">
-              <b *ngIf="seExist2()">Observações:</b>
+              @if (seExist2()) {
+                <b>Observações:</b>
+              }
               <div style="white-space: pre-wrap;">
                 {{ Budget.obs }}
               </div>
             </td>
           </tr>
-          
+
           <!-- Declaration Section -->
           <tr>
             <td colspan="2" style="text-align:left;font-size: 12px;">
-              <b *ngIf="seExist()">Declaração:</b>
+              @if (seExist()) {
+                <b>Declaração:</b>
+              }
               <div style="white-space: pre-wrap;">
                 {{ CompanyInfo.declaration }}
               </div>
             </td>
           </tr>
-    
+
           <!-- Totals Section -->
           <tr>
             <td style="width: 10%;"></td>
@@ -159,7 +166,7 @@
               </table>
             </td>
           </tr>
-    
+
           <!-- Signature Section -->
           <tr>
             <td style="width: 70%;"></td>

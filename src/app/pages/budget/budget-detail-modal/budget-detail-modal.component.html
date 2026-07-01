@@ -3,78 +3,94 @@
   <form [formGroup]="budgetDetailForm">
     <mat-form-field appearance="fill">
       <mat-label>Artigo</mat-label>
-        <input type="text"
-               matInput
-               placeholder="Selecionar Artigo"
-               [formControl]="myControl"
-               [matAutocomplete]="auto"
-               (focus)="myControl.setValue('')"> <!-- Clear input on focus -->
+      <input type="text"
+        matInput
+        placeholder="Selecionar Artigo"
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        (focus)="myControl.setValue('')"> <!-- Clear input on focus -->
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onChangeProduct($event.option.value)" autoActiveFirstOption="true">
-          <mat-option *ngFor="let item of filteredItems | async" [value]="item">
-            {{ item.name }}
-          </mat-option>
+          @for (item of filteredItems | async; track item) {
+            <mat-option [value]="item">
+              {{ item.name }}
+            </mat-option>
+          }
         </mat-autocomplete>
-        <mat-error *ngIf="budgetDetailForm.controls['itemId'].hasError('required')">
-          Item ID é obrigatório
-        </mat-error>
+        @if (budgetDetailForm.controls['itemId'].hasError('required')) {
+          <mat-error>
+            Item ID é obrigatório
+          </mat-error>
+        }
       </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Descrição</mat-label>
-      <textarea matInput formControlName="itemDescription" placeholder="Descrição" (input)="getTotal()" (keydown.enter)="$event.stopPropagation()"></textarea>
-      <mat-error *ngIf="budgetDetailForm.controls['itemDescription'].hasError('required')">
-        Descrição é obrigatória
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="itemDescription" placeholder="Descrição" (input)="getTotal()" (keydown.enter)="$event.stopPropagation()"></textarea>
+        @if (budgetDetailForm.controls['itemDescription'].hasError('required')) {
+          <mat-error>
+            Descrição é obrigatória
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Quantidade</mat-label>
-      <input matInput formControlName="quantity" placeholder="Quantidade" (input)="getTotal()">
-      <mat-error *ngIf="budgetDetailForm.controls['quantity'].hasError('required')">
-        Quantidade é obrigatória
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Quantidade</mat-label>
+        <input matInput formControlName="quantity" placeholder="Quantidade" (input)="getTotal()">
+        @if (budgetDetailForm.controls['quantity'].hasError('required')) {
+          <mat-error>
+            Quantidade é obrigatória
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Preço</mat-label>
-      <input matInput formControlName="price" placeholder="Preço" (input)="getTotal()">
-      <mat-error *ngIf="budgetDetailForm.controls['price'].hasError('required')">
-        Preço é obrigatório
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Preço</mat-label>
+        <input matInput formControlName="price" placeholder="Preço" (input)="getTotal()">
+        @if (budgetDetailForm.controls['price'].hasError('required')) {
+          <mat-error>
+            Preço é obrigatório
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Unidade</mat-label>
-      <mat-select formControlName="unitId">
-        <mat-option *ngFor="let unit of data.unitList" [value]="unit.unitId">
-          {{ unit.symbol }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="budgetDetailForm.controls['unitId'].hasError('required')">
-        Unidade é obrigatória
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Unidade</mat-label>
+        <mat-select formControlName="unitId">
+          @for (unit of data.unitList; track unit) {
+            <mat-option [value]="unit.unitId">
+              {{ unit.symbol }}
+            </mat-option>
+          }
+        </mat-select>
+        @if (budgetDetailForm.controls['unitId'].hasError('required')) {
+          <mat-error>
+            Unidade é obrigatória
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>IVA</mat-label>
-      <input matInput formControlName="iva" placeholder="IVA" (input)="getTotal()">
-      <mat-error *ngIf="budgetDetailForm.controls['iva'].hasError('required')">
-        IVA é obrigatório
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>IVA</mat-label>
+        <input matInput formControlName="iva" placeholder="IVA" (input)="getTotal()">
+        @if (budgetDetailForm.controls['iva'].hasError('required')) {
+          <mat-error>
+            IVA é obrigatório
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Desconto</mat-label>
-      <input matInput formControlName="discount" placeholder="Desconto" (input)="calcularDesconto()">
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Desconto</mat-label>
+        <input matInput formControlName="discount" placeholder="Desconto" (input)="calcularDesconto()">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Total</mat-label>
-      <input matInput formControlName="total" placeholder="Total">
-    </mat-form-field>
-  </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button color="primary" (click)="onSave()">Salvar</button>
-</div>
+      <mat-form-field appearance="fill">
+        <mat-label>Total</mat-label>
+        <input matInput formControlName="total" placeholder="Total">
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-button color="primary" (click)="onSave()">Salvar</button>
+  </div>

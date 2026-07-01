@@ -4,37 +4,41 @@
 </hgroup>
 <form>
   <div class="group">
-    <input 
-      type="text" 
-      name="username" 
-      [(ngModel)]="loginObj.username" 
-      (focus)="onFocus($event)" 
-      (blur)="onBlur($event)" 
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="loginObj.username"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
       [ngClass]="{'used': loginObj.username}">
-    <span class="highlight"></span><span class="bar"></span>
-    <label>Email</label>
-  </div>
-  <div class="group">
-    <input 
-      type="password" 
-      name="password" 
-      [(ngModel)]="loginObj.password" 
-      (keydown.enter)="onLogin()" 
-      (focus)="onFocus($event)" 
-      (blur)="onBlur($event)" 
-      [ngClass]="{'used': loginObj.password}">
-    <span class="highlight"></span><span class="bar"></span>
-    <label>Password</label>
-  </div>
-  <button type="button" class="button buttonBlue" *ngIf="!isLoading" (click)="onLogin()">Login
-    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-  </button>
-  <div class="align-middle" *ngIf="isLoading">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </div>
-</form>
+      <span class="highlight"></span><span class="bar"></span>
+      <label>Email</label>
+    </div>
+    <div class="group">
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="loginObj.password"
+        (keydown.enter)="onLogin()"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+        [ngClass]="{'used': loginObj.password}">
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Password</label>
+      </div>
+      @if (!isLoading) {
+        <button type="button" class="button buttonBlue" (click)="onLogin()">Login
+          <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+        </button>
+      }
+      @if (isLoading) {
+        <div class="align-middle">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      }
+    </form>
 
-<footer>
-  <!-- <a href="http://www.polymer-project.org/" target="_blank"><img src="https://www.polymer-project.org/images/logos/p-logo.svg"></a> -->
-  <!-- <p>You Gotta Love <a href="http://www.polymer-project.org/" target="_blank">Google</a></p> -->
-</footer>
+    <footer>
+      <!-- <a href="http://www.polymer-project.org/" target="_blank"><img src="https://www.polymer-project.org/images/logos/p-logo.svg"></a> -->
+      <!-- <p>You Gotta Love <a href="http://www.polymer-project.org/" target="_blank">Google</a></p> -->
+    </footer>

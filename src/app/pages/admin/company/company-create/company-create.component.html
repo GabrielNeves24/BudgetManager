@@ -1,122 +1,130 @@
 <form [formGroup]="companyForm" novalidate (ngSubmit)="onSubmit()">
-    <mat-card class="company-card">
-      <mat-card-header>
-        <mat-card-title>
-          <h1>{{ isEditMode ? 'Editar Empresa' : 'Criar Empresa' }}</h1>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="row">
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Nome</mat-label>
-              <input matInput placeholder="Nome" formControlName="name" />
-              <mat-error *ngIf="companyForm.controls['name'].hasError('required')">
+  <mat-card class="company-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>{{ isEditMode ? 'Editar Empresa' : 'Criar Empresa' }}</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Nome" formControlName="name" />
+            @if (companyForm.controls['name'].hasError('required')) {
+              <mat-error>
                 Nome <strong>é obrigatório</strong>
               </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Telemovel</mat-label>
-              <input matInput type="tel" placeholder="Telefone" formControlName="phone" />
-              <mat-error *ngIf="companyForm.controls['phone'].hasError('required')">
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Telemovel</mat-label>
+            <input matInput type="tel" placeholder="Telefone" formControlName="phone" />
+            @if (companyForm.controls['phone'].hasError('required')) {
+              <mat-error>
                 Telefone <strong>é obrigatório</strong>
               </mat-error>
-            </mat-form-field>
-          </div>
+            }
+          </mat-form-field>
         </div>
-  
-        <div class="row">
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Endereço</mat-label>
-              <input matInput placeholder="Endereço" formControlName="address" />
-            </mat-form-field>
-          </div>
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Endereço Adicional</mat-label>
-              <input matInput placeholder="Complemento de Endereço" formControlName="address2" />
-            </mat-form-field>
-          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Endereço</mat-label>
+            <input matInput placeholder="Endereço" formControlName="address" />
+          </mat-form-field>
         </div>
-  
-        <div class="row">
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Código Postal</mat-label>
-              <input matInput placeholder="Código Postal" formControlName="postalCode" />
-            </mat-form-field>
-          </div>
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Cidade</mat-label>
-              <input matInput placeholder="Cidade" formControlName="city" />
-            </mat-form-field>
-          </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Endereço Adicional</mat-label>
+            <input matInput placeholder="Complemento de Endereço" formControlName="address2" />
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <mat-form-field class="full-width">
-              <mat-label>IBAN</mat-label>
-              <input matInput placeholder="IBAN" formControlName="iban" />
-            </mat-form-field>
-          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Código Postal</mat-label>
+            <input matInput placeholder="Código Postal" formControlName="postalCode" />
+          </mat-form-field>
         </div>
-  
-        <div class="row">
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Website</mat-label>
-              <input matInput placeholder="Website" formControlName="website" />
-            </mat-form-field>
-          </div>
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" placeholder="Email" formControlName="email" />
-              <mat-error *ngIf="companyForm.controls['email'].hasError('email')">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Cidade</mat-label>
+            <input matInput placeholder="Cidade" formControlName="city" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field class="full-width">
+            <mat-label>IBAN</mat-label>
+            <input matInput placeholder="IBAN" formControlName="iban" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Website</mat-label>
+            <input matInput placeholder="Website" formControlName="website" />
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Email" formControlName="email" />
+            @if (companyForm.controls['email'].hasError('email')) {
+              <mat-error>
                 Email inválido
               </mat-error>
-            </mat-form-field>
-          </div>
+            }
+          </mat-form-field>
         </div>
-  
-        <div class="row">
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>NIF</mat-label>
-              <input matInput type="text" placeholder="NIF" formControlName="nif" />
-              <mat-error *ngIf="companyForm.controls['nif'].hasError('required')">
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>NIF</mat-label>
+            <input matInput type="text" placeholder="NIF" formControlName="nif" />
+            @if (companyForm.controls['nif'].hasError('required')) {
+              <mat-error>
                 NIF <strong>é obrigatório</strong>
               </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-6">
-            <mat-form-field class="full-width">
-              <mat-label>Declaração</mat-label>
-              <textarea matInput placeholder="Declaração" formControlName="declaration"></textarea>
-            </mat-form-field>
-          </div>
+            }
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <mat-slide-toggle formControlName="active">Ativo?</mat-slide-toggle>
-          </div>
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Declaração</mat-label>
+            <textarea matInput placeholder="Declaração" formControlName="declaration"></textarea>
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <!-- Button to trigger file input for logo upload -->
-            <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
-              {{ isEditMode ? 'Editar Logo' : 'Adicionar Logo' }}
-            </button>
-            <input
-              #fileInput
-              type="file"
-              (change)="onLogoSelected($event)"
-              accept="image/*"
-              style="display: none;"
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <mat-slide-toggle formControlName="active">Ativo?</mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <!-- Button to trigger file input for logo upload -->
+          <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+            {{ isEditMode ? 'Editar Logo' : 'Adicionar Logo' }}
+          </button>
+          <input
+            #fileInput
+            type="file"
+            (change)="onLogoSelected($event)"
+            accept="image/*"
+            style="display: none;"
             />
           </div>
         </div>
@@ -131,4 +139,3 @@
       </mat-card-actions>
     </mat-card>
   </form>
-  

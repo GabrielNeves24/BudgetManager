@@ -14,16 +14,15 @@ import { AuthService } from '../../../../services/auth.service';
 
 
 @Component({
-  selector: 'app-company-create',
-  standalone: true,
-  imports: [MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    ReactiveFormsModule,CommonModule,MatSlideToggleModule],
-  templateUrl: './company-create.component.html',
-  styleUrl: './company-create.component.css'
+    selector: 'app-company-create',
+    imports: [MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatCardModule,
+        ReactiveFormsModule, CommonModule, MatSlideToggleModule],
+    templateUrl: './company-create.component.html',
+    styleUrl: './company-create.component.css'
 })
 export class CompanyCreateComponent {
   constructor(

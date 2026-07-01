@@ -12,16 +12,15 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatCard } from '@angular/material/card';
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,MatCard,
-    ReactiveFormsModule,CommonModule,MatSlideToggleModule],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+    selector: 'app-profile',
+    imports: [MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatCardModule, MatCard,
+        ReactiveFormsModule, CommonModule, MatSlideToggleModule],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
   constructor(

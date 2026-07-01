@@ -13,16 +13,15 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @Component({
-  selector: 'app-unit-create',
-  standalone: true,
-  imports: [MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    ReactiveFormsModule,CommonModule,MatSlideToggleModule],
-  templateUrl: './unit-create.component.html',
-  styleUrl: './unit-create.component.css'
+    selector: 'app-unit-create',
+    imports: [MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatCardModule,
+        ReactiveFormsModule, CommonModule, MatSlideToggleModule],
+    templateUrl: './unit-create.component.html',
+    styleUrl: './unit-create.component.css'
 })
 export class UnitCreateComponent {
 

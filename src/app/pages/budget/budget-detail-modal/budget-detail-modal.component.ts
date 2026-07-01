@@ -13,19 +13,18 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @Component({
-  selector: 'app-budget-detail-modal',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatDialogModule,MatAutocompleteModule
-  ],
-  templateUrl: './budget-detail-modal.component.html',
-  styleUrls: ['./budget-detail-modal.component.css']
+    selector: 'app-budget-detail-modal',
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatDialogModule, MatAutocompleteModule
+    ],
+    templateUrl: './budget-detail-modal.component.html',
+    styleUrls: ['./budget-detail-modal.component.css']
 })
 export class BudgetDetailModalComponent implements OnInit {
   budgetDetailForm: FormGroup;

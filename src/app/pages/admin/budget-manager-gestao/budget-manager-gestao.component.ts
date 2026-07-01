@@ -8,11 +8,10 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-budget-manager-gestao',
-  standalone: true,
-  imports: [DataTableComponent,DatePipe],
-  templateUrl: './budget-manager-gestao.component.html',
-  styleUrl: './budget-manager-gestao.component.css'
+    selector: 'app-budget-manager-gestao',
+    imports: [DataTableComponent, DatePipe],
+    templateUrl: './budget-manager-gestao.component.html',
+    styleUrl: './budget-manager-gestao.component.css'
 })
 export class BudgetManagerGestaoComponent implements OnInit {
 

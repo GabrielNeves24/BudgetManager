@@ -15,22 +15,21 @@ import { ClientService } from '../../services/client.service';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    CommonModule,  // Use CommonModule instead of BrowserModule
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatIconModule,
-    MatTableModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatListModule,
-    BaseChartDirective
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    imports: [
+        CommonModule, // Use CommonModule instead of BrowserModule
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatCardModule,
+        MatIconModule,
+        MatTableModule,
+        MatButtonModule,
+        MatChipsModule,
+        MatListModule,
+        BaseChartDirective
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 

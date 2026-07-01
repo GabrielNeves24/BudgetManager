@@ -14,23 +14,22 @@ import { CompanyService } from '../../services/company.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-layout',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatListModule,
-    MatMenuModule,
-    CommonModule,
-    MatSlideToggleModule,
-    MatExpansionModule
-  ],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+    selector: 'app-layout',
+    imports: [
+        RouterLink,
+        RouterOutlet,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatListModule,
+        MatMenuModule,
+        CommonModule,
+        MatSlideToggleModule,
+        MatExpansionModule
+    ],
+    templateUrl: './layout.component.html',
+    styleUrl: './layout.component.css'
 })
 export class LayoutComponent implements OnInit {
   title = 'Plataforma Orçamentos';

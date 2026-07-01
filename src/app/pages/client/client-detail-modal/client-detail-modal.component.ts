@@ -11,17 +11,16 @@ import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
-  selector: 'app-client-detail-modal',
-  standalone: true,
-  imports: [MatTabsModule,
-    CommonModule,
-    MatDialogModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-  MatButtonModule],
-  templateUrl: './client-detail-modal.component.html',
-  styleUrl: './client-detail-modal.component.css'
+    selector: 'app-client-detail-modal',
+    imports: [MatTabsModule,
+        CommonModule,
+        MatDialogModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatButtonModule],
+    templateUrl: './client-detail-modal.component.html',
+    styleUrl: './client-detail-modal.component.css'
 })
 export class ClientDetailModalComponent implements OnInit {
   @Input() data: any = {};

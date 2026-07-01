@@ -19,11 +19,10 @@ import { AuthService } from '../../../services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import html2pdf from 'html2pdf.js';
 @Component({
-  selector: 'app-budget-pdf',
-  standalone: true,
-  imports: [DatePipe, CommonModule, MatIcon, MatButtonModule],
-  templateUrl: './budget-pdf.component.html',
-  styleUrls: ['./budget-pdf.component.css']
+    selector: 'app-budget-pdf',
+    imports: [DatePipe, CommonModule, MatIcon, MatButtonModule],
+    templateUrl: './budget-pdf.component.html',
+    styleUrls: ['./budget-pdf.component.css']
 })
 export class BudgetPdfComponent implements OnInit {
   // Existing properties

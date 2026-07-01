@@ -12,16 +12,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from '../../../services/client.service';
 
 @Component({
-  selector: 'app-client-create',
-  standalone: true,
-  imports: [MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    ReactiveFormsModule,CommonModule,MatSlideToggleModule],
-  templateUrl: './client-create.component.html',
-  styleUrl: './client-create.component.css'
+    selector: 'app-client-create',
+    imports: [MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatCardModule,
+        ReactiveFormsModule, CommonModule, MatSlideToggleModule],
+    templateUrl: './client-create.component.html',
+    styleUrl: './client-create.component.css'
 })
 export class ClientCreateComponent implements OnInit {
   constructor(

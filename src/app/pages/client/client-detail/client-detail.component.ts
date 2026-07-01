@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DataTableComponent } from '../../shared/data-table/data-table.component';
 @Component({
-  selector: 'app-client-detail',
-  standalone: true,
-  imports: [DatePipe,CommonModule,DataTableComponent],
-  templateUrl: './client-detail.component.html',
-  styleUrl: './client-detail.component.css'
+    selector: 'app-client-detail',
+    imports: [DatePipe, CommonModule, DataTableComponent],
+    templateUrl: './client-detail.component.html',
+    styleUrl: './client-detail.component.css'
 })
 export class ClientDetailComponent implements OnInit {
   clientId!: number;

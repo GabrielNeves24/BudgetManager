@@ -5,11 +5,10 @@ import { DataTableComponent } from '../../../shared/data-table/data-table.compon
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 @Component({
-  selector: 'app-user-list',
-  standalone: true,
-  imports: [DataTableComponent],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+    selector: 'app-user-list',
+    imports: [DataTableComponent],
+    templateUrl: './user-list.component.html',
+    styleUrl: './user-list.component.css'
 })
 export class UserListComponent implements OnInit {
 

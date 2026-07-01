@@ -6,7 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-import { CommonModule } from '@angular/common';
+
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -16,18 +16,17 @@ import { AuthService } from '../../services/auth.service';
 @Component({
     selector: 'app-layout',
     imports: [
-        RouterLink,
-        RouterOutlet,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatListModule,
-        MatMenuModule,
-        CommonModule,
-        MatSlideToggleModule,
-        MatExpansionModule
-    ],
+    RouterLink,
+    RouterOutlet,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatListModule,
+    MatMenuModule,
+    MatSlideToggleModule,
+    MatExpansionModule
+],
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.css'
 })

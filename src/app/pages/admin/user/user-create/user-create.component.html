@@ -1,73 +1,82 @@
 <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
-    <mat-card class="company-card">
-      <mat-card-header>
-        <mat-card-title>
-          <h1>{{ isEditMode ? 'Editar User' : 'Criar User' }}</h1>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="row">
-          <div class="col-6">
-            <mat-form-field class="full-width">
-                <mat-label>Nome</mat-label>
-                <input matInput placeholder="Nome" formControlName="username" />
-                <mat-error *ngIf="userForm.controls['username'].hasError('required')">
+  <mat-card class="company-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>{{ isEditMode ? 'Editar User' : 'Criar User' }}</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Nome" formControlName="username" />
+            @if (userForm.controls['username'].hasError('required')) {
+              <mat-error>
                 Nome <strong>é obrigatório</strong>
               </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-6">
-            <mat-form-field class="full-width" *ngIf="!isEditMode">
-                <mat-label>Password</mat-label>
-              <input matInput type="password" placeholder="Password" formControlName="password" />
-              <mat-error *ngIf="userForm.controls['username'].hasError('required')">
-                Password <strong>é obrigatório</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
+            }
+          </mat-form-field>
         </div>
-  
-        <div class="row">
-          <div class="col-6">
+        <div class="col-6">
+          @if (!isEditMode) {
             <mat-form-field class="full-width">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" placeholder="Email" formControlName="email" />
-              <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" placeholder="Password" formControlName="password" />
+              @if (userForm.controls['username'].hasError('required')) {
+                <mat-error>
+                  Password <strong>é obrigatório</strong>
+                </mat-error>
+              }
+            </mat-form-field>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Email" formControlName="email" />
+            @if (userForm.controls['email'].hasError('required')) {
+              <mat-error>
                 Email <strong>é obrigatório</strong>
               </mat-error>
-            </mat-form-field>
-          </div>
-          
-          <div class="col-6">
-            <mat-form-field class="full-width">
-             <mat-label>Nivel</mat-label>
-              <mat-select  placeholder="Empresa" formControlName="role">
-                <mat-option value="A">Admin</mat-option>
-                <mat-option value="U">User</mat-option>
-                <mat-option value="D">Demo</mat-option>
-              </mat-select>
-              <mat-error *ngIf="userForm.controls['role'].hasError('required')">
-                  Nivel<strong>é obrigatório</strong>
-                </mat-error>
-            </mat-form-field>
-          </div>
+            }
+          </mat-form-field>
         </div>
-        <div class="row">
-          <div class="col">
-              <mat-label>Ativo</mat-label>
-              <mat-slide-toggle formControlName="active" placeholder="Ativo?" >
-              </mat-slide-toggle>
-          </div>
+
+        <div class="col-6">
+          <mat-form-field class="full-width">
+            <mat-label>Nivel</mat-label>
+            <mat-select  placeholder="Empresa" formControlName="role">
+              <mat-option value="A">Admin</mat-option>
+              <mat-option value="U">User</mat-option>
+              <mat-option value="D">Demo</mat-option>
+            </mat-select>
+            @if (userForm.controls['role'].hasError('required')) {
+              <mat-error>
+                Nivel<strong>é obrigatório</strong>
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
       </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">
-          {{ isEditMode ? 'Atualizar' : 'Gravar' }}
-        </button>
-        <button mat-raised-button color="accent" type="button" (click)="onCancel()">
-          Cancelar
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
-  
+      <div class="row">
+        <div class="col">
+          <mat-label>Ativo</mat-label>
+          <mat-slide-toggle formControlName="active" placeholder="Ativo?" >
+          </mat-slide-toggle>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">
+        {{ isEditMode ? 'Atualizar' : 'Gravar' }}
+      </button>
+      <button mat-raised-button color="accent" type="button" (click)="onCancel()">
+        Cancelar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

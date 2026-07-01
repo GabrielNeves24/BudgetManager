@@ -1,44 +1,52 @@
 <form [formGroup]="budgetForm" novalidate>
   <!-- <input matInput formControlName="someField" (keydown.enter)="$event.preventDefault()" hidden> -->
-  
+
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>
         <h1>{{ isEditMode ? 'Editar Orçamento' : 'Criar Orçamento' }}</h1>
       </mat-card-title>
     </mat-card-header>
-    
+
     <mat-card-content>
       <div class="row">
         <div class="col-4">
           <mat-form-field class="full-width">
             <mat-label>Cliente</mat-label>
             <mat-select placeholder="Cliente" formControlName="clientId" (selectionChange)="preSelectDate()">
-              <mat-option *ngFor="let client of clientList" [value]="client.clientId">
-                {{ client.name }}
-              </mat-option>
+              @for (client of clientList; track client) {
+                <mat-option [value]="client.clientId">
+                  {{ client.name }}
+                </mat-option>
+              }
             </mat-select>
-            <mat-error *ngIf="budgetForm.controls['clientId'].hasError('required')">
-              Cliente é <strong>obrigatório</strong>
-            </mat-error>
+            @if (budgetForm.controls['clientId'].hasError('required')) {
+              <mat-error>
+                Cliente é <strong>obrigatório</strong>
+              </mat-error>
+            }
           </mat-form-field>
         </div>
         <div class="col-4">
           <mat-form-field class="full-width">
             <mat-label>Data</mat-label>
             <input matInput type="date" placeholder="Data" formControlName="date">
-            <mat-error *ngIf="budgetForm.controls['date'].hasError('required')">
-              Data <strong>é obrigatória</strong>
-            </mat-error>
+            @if (budgetForm.controls['date'].hasError('required')) {
+              <mat-error>
+                Data <strong>é obrigatória</strong>
+              </mat-error>
+            }
           </mat-form-field>
         </div>
         <div class="col-4">
           <mat-form-field class="full-width">
             <mat-label>Origem</mat-label>
             <input matInput type="text" placeholder="Origem" formControlName="origin">
-            <mat-error *ngIf="budgetForm.controls['origin'].hasError('required')">
-              Origem <strong>é obrigatória</strong>
-            </mat-error>
+            @if (budgetForm.controls['origin'].hasError('required')) {
+              <mat-error>
+                Origem <strong>é obrigatória</strong>
+              </mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -47,8 +55,8 @@
           <p>
             <mat-form-field class="full-width">
               <mat-label>Observações</mat-label>
-              <textarea matInput placeholder="Observações" formControlName="obs" 
-              (keydown.enter)="$event.stopPropagation()"
+              <textarea matInput placeholder="Observações" formControlName="obs"
+                (keydown.enter)="$event.stopPropagation()"
               ></textarea>
             </mat-form-field>
           </p>
@@ -61,11 +69,13 @@
               <mat-option value="Adjudicado">Adjudicado</mat-option>
               <mat-option value="Rejeitado">Rejeitado</mat-option>
             </mat-select>
-            <mat-error *ngIf="budgetForm.controls['state'].hasError('required')">
-              Estado é <strong>obrigatório</strong>
-            </mat-error>
+            @if (budgetForm.controls['state'].hasError('required')) {
+              <mat-error>
+                Estado é <strong>obrigatório</strong>
+              </mat-error>
+            }
           </mat-form-field>
-         
+
         </div>
       </div>
 
@@ -147,14 +157,16 @@
         <mat-form-field class="total-field">
           <mat-label>Total</mat-label>
           <input matInput placeholder="Total Com IVA" [value]="totalWithIva | currency: 'EUR'" (change)="onManualTotalChange($event.target)" formControlName="totalWithIva">
-          <mat-error *ngIf="budgetForm.controls['totalWithIva'].hasError('required')">
-            Total é <strong>obrigatório</strong>
-          </mat-error>
+          @if (budgetForm.controls['totalWithIva'].hasError('required')) {
+            <mat-error>
+              Total é <strong>obrigatório</strong>
+            </mat-error>
+          }
         </mat-form-field>
       </div>
 
     </mat-card-content>
-    
+
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">
         <mat-icon>save</mat-icon>

@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit,ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -12,13 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
     selector: 'app-client-detail-modal',
-    imports: [MatTabsModule,
-        CommonModule,
-        MatDialogModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatIconModule,
-        MatButtonModule],
+    imports: [MatTabsModule, MatDialogModule, MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule],
     templateUrl: './client-detail-modal.component.html',
     styleUrl: './client-detail-modal.component.css'
 })

@@ -7,7 +7,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute  } from  '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CompanyService } from '../../../../services/company.service';
 import { AuthService } from '../../../../services/auth.service';
@@ -15,12 +15,7 @@ import { AuthService } from '../../../../services/auth.service';
 
 @Component({
     selector: 'app-company-create',
-    imports: [MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatCardModule,
-        ReactiveFormsModule, CommonModule, MatSlideToggleModule],
+    imports: [MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatCardModule, ReactiveFormsModule, MatSlideToggleModule],
     templateUrl: './company-create.component.html',
     styleUrl: './company-create.component.css'
 })

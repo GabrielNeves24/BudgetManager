@@ -7,19 +7,14 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute  } from  '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { UnitService } from '../../../services/unit.service';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @Component({
     selector: 'app-unit-create',
-    imports: [MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatCardModule,
-        ReactiveFormsModule, CommonModule, MatSlideToggleModule],
+    imports: [MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatCardModule, ReactiveFormsModule, MatSlideToggleModule],
     templateUrl: './unit-create.component.html',
     styleUrl: './unit-create.component.css'
 })

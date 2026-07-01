@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,12 +15,7 @@ import { AuthService } from '../../../../services/auth.service';
 
 @Component({
     selector: 'app-user-create',
-    imports: [MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatCardModule,
-        ReactiveFormsModule, CommonModule, MatSlideToggleModule],
+    imports: [MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatCardModule, ReactiveFormsModule, MatSlideToggleModule],
     templateUrl: './user-create.component.html',
     styleUrl: './user-create.component.css'
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ClientService } from '../../services/client.service';
 import { BudgetService } from '../../services/budget.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 Chart.register(...registerables);
 @Component({
     selector: 'app-home',
-    imports: [DatePipe, CommonModule],
+    imports: [DatePipe],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css'
 })

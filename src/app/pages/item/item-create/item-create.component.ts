@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute  } from  '@angular/router';
 import { ItemService } from '../../../services/item.service';
 import { Item } from '../../../Model/item.model';
-import { CommonModule } from '@angular/common';
+
 import { UnitService } from '../../../services/unit.service';
 import { Unit } from '../../../Model/unit.model';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
@@ -17,13 +17,14 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @Component({
     selector: 'app-item-create',
     imports: [
-        MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatCardModule,
-        ReactiveFormsModule, CommonModule, MatSlideToggleModule
-    ],
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatSlideToggleModule
+],
     templateUrl: './item-create.component.html',
     styleUrl: './item-create.component.css'
 })
